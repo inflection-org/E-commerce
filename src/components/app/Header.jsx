@@ -11,12 +11,15 @@ const Header = () => {
     <div>
       {/* *******1******* */}
       <div className='bg-orange'>
-        <div className='h-14 px-10 flex justify-between items-center text-white'>
-          <h1>
-            Get 20% <span className='font-semibold'>Flat Discount</span> on Your
-            First Order
+        <div className='h-14 md:px-10  flex justify-between items-center text-white'>
+          <h1 className='text-xs ml-5 md:ml-0 md:text-lg'>
+            Get 20%{' '}
+            <span className='font-semibold text-xs md:text-lg'>
+              Flat Discount
+            </span>{' '}
+            on Your First Order
           </h1>
-          <div className='flex gap-2'>
+          <div className='hidden md:flex gap-2'>
             <h1>Login</h1>
             <p className='text-gray'>Or</p>
             <h1>Registration</h1>
@@ -24,7 +27,7 @@ const Header = () => {
         </div>
       </div>
       {/* ********2********* */}
-      <div className='flex bg-white px-10 justify-between h-20 py-2 items-center'>
+      <div className='flex bg-white md:px-10 md:justify-between h-20 py-2 items-center'>
         <div className='flex items-center gap-1'>
           <Image src={logo} width={50} height={50} alt='logo' />
           <h1 className='text-lg'>
@@ -33,7 +36,7 @@ const Header = () => {
         </div>
         {/*Search-box*/}
         <div>
-          <div className=' md:w-96'>
+          <div className='hidden md:block md:w-96'>
             <div className='relative  flex w-full flex-wrap items-stretch'>
               <input
                 type='search'
@@ -67,7 +70,7 @@ const Header = () => {
           </div>
         </div>
         {/* *****cart*** */}
-        <div className='flex items-center gap-6'>
+        <div className='hidden md:flex items-center gap-6'>
           <CgProfile className='w-8 h-8' />
           <div className='flex gap-3 items-center bg-light_gray p-2 rounded-lg'>
             <IoIosCart className='w-6 h-6' />
@@ -82,7 +85,7 @@ const Header = () => {
       </div>
       <hr className='text-light_gray'></hr>
       {/* ************3******* */}
-      <div className='flex px-10 justify-between items-center h-12'>
+      <div className='md:flex  hidden  px-10 justify-between items-center h-12'>
         <div>
           <MenuDropdown />
         </div>
@@ -95,7 +98,9 @@ const Header = () => {
             </li>
             <li className='hover:text-orange'>SPECIAL OFFER</li>
             <li className='hover:text-orange'>NEW ARRIVALS</li>
-            <li className='hover:text-orange'>ABOUT US</li>
+            <li className='hover:text-orange'>
+              <a href='/about'>ABOUT US</a>
+            </li>
             <li className='hover:text-orange'>BLOG</li>
             <li className='hover:text-orange'>FAQS</li>
             <li className='hover:text-orange'>CONTACT US</li>
