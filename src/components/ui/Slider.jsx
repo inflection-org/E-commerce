@@ -33,7 +33,7 @@ const Slider = () => {
         <SwiperSlide>
           <div>
             <img
-              className='object-cover w-full h-[500px]'
+              className='object-cover w-full h-52 md:h-[500px]'
               src='/Slider1.webp'
               alt='logo'
             />
@@ -42,7 +42,7 @@ const Slider = () => {
         <SwiperSlide>
           <div>
             <img
-              className='object-cover w-full h-[500px]'
+              className='object-cover w-full h-52 md:h-[500px]'
               src='/Slider3.jpeg'
               alt='logo'
             />
@@ -51,7 +51,7 @@ const Slider = () => {
         <SwiperSlide>
           <div>
             <img
-              className='object-cover w-full h-[500px]'
+              className='object-cover w-full h-52 md:h-[500px]'
               src='/Slider2.webp'
               alt='logo'
             />
