@@ -1,6 +1,6 @@
 'use client'
 import React, { useRef, useState } from 'react'
-import Image from 'next/image'
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 
