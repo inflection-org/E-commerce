@@ -15,6 +15,7 @@ module.exports = {
       orange: '#ff5722',
       light_black: '#454545',
       red: '#FF0000',
+      pink: '#FFC0CB',
     },
     extend: {
       backgroundImage: {
@@ -24,5 +25,8 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // ...
+    require('@tailwindcss/forms'),
+  ],
 }

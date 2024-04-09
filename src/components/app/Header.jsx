@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <div>
       {/* *******1******* */}
-      <div className='bg-orange'>
+      <div className='bg-orange '>
         <div className='h-14 md:px-10  flex justify-between items-center text-white'>
           <h1 className='text-xs ml-5 md:ml-0 md:text-lg'>
             Get 20%{' '}
@@ -92,7 +92,9 @@ const Header = () => {
         {/* ******li-item****** */}
         <div className='flex'>
           <ul className='flex gap-6 text-light_black '>
-            <li className='hover:text-orange'>HOME</li>
+            <li className='hover:text-orange'>
+              <a href='/'>HOME</a>
+            </li>
             <li className=''>
               <ShopDropdown />
             </li>
@@ -103,7 +105,9 @@ const Header = () => {
             </li>
             <li className='hover:text-orange'>BLOG</li>
             <li className='hover:text-orange'>FAQS</li>
-            <li className='hover:text-orange'>CONTACT US</li>
+            <li className='hover:text-orange'>
+              <a href='/contact'>CONTACT US</a>
+            </li>
           </ul>
         </div>
         {/* ******* */}

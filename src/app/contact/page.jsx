@@ -1,14 +1,24 @@
+'use client'
 import React from 'react'
 import { IoLocation } from 'react-icons/io5'
 import { IoMdCall } from 'react-icons/io'
 import { MdEmail } from 'react-icons/md'
+import { usePathname } from 'next/navigation'
 
 function Contact() {
+  const pathname = usePathname()
   return (
     <div className='px-10'>
-      <div className='h-44 my-5 bg-light_gray'>
-        <h1>hello</h1>
+      <div className='h-44 my-5 px-4 block md:flex md:justify-between items-center bg-light_gray'>
+        <div className='pt-5 md:pt-0'>
+          <h1 className='text-3xl md:text-5xl font-bold'>Contact Us</h1>
+          <p className='mt-3  text-gray text-lg md:text-xl'>
+            Something differet, every day.
+          </p>
+        </div>
+        <p className='uppercase text-center mt-2 md:mt-0'>home{pathname}</p>
       </div>
+
       <div className='flex justify-center  mt-20  '>
         <div className='w-[100%] mt-5'>
           <div className='flex justify-center m-2'>

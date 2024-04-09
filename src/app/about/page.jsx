@@ -1,16 +1,28 @@
+'use client'
 import React from 'react'
 import ServiceCard from '@/components/ui/cards/ServiceCard'
 import OurTeam from '@/components/ui/cards/OurTeam'
+import { usePathname } from 'next/navigation'
 
 function About() {
+  const pathname = usePathname()
+
   return (
     <div className='px-10'>
-      <div className='h-44 my-5 bg-light_gray'>
-        <h1>hello</h1>
+      <div className='h-44 my-5 px-4 block md:flex md:justify-between items-center bg-light_gray'>
+        <div className='pt-5 md:pt-0'>
+          <h1 className='text-3xl md:text-5xl font-bold'>About Us</h1>
+          <p className='mt-3  text-gray text-lg md:text-xl'>
+            Something differet, every day.
+          </p>
+        </div>
+        <p className='uppercase text-center mt-2 md:mt-0'>home {pathname}</p>
       </div>
-      <div className='py-16'>
-        <h1 className='text-4xl text-center font-bold'>Empowering</h1>
-        <h1 className='text-4xl text-center font-bold'>
+      <div className='py-10 md:py-16'>
+        <h1 className='text-2xl md:text-4xl text-center font-bold'>
+          Empowering
+        </h1>
+        <h1 className='text-2xl md:text-4xl text-center font-bold'>
           {' '}
           eCommerce brands everywhere.
         </h1>
@@ -21,7 +33,7 @@ function About() {
       </div>
       {/* **************about-img******** */}
       <div>
-        <img src={'/about.webp'} alt='img' className='w-full h-full py-4' />
+        <img src={'/about.webp'} alt='img' className='w-full h-full md:py-4' />
       </div>
       {/* *******ServiceCard****************** */}
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-8 mt-16 mb-5 '>
@@ -134,19 +146,19 @@ function About() {
         </ServiceCard>
       </div>
       {/* ***********************team part********************* */}
-      <div className='flex justify-center bg-light_gray  my-10 bg-slate-100 '>
+      <div className='flex justify-center md:bg-light_gray my-5 md:my-10 bg-slate-100 '>
         <div className='w-[100%] mt-5'>
           <div className='flex justify-center m-4'>
-            <div className='text-center py-8'>
+            <div className='text-center bg-light_gray  py-4 md:py-8'>
               <h1 className='text-4xl font-medium'>Our Teams</h1>
-              <p className='py-5'>
+              <p className='py-3 md:py-5'>
                 Our team is made up of passionate people who love to create.
               </p>
             </div>
           </div>
           {/******* *  OurTeam Card ********/}
-          <div className='flex justify-center py-8'>
-            <div className='grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-2 lg:grid-cols-3 lg:gap-10 '>
+          <div className='flex justify-center py-2 md:py-8'>
+            <div className='grid grid-cols-1  md:grid-cols-2  lg:grid-cols-3 gap-10 '>
               <OurTeam
                 img='
                 /OurTeam/team1.webp'
@@ -171,17 +183,19 @@ function About() {
       </div>
       {/********************* * Support *************************** */}
       <div className='py-8'>
-        <div className='flex  gap-14 w-auto h-auto py-8  rounded-lg'>
-          <div className='w-1/2 '>
+        <div className='block md:flex  md:gap-14 w-auto h-auto py-8  rounded-lg'>
+          <div className='w-full md:w-1/2 '>
             <img
               className='object-top h-auto w-full'
               src={'/platform1.webp'}
               alt='logo'
             />
           </div>
-          <div className=' w-1/2'>
+          <div className='w-full md:w-1/2'>
             <div>
-              <h1 className='text-3xl font-bold'>What can we do for you?</h1>
+              <h1 className='text-3xl mt-5 md:mt-0 font-bold'>
+                What can we do for you?
+              </h1>
             </div>
             <div className='mt-4'>
               <h2 className='text-2xl'>Free Shipping</h2>
@@ -213,27 +227,27 @@ function About() {
       <div className='py-8 '>
         <div className='flex flex-col  md:flex-row md:justify-center gap-14  bg-light_gray w-auto h-auto py-8 px-4 rounded-lg'>
           <img
-            className='object-cover group-hover:scale-110 duration-1000 w-auto h-auto '
+            className='object-cover m-auto  w-28 h-20 md:w-auto md:h-auto'
             src={'/Brands/Brand-1.png'}
             alt='logo'
           />{' '}
           <img
-            className='object-cover group-hover:scale-110 duration-1000 w-auto h-auto '
+            className='object-cover m-auto  w-28 h-20 md:w-auto md:h-auto'
             src={'/Brands/Brand-2.webp'}
             alt='logo'
           />{' '}
           <img
-            className='object-cover group-hover:scale-110 duration-1000 w-auto h-auto '
+            className='object-cover m-auto  w-28 h-20 md:w-auto md:h-auto'
             src={'/Brands/Brand-3.png'}
             alt='logo'
           />{' '}
           <img
-            className='object-cover group-hover:scale-110 duration-1000 w-auto h-auto '
+            className='object-cover m-auto  w-28 h-20 md:w-auto md:h-auto'
             src={'/Brands/Brand-4.webp'}
             alt='logo'
           />{' '}
           <img
-            className='object-cover group-hover:scale-110 duration-1000 w-auto h-auto '
+            className='object-cover m-auto  w-28 h-20 md:w-auto md:h-auto'
             src={'/Brands/Brand-5.webp'}
             alt='logo'
           />

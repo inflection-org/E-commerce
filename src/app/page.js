@@ -11,7 +11,7 @@ const page = () => {
       <Slider />
       <div className='px-10'>
         {/* ***service card ******/}
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-8 mt-16 mb-5 '>
+        <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4  md:gap-8 mt-16 mb-5 '>
           <ServiceCard title='Free Shipping' disc='On all orders over $75.00'>
             <svg
               width='61'
@@ -122,13 +122,15 @@ const page = () => {
         </div>
         {/* ******ProductCard*** */}
         <div className='py-10'>
-          <div className='flex justify-between'>
-            <h1 className='text-4xl font-bold'>Our Best Selling Products</h1>
-            <button className='bg-orange hover:bg-black duration-1000 text-white rounded-full px-5 py-3'>
+          <div className='block md:flex justify-between'>
+            <h1 className='text-3xl md:text-4xl font-bold'>
+              Our Best Selling Products
+            </h1>
+            <button className='bg-orange mt-2 md:mt-0 hover:bg-black duration-1000 text-white rounded-full px-5 py-3'>
               View All Deals
             </button>
           </div>
-          <div className='mt-10 flex flex-wrap gap-12'>
+          <div className='mt-10 flex flex-wrap gap-10 md:gap-12'>
             {products.map((product, index) => (
               <ProductCard
                 pic={product.pic}
@@ -142,58 +144,31 @@ const page = () => {
           </div>
         </div>
         {/* **ProductCard2 */}
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  py-20  gap-5'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-20  gap-5'>
           <ProductCard2 />
           <ProductCard2 />
           <ProductCard2 />
         </div>
         {/* *****bottom menu****** */}
         <div className='py-5'>
-          <div className='my-10 py-0 bg-light_gray'>
-            <div className='text-sm font-medium text-center text-gray-500'>
-              <ul className='flex flex-wrap justify-center gap-8'>
-                <li>
-                  <a
-                    href='#page1'
-                    class='flex justify-center font-serif text-xl border-b-4 border-transparent text-gray hover:text-orange hover:border-orange py-4'
-                  >
-                    New Arrival
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href='#page1'
-                    class='flex justify-center font-serif text-xl border-b-4 border-transparent text-gray hover:text-orange hover:border-orange py-4'
-                  >
-                    Best Seller
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href='#page1'
-                    class='flex justify-center  font-serif text-xl border-b-4 border-transparent text-gray hover:text-orange hover:border-orange py-4'
-                  >
-                    Featured
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href='#page1'
-                    class='flex justify-center font-serif  text-xl border-b-4 border-transparent text-gray hover:text-orange hover:border-orange py-4'
-                  >
-                    Top Rated
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href='#page1'
-                    class='flex justify-center font-serif  text-xl border-b-4 border-transparent text-gray hover:text-orange hover:border-orange py-4'
-                  >
-                    Most Popular
-                  </a>
-                </li>
-              </ul>
-            </div>
+          <div className='my-4 py-0 bg-light_gray'>
+            <ul className='flex px-2 md:px-0 md:justify-center gap-10  overflow-auto text-xl  bg-light_gray'>
+              <li className="class='font-serif text-xl border-b-4 text-nowrap border-transparent text-gray hover:text-orange hover:border-orange py-4">
+                New Arrival
+              </li>
+              <li className='font-serif text-xl border-b-4 text-nowrap border-transparent text-gray hover:text-orange hover:border-orange py-4'>
+                Best Seller
+              </li>
+              <li className='font-serif text-xl border-b-4 text-nowrap border-transparent text-gray hover:text-orange hover:border-orange py-4'>
+                Featured
+              </li>
+              <li className='font-serif text-xl border-b-4 text-nowrap border-transparent text-gray hover:text-orange hover:border-orange py-4'>
+                Top Rated
+              </li>
+              <li className='font-serif text-xl border-b-4 text-nowrap border-transparent text-gray hover:text-orange hover:border-orange py-4'>
+                Most Popular
+              </li>
+            </ul>
           </div>
           {/* ***ProductCard**** */}
           <div className='mt-10 flex flex-wrap gap-12'>
@@ -216,13 +191,15 @@ const page = () => {
         </div>
         {/* ********newsletter******* */}
         <div className='py-8'>
-          <div className='flex  bg-light_gray w-auto h-auto py-8 px-4 rounded-lg'>
-            <div className='pl-8 mt-8 w-1/2'>
-              <h1 className='text-2xl  mt-3'>Subscribe to our newsletter</h1>
-              <h1 className='text-5xl mt-5'>
+          <div className=' block md:flex  bg-light_gray w-auto h-auto py-8 px-4 rounded-lg'>
+            <div className='md:pl-8 mt-5 md:mt-8 w-full md:w-1/2'>
+              <h1 className='text-lg md:text-2xl mt-3'>
+                Subscribe to our newsletter
+              </h1>
+              <h1 className='text-xl md:text-5xl mt-2 md:mt-5'>
                 Get 20% <span className='font-bold'>Flat Discount</span>
               </h1>
-              <div className='flex items-center py-8 gap-5'>
+              <div className='block md:flex items-center py-8 gap-5'>
                 <div>
                   <input
                     type='text'
@@ -232,14 +209,14 @@ const page = () => {
                     required
                   />
                 </div>
-                <button className='bg-black text-white hover:bg-orange duration-1000 rounded-lg px-10 py-3 '>
+                <button className='bg-black mt-4 md:mt-0 text-white hover:bg-orange duration-1000 rounded-lg w-full md:w-40  py-3 '>
                   Subscribe
                 </button>
               </div>
             </div>
-            <div className='w-1/2 flex justify-end'>
+            <div className='w-full md:w-1/2 flex justify-end'>
               <img
-                className='object-cover group-hover:scale-110 duration-1000 w-auto h-72 '
+                className='object-cover group-hover:scale-110 duration-1000 w-auto h-auto md:h-72 '
                 src={'/newslatter.webp'}
                 alt='logo'
               />
@@ -248,29 +225,29 @@ const page = () => {
         </div>
         {/* **************** */}
         <div className='py-8 '>
-          <div className='flex flex-col  md:flex-row md:justify-center gap-14  bg-light_gray w-auto h-auto py-8 px-4 rounded-lg'>
+          <div className='flex flex-col   md:flex-row md:justify-center gap-14  bg-light_gray w-auto h-auto py-8 px-4 rounded-lg'>
             <img
-              className='object-cover group-hover:scale-110 duration-1000 w-auto h-auto '
+              className='object-cover m-auto  w-28 h-20 md:w-auto md:h-auto '
               src={'/Brands/Brand-1.png'}
               alt='logo'
             />{' '}
             <img
-              className='object-cover group-hover:scale-110 duration-1000 w-auto h-auto '
+              className='object-cover m-auto w-28 h-20 md:w-auto md:h-auto '
               src={'/Brands/Brand-2.webp'}
               alt='logo'
             />{' '}
             <img
-              className='object-cover group-hover:scale-110 duration-1000 w-auto h-auto '
+              className='object-cover m-auto w-28 h-20 md:w-auto md:h-auto '
               src={'/Brands/Brand-3.png'}
               alt='logo'
             />{' '}
             <img
-              className='object-cover group-hover:scale-110 duration-1000 w-auto h-auto '
+              className='object-cover m-auto w-28 h-20  md:w-auto md:h-auto '
               src={'/Brands/Brand-4.webp'}
               alt='logo'
             />{' '}
             <img
-              className='object-cover group-hover:scale-110 duration-1000 w-auto h-auto '
+              className='object-cover m-auto w-28 h-20 md:w-auto md:h-auto '
               src={'/Brands/Brand-5.webp'}
               alt='logo'
             />

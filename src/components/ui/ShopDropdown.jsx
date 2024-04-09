@@ -7,7 +7,7 @@ const ShopDropdown = () => {
   const [isShow, setIsShow] = useState(false)
   return (
     <div>
-      <div className='relative'>
+      <div className='relative z-20  '>
         <div
           className='flex justify-center items-center group  gap-3 cursor-pointer'
           onClick={() => {
@@ -17,12 +17,13 @@ const ShopDropdown = () => {
           <h1 className='group-hover:text-orange'>SHOP</h1>
           <IoIosArrowDown className='group-hover:text-orange' />
         </div>
-        <div className='absolute  bg-gray w-full  rounded-b-lg  left-[50%] -translate-x-[50%]'>
+        <div className='absolute  bg-light_gray w-full  rounded-b-lg  left-[50%] -translate-x-[50%]'>
           {isShow && (
-            <ul className='text-center'>
-              <li>Right sideBar</li>
+            <ul className='text-sm'>
+              <li>
+                <a href='/shop'>Right sideBar</a>
+              </li>
               <li>Left sideBar</li>
-              <li>No sideBar</li>
             </ul>
           )}
         </div>
