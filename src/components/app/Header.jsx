@@ -20,9 +20,9 @@ const Header = () => {
             on Your First Order
           </h1>
           <div className='hidden md:flex gap-2'>
-            <h1>Login</h1>
+            <a href='/login'>Login</a>
             <p className='text-gray'>Or</p>
-            <h1>Registration</h1>
+            <a href='/signUp'>Registration</a>
           </div>
         </div>
       </div>
@@ -71,9 +71,14 @@ const Header = () => {
         </div>
         {/* *****cart*** */}
         <div className='hidden md:flex items-center gap-6'>
-          <CgProfile className='w-8 h-8' />
+          <a href='/login'>
+            <CgProfile className='w-8 h-8' />
+          </a>
           <div className='flex gap-3 items-center bg-light_gray p-2 rounded-lg'>
-            <IoIosCart className='w-6 h-6' />
+            <a href='/cart'>
+              {' '}
+              <IoIosCart className='w-6 h-6' />{' '}
+            </a>
             <div className=''>
               <div className='flex justify-center items-center bg-orange  text-white rounded-full  h-4 w-8'>
                 0
