@@ -14,16 +14,18 @@ const ShopDropdown = () => {
             setIsShow(!isShow)
           }}
         >
-          <h1 className='group-hover:text-orange'>SHOP</h1>
+          <h1 className='group-hover:text-orange'>PRODUCT</h1>
           <IoIosArrowDown className='group-hover:text-orange' />
         </div>
-        <div className='absolute  bg-light_gray w-full  rounded-b-lg  left-[50%] -translate-x-[50%]'>
+        <div className='absolute  bg-white w-full  rounded-b-lg  '>
           {isShow && (
-            <ul className='text-sm'>
-              <li>
-                <a href='/shop'>Right sideBar</a>
+            <ul className='text-sm pl-2 cursor-pointer'>
+              <li className='pt-2 hover:underline hover:text-black'>
+                <a href='/shop'>SHOP</a>
               </li>
-              <li>Left sideBar</li>
+              <li className='pt-1 pb-2 hover:underline hover:text-black'>
+                Shopping Cart
+              </li>
             </ul>
           )}
         </div>

@@ -9,7 +9,7 @@ const page = () => {
   return (
     <>
       <Slider />
-      <div className='px-10'>
+      <div className='px-5 md:px-10'>
         {/* ***service card ******/}
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4  md:gap-8 mt-16 mb-5 '>
           <ServiceCard title='Free Shipping' disc='On all orders over $75.00'>
@@ -130,7 +130,7 @@ const page = () => {
               View All Deals
             </button>
           </div>
-          <div className='mt-10 flex flex-wrap gap-10 md:gap-12'>
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-10 gap-10 md:gap-12'>
             {products.map((product, index) => (
               <ProductCard
                 pic={product.pic}
@@ -171,7 +171,7 @@ const page = () => {
             </ul>
           </div>
           {/* ***ProductCard**** */}
-          <div className='mt-10 flex flex-wrap gap-12'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-10 gap-10 md:gap-12'>
             {products.map((product, index) => (
               <ProductCard
                 pic={product.pic}
@@ -183,7 +183,7 @@ const page = () => {
               />
             ))}
           </div>
-          <div className='flex justify-center py-5'>
+          <div className='flex justify-center pt-8'>
             <button className='bg-orange hover:bg-black duration-1000 text-white rounded-full px-5 py-3'>
               View All Deals
             </button>
