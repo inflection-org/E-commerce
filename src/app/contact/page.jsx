@@ -144,7 +144,7 @@ function Contact() {
                     </span>
                   </label>
                 </div>
-                <button className='w-full border rounded-[7px] mt-4 h-12 text-white bg-orange '>
+                <button className='w-full border rounded-[7px] mt-3.5 py-3.5  text-white bg-orange '>
                   Send Massage
                 </button>
               </div>
