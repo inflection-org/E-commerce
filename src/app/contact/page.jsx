@@ -74,42 +74,74 @@ function Contact() {
               {/* ******1******* */}
               <div className='w-full md:w-[50%]'>
                 <div class='relative h-12 w-full min-w-[300px] mt-8'>
-                  <input
-                    className='peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-gray focus:border-2 focus:border-red focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-gray'
-                    placeholder=' '
-                  />
-                  <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-gray transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-gray before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-gray after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-gray peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-red peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-red peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-red peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-gray">
-                    Enter Name
+                  <label
+                    for='Username'
+                    class='relative block rounded-md border border-gray shadow-sm focus-within:border-red focus-within:ring-1 focus-within:ring-red'
+                  >
+                    <input
+                      type='text'
+                      id='Username'
+                      class='peer h-12 border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0'
+                      placeholder='Username'
+                    />
+
+                    <span class='pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs'>
+                      Username
+                    </span>
                   </label>
                 </div>
-                <div className='relative h-12 w-full min-w-[300px] mt-10'>
-                  <input
-                    className='peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-gray focus:border-2 focus:border-red focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-gray'
-                    placeholder=' '
-                  />
-                  <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-gray transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-gray before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-gray after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-gray peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-red peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-red peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-red peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-gray">
-                    Enter Email
+                <div class='relative h-12 w-full min-w-[300px] mt-10'>
+                  <label
+                    for='email'
+                    class='relative block rounded-md border border-gray shadow-sm focus-within:border-red focus-within:ring-1 focus-within:ring-red'
+                  >
+                    <input
+                      type='text'
+                      id='email'
+                      class='peer  h-12 border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0'
+                      placeholder='email'
+                    />
+
+                    <span class='pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs'>
+                      Email
+                    </span>
                   </label>
                 </div>
-                <div className='relative h-12 w-full min-w-[300px] mt-10'>
-                  <input
-                    className='peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-gray focus:border-2 focus:border-red focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-gray'
-                    placeholder=' '
-                  />
-                  <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-gray transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-gray before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-gray after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-gray peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-red peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-red peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-red peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-gray">
-                    Number
+                <div class='relative h-20 w-full min-w-[300px] mt-10'>
+                  <label
+                    for='number'
+                    class='relative block rounded-md border border-gray shadow-sm focus-within:border-red focus-within:ring-1 focus-within:ring-red'
+                  >
+                    <input
+                      type='text'
+                      id='number'
+                      class='peer  h-12 border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0'
+                      placeholder='number'
+                    />
+
+                    <span class='pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs'>
+                      Number
+                    </span>
                   </label>
                 </div>
               </div>
               {/* ******2****** */}
               <div className='w-full md:w-[50%]'>
                 <div className='relative h-40 w-full min-w-[200px] mt-8'>
-                  <input
-                    className='peer h-full w-full rounded-[7px] border border-gray bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-gray outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-gray placeholder-shown:border-t-gray focus:border-2 focus:border-red focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-gray'
-                    placeholder=' '
-                  />
-                  <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-gray transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-gray before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-gray after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-gray peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-red peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-red peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-red peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-gray">
-                    Your Comment
+                  <label
+                    for='Comment'
+                    class='relative h-full w-full block rounded-md border border-gray shadow-sm focus-within:border-red focus-within:ring-1 focus-within:ring-red'
+                  >
+                    <input
+                      type='text'
+                      id='Comment'
+                      class='peer  border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0'
+                      placeholder='Comment'
+                    />
+
+                    <span class='pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2  peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs'>
+                      Comment
+                    </span>
                   </label>
                 </div>
                 <button className='w-full border rounded-[7px] mt-4 h-12 text-white bg-orange '>
@@ -121,7 +153,7 @@ function Contact() {
         </div>
       </div>
       {/* *******map***** */}
-      <div className='flex justify-center h-60  md:h-96 w-full  mt-10'>
+      <div className='flex justify-center h-56  md:h-96 w-full  mt-10'>
         <div className='w-[100%]'>
           <iframe
             src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d227822.60371495236!2d80.77770113613681!3d26.848596484270367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd991f32b16b%3A0x93ccba8909978be7!2sLucknow%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1708524359275!5m2!1sen!2sin'
