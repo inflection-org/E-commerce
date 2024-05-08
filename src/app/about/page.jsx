@@ -8,8 +8,8 @@ function About() {
   const pathname = usePathname()
 
   return (
-    <div className='px-10'>
-      <div className='h-44 my-5 px-4 block md:flex md:justify-between items-center bg-light_gray'>
+    <div className='px-5 md:px-10'>
+      <div className='h-44 md:my-5 px-4 block md:flex md:justify-between items-center bg-light_gray'>
         <div className='pt-5 md:pt-0'>
           <h1 className='text-3xl md:text-5xl font-bold'>About Us</h1>
           <p className='mt-3  text-gray text-lg md:text-xl'>
@@ -181,7 +181,7 @@ function About() {
           </div>
         </div>
       </div>
-      {/********************* * Support *************************** */}
+      {/********************** Support*************************** */}
       <div className='py-8'>
         <div className='block md:flex  md:gap-14 w-auto h-auto py-8  rounded-lg'>
           <div className='w-full md:w-1/2 '>
