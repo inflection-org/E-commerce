@@ -1,7 +1,12 @@
 'use client'
 import React from 'react'
 import { useState } from 'react'
+import Link from 'next/link'
+import { MdOutlinePermDeviceInformation } from 'react-icons/md'
+
 const page = () => {
+  const [isOpen, setIsOpen] = useState(true)
+  const [email, setEmail] = useState('')
   const [state, setState] = useState({
     email: '',
     password: '',
@@ -9,6 +14,11 @@ const page = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
     console.log(state)
+  }
+
+  const onSubmit = (event) => {
+    event.preventDefault()
+    console.log(email)
   }
 
   return (
@@ -21,7 +31,7 @@ const page = () => {
           className='hidden lg:block'
           alt='Picture of the author'
         ></img>
-
+        {/* *****login form***** */}
         <div className='w-full p-8 lg:w-1/2'>
           <h2 className='text-2xl font-semibold text-black text-center'>
             Brand
@@ -78,9 +88,15 @@ const page = () => {
               <label className='block text-black text-sm font-bold mb-2'>
                 Password
               </label>
-              <a href='#' className='text-xs text-black'>
+              <Link
+                href='#'
+                onClick={() => {
+                  setIsOpen(false)
+                }}
+                className='text-xs hover:text-blue hover:underline text-black'
+              >
                 Forget Password?
-              </a>
+              </Link>
             </div>
             <input
               className='bg-light_gray text-gray focus:outline-none focus:shadow-outline border border-gray rounded py-2 px-4 block w-full appearance-none'
@@ -110,6 +126,50 @@ const page = () => {
           </div>
         </div>
       </div>
+      {/* ******forget password */}
+      {!isOpen && (
+        <div className='top-0 z-50 bg-opacity-80 fixed  h-full w-full bg-black'>
+          <div className='flex justify-center h-screen items-center '>
+            <div className='flex justify-center bg-[#ffff] w-[90%]  md:w-[60%] rounded-md h-96 '>
+              <div>
+                <MdOutlinePermDeviceInformation className='size-20 md:size-32 m-auto mt-6 text-red' />
+                <h1 className='text-2xl mt-4 font-semibold text-blue'>
+                  Forget Password
+                </h1>
+                <div className='mt-4'>
+                  <input
+                    className='bg-light_gray text-gray focus:outline-none focus:shadow-outline border border-gray rounded py-2 px-4 md:px-8 block w-full appearance-none'
+                    type='email'
+                    name='email'
+                    placeholder='Enter Email'
+                    onChange={(e) =>
+                      setEmail({ ...email, email: e.target.value })
+                    }
+                  />
+                </div>
+                {/* *******button***** */}
+                <div className='flex gap-4'>
+                  <button
+                    onClick={onSubmit}
+                    className='bg-blue hover:bg-green mt-5 py-2 px-4  rounded-md text-white '
+                  >
+                    Forget Password
+                  </button>
+                  <button
+                    type='button'
+                    className='bg-blue hover:bg-green mt-5 py-2 px-8  rounded-md text-white '
+                    onClick={() => {
+                      setIsOpen(true)
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
