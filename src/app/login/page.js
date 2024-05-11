@@ -1,6 +1,16 @@
+'use client'
 import React from 'react'
-
+import { useState } from 'react'
 const page = () => {
+  const [state, setState] = useState({
+    email: '',
+    password: '',
+  })
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log(state)
+  }
+
   return (
     <div className='py-16 bg-light_gray '>
       <div className='flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl'>
@@ -57,8 +67,10 @@ const page = () => {
               Email Address
             </label>
             <input
-              className='bg-gray-200 text-gray focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none'
+              className='bg-light_gray text-gray focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none'
               type='email'
+              name='email'
+              onChange={(e) => setState({ ...state, email: e.target.value })}
             />
           </div>
           <div className='mt-4'>
@@ -71,12 +83,18 @@ const page = () => {
               </a>
             </div>
             <input
-              className='bg-gray-200 text-gray focus:outline-none focus:shadow-outline border border-gray rounded py-2 px-4 block w-full appearance-none'
+              className='bg-light_gray text-gray focus:outline-none focus:shadow-outline border border-gray rounded py-2 px-4 block w-full appearance-none'
               type='password'
+              name='password'
+              onChange={(e) => setState({ ...state, password: e.target.value })}
             />
           </div>
           <div className='mt-8'>
-            <button className='bg-blue text-white font-bold py-2 px-4 w-full rounded hover:bg-green'>
+            <button
+              type='submit'
+              onClick={handleSubmit}
+              className='bg-blue text-white font-bold py-2 px-4 w-full rounded hover:bg-green'
+            >
               Login
             </button>
           </div>
