@@ -2,8 +2,9 @@
 import React from 'react'
 import Image from 'next/image'
 import { useState } from 'react'
+import Link from 'next/link'
 
-import logo from '../../../public/logo.png'
+import logo from '../../../public/product/i.png'
 import { CgProfile } from 'react-icons/cg'
 import { IoIosCart } from 'react-icons/io'
 import MenuDropdown from '../ui/MenuDropdown'
@@ -27,9 +28,9 @@ const Header = () => {
             on Your First Order
           </h1>
           <div className='hidden md:flex gap-2'>
-            <a href='/login'>Login</a>
+            <Link href='/login'>Login</Link>
             <p className='text-gray'>Or</p>
-            <a href='/signUp'>Registration</a>
+            <Link href='/signUp'>Registration</Link>
           </div>
         </div>
       </div>
@@ -38,7 +39,7 @@ const Header = () => {
         <div className='flex items-center gap-1'>
           <Image src={logo} width={50} height={50} alt='logo' />
           <h1 className='text-lg'>
-            <span className='font-bold'> Meta</span>Shop
+            <span className='font-bold'>JITENDRA</span>SHOP
           </h1>
         </div>
         {/*Search-box*/}
@@ -78,10 +79,10 @@ const Header = () => {
         </div>
         {/* *****cart*** */}
         <div className='hidden md:flex items-center gap-6'>
-          <a href='/login'>
+          <Link href='/profile'>
             <CgProfile className='w-8 h-8' />
-          </a>
-          <a href='/cart'>
+          </Link>
+          <Link href='/cart'>
             <div className='flex gap-3 items-center bg-light_gray p-2 rounded-lg'>
               {' '}
               <IoIosCart className='w-6 h-6' />{' '}
@@ -92,7 +93,7 @@ const Header = () => {
                 <p>My Cart</p>
               </div>
             </div>
-          </a>
+          </Link>
         </div>
         {/* *******menu button mobile******** */}
         <div className='text-2xl mr-3 cursor-pointer md:hidden  '>
@@ -117,13 +118,13 @@ const Header = () => {
       </div>
       <hr className='text-light_gray'></hr>
       {/* ************3******* */}
-      <div className='md:flex z-50 relative   md:bg-white  md:px-10 justify-between items-center h-12'>
+      <div className='md:flex z-50 relative   md:bg-white  md:px-10  items-center h-12'>
         <div className='hidden md:block'>
           <MenuDropdown />
         </div>
         {/* ******li-item****** */}
         <div
-          className={`md:flex bg-light_gray  md:bg-white h-screen md:h-auto ${
+          className={`md:flex bg-light_gray md:ml-32 md:bg-white h-screen md:h-auto ${
             isOpen
               ? '-translate-x-[0%] transition-all ease-in duration-[0.5s]'
               : '-translate-x-[100%] md:translate-x-[0%] transition-all ease-in duration-[0.5s]'
@@ -133,18 +134,18 @@ const Header = () => {
             <div className='w-full flex justify-center  pt-5'>
               <ul className='flex items-center gap-5'>
                 <li className='bg-white px-6 py-2 hover:bg-orange hover:text-white duration-1000 rounded-lg'>
-                  <a href='/login'>Login</a>
+                  <Link href='/login'>Login</Link>
                 </li>
 
                 <li className='bg-white px-6 hover:bg-orange hover:text-white duration-1000 py-2 rounded-lg'>
-                  <a href='signUp'>SignUp</a>
+                  <Link href='signUp'>SignUp</Link>
                 </li>
               </ul>
             </div>
           </div>
-          <ul className='md:flex gap-6 ml-10 z-50 pt-6 md:pt-0 md:ml-0 text-black '>
+          <ul className='md:flex  gap-6 ml-10 z-50 pt-6 md:pt-0 md:ml-0 text-black '>
             <li className='hover:text-orange  text-xl md:text-base  pt-2 md:pt-0'>
-              <a href='/'>HOME</a>
+              <Link href='/'>HOME</Link>
             </li>
             <li className='w-28 text-xl md:text-base pt-2 md:pt-0'>
               <ShopDropdown />
@@ -165,16 +166,16 @@ const Header = () => {
               FAQS
             </li>
             <li className='hover:text-orange  text-xl md:text-base  pt-3 md:pt-0'>
-              <a href='/contact' className='pt-3 md:pt-0'>
+              <Link href='/contact' className='pt-3 md:pt-0'>
                 CONTACT US
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
         {/* ******* */}
-        <div className='text-light_black hidden md:block hover:text-orange'>
+        {/* <div className='text-light_black hidden md:block hover:text-orange'>
           <h1>Need Help? Contact Us</h1>
-        </div>
+        </div> */}
       </div>
     </div>
   )
