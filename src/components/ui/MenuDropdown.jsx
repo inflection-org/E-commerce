@@ -8,16 +8,27 @@ const MenuDropdown = () => {
   return (
     <div className='relative z-50'>
       <div
-        className='flex justify-center items-center bg-orange text-white h-12 p-2 gap-6 cursor-pointer'
-        onClick={() => {
-          setIsShow(!isShow)
+        className='flex justify-center items-center bg-orange text-white h-12 p-2 gap-4 cursor-pointer'
+        onMouseEnter={() => {
+          setIsShow(true)
+        }}
+        onMouseLeave={() => {
+          setIsShow(false)
         }}
       >
         <CgMenuGridO className='' />
         <h1>All Categories</h1>
-        <IoIosArrowDown className='' />
+        <IoIosArrowDown className={isShow ? 'rotate-180' : ''} />
       </div>
-      <div className='absolute bg-white w-full rounded-b-lg   top-14 left-[50%] -translate-x-[50%]'>
+      <div
+        onMouseEnter={() => {
+          setIsShow(true)
+        }}
+        onMouseLeave={() => {
+          setIsShow(false)
+        }}
+        className='absolute bg-white w-full rounded-b-lg   top-12 left-[50%] -translate-x-[50%]'
+      >
         {isShow && (
           <ul className='ml-5 text-gray cursor-pointer '>
             <li className='pt-1 hover:text-black hover:underline'>
