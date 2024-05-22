@@ -2,27 +2,74 @@
 import React from 'react'
 import { useState } from 'react'
 import Link from 'next/link'
+import instance from '../axios/Api'
 import { MdOutlinePermDeviceInformation } from 'react-icons/md'
+import { setCookie } from '../axios/CookieConfig'
+import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 const page = () => {
+  const router = useRouter()
   const [isOpen, setIsOpen] = useState(true)
-  const [email, setEmail] = useState('')
+  const [forgetPasswordEmail, setForgetPasswordEmail] = useState('')
   const [state, setState] = useState({
     email: '',
     password: '',
   })
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault()
     console.log(state)
+    setState({
+      email: '',
+      password: '',
+    })
+    try {
+      // console.log(state)
+      const res = await instance.post('/users/login', {
+        email: state.email,
+        password: state.password,
+      })
+      console.log(res)
+      const jwt = res.data.access_token
+      setCookie('access_token', jwt)
+      setCookie(jwt)
+      console.log(jwt)
+      // console.log('access_token', getCookie('access_token'))
+      console.log(state.email, state.password)
+      toast.success('login successfully')
+      router.push('/')
+    } catch (error) {
+      if (error.response.data.message) {
+        toast.error(error.response.data.message)
+      } else {
+        toast.error(error.message)
+      }
+    }
   }
 
-  const onSubmit = (event) => {
+  // forget Password********************
+  const onSubmit = async (event) => {
     event.preventDefault()
-    console.log(email)
+    try {
+      const res = await instance.post('/users/forgot_password', {
+        reset_password_ui_url: 'http://localhost:3000/reset_password',
+        email: forgetPasswordEmail,
+      })
+      // console.log(res)
+      toast.success('login successfully')
+      router.push('/')
+    } catch (error) {
+      if (error.response.data.message) {
+        toast.error(error.response.data.message)
+      } else {
+        toast.error(error.message)
+      }
+    }
   }
 
   return (
-    <div className='py-16 bg-light_gray '>
+    <div className='py-16 bg-light_gray'>
       <div className='flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl'>
         <img
           src={'/login.jpg'}
@@ -36,6 +83,7 @@ const page = () => {
           <h2 className='text-2xl font-semibold text-black text-center'>
             Brand
           </h2>
+
           <p className='text-xl text-black text-center'>Welcome back!</p>
           <a
             href='#'
@@ -79,6 +127,7 @@ const page = () => {
             <input
               className='bg-light_gray text-gray focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none'
               type='email'
+              value={state.email}
               name='email'
               onChange={(e) => setState({ ...state, email: e.target.value })}
             />
@@ -102,6 +151,7 @@ const page = () => {
               className='bg-light_gray text-gray focus:outline-none focus:shadow-outline border border-gray rounded py-2 px-4 block w-full appearance-none'
               type='password'
               name='password'
+              value={state.password}
               onChange={(e) => setState({ ...state, password: e.target.value })}
             />
           </div>
@@ -142,9 +192,7 @@ const page = () => {
                     type='email'
                     name='email'
                     placeholder='Enter Email'
-                    onChange={(e) =>
-                      setEmail({ ...email, email: e.target.value })
-                    }
+                    onChange={(e) => setForgetPasswordEmail(e.target.value)}
                   />
                 </div>
                 {/* *******button***** */}
