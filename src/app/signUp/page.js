@@ -1,17 +1,42 @@
 'use client'
 import React from 'react'
 import { useState } from 'react'
+import instance from '../axios/Api'
+import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
+
 const page = () => {
+  const router = useRouter()
   const [state, setState] = useState({
     name: '',
     email: '',
-    password: '',
   })
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    console.log(state)
+    // console.log(state)
+    setState({
+      name: '',
+      email: '',
+    })
+    try {
+      // console.log(state)
+      const res = await instance.post('/users/signup', {
+        reset_password_ui_url: 'http://localhost:3000/reset_password',
+        full_name: state.name,
+        email: state.email,
+      })
+      toast.success('signUp successfully')
+      // router.push('/login')
+    } catch (error) {
+      if (error.response.data.message) {
+        toast.error(error.response.data.message)
+      } else {
+        toast.error(error.message)
+      }
+    }
   }
+
   return (
     <div className='font-[sans-serif] text-gray-800 bg-white max-w-4xl flex items-center mx-auto md:h-screen p-4'>
       <div className='grid md:grid-cols-3 items-center shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-xl overflow-hidden'>
@@ -46,7 +71,7 @@ const page = () => {
                 <input
                   type='text'
                   name='name'
-                  // value={name}
+                  value={state.name}
                   onChange={(e) => setState({ ...state, name: e.target.value })}
                   required
                   className='bg-white border border-gray w-full text-sm px-4 py-2.5 rounded-md outline-blue'
@@ -73,7 +98,7 @@ const page = () => {
                 <input
                   name='email'
                   type='email'
-                  // value={email}
+                  value={state.email}
                   onChange={(e) =>
                     setState({ ...state, email: e.target.value })
                   }
@@ -112,13 +137,13 @@ const page = () => {
                 </svg>
               </div>
             </div>
-            <div>
+            {/* <div>
               <label className='text-sm mb-2 block'>Password</label>
               <div className='relative flex items-center'>
                 <input
                   name='password'
                   type='password'
-                  // value={password}
+                  value={state.password}
                   onChange={(e) =>
                     setState({ ...state, password: e.target.value })
                   }
@@ -139,24 +164,7 @@ const page = () => {
                   ></path>
                 </svg>
               </div>
-            </div>
-            <div className='flex items-center'>
-              <input
-                id='remember-me'
-                name='remember-me'
-                type='checkbox'
-                className='h-4 w-4 shrink-0 text-blue focus:ring-blue-500 border-gray-300 rounded'
-              />
-              <label for='remember-me' className='ml-3 block text-sm'>
-                I accept the
-                <a
-                  href='javascript:void(0);'
-                  className='text-blue-600 font-semibold hover:underline ml-1'
-                >
-                  Terms and Conditions
-                </a>
-              </label>
-            </div>
+            </div> */}
           </div>
           <div className='!mt-10'>
             <button
@@ -171,7 +179,7 @@ const page = () => {
             Already have an account?
             <a
               href='/login'
-              className='text-blue-600 font-semibold hover:underline ml-1'
+              className='text-blue font-semibold hover:underline ml-1'
             >
               Login here
             </a>
