@@ -38,6 +38,7 @@ const page = () => {
       // console.log('access_token', getCookie('access_token'))
       console.log(state.email, state.password)
       toast.success('login successfully')
+
       router.push('/')
     } catch (error) {
       if (error.response.data.message) {
