@@ -3,7 +3,6 @@ import React from 'react'
 import Image from 'next/image'
 import { useState } from 'react'
 import Link from 'next/link'
-
 import logo from '../../../public/product/i.png'
 import { CgProfile } from 'react-icons/cg'
 import { IoIosCart } from 'react-icons/io'
@@ -27,21 +26,31 @@ const Header = () => {
             </span>{' '}
             on Your First Order
           </h1>
-          <div className='hidden md:flex gap-2'>
-            <Link href='/login'>Login</Link>
-            <p className='text-gray'>Or</p>
-            <Link href='/signUp'>Registration</Link>
+          <div className='hidden md:flex gap-4'>
+            <Link
+              className='bg-light_gray py-2 px-4 rounded-md text-black'
+              href='/login'
+            >
+              Login
+            </Link>
+
+            <Link
+              className='bg-light_gray py-2 px-4 rounded-md text-black'
+              href='/signUp'
+            >
+              Registration
+            </Link>
           </div>
         </div>
       </div>
       {/* ********2********* */}
       <div className='flex bg-white md:px-10 justify-between h-20 py-2 items-center'>
-        <div className='flex items-center gap-1'>
+        <Link href='/' className='flex items-center gap-1'>
           <Image src={logo} width={50} height={50} alt='logo' />
           <h1 className='text-lg'>
             <span className='font-bold'>JITENDRA</span>SHOP
           </h1>
-        </div>
+        </Link>
         {/*Search-box*/}
         <div>
           <div className='hidden md:block md:w-96'>
@@ -83,14 +92,10 @@ const Header = () => {
             <CgProfile className='w-8 h-8' />
           </Link>
           <Link href='/cart'>
-            <div className='flex gap-3 items-center bg-light_gray p-2 rounded-lg'>
-              {' '}
-              <IoIosCart className='w-6 h-6' />{' '}
-              <div className=''>
-                <div className='flex justify-center items-center bg-orange  text-white rounded-full  h-4 w-8'>
-                  0
-                </div>
-                <p>My Cart</p>
+            <div className='flex gap-1 items-center bg-light_gray p-2 rounded-lg'>
+              <IoIosCart className='w-6 h-6' />
+              <div className='flex justify-center items-center  text-black rounded-full'>
+                0
               </div>
             </div>
           </Link>
@@ -132,7 +137,12 @@ const Header = () => {
         >
           <div className='block md:hidden'>
             <div className='w-full flex justify-center  pt-5'>
-              <ul className='flex items-center gap-5'>
+              <ul
+                onClick={() => {
+                  setIsOpen(false)
+                }}
+                className='flex items-center gap-5'
+              >
                 <li className='bg-white px-6 py-2 hover:bg-orange hover:text-white duration-1000 rounded-lg'>
                   <Link href='/login'>Login</Link>
                 </li>
@@ -143,7 +153,12 @@ const Header = () => {
               </ul>
             </div>
           </div>
-          <ul className='md:flex  gap-6 ml-10 z-50 pt-6 md:pt-0 md:ml-0 text-black '>
+          <ul
+            onClick={() => {
+              setIsOpen(false)
+            }}
+            className='md:flex  gap-6 ml-10 z-50 pt-6 md:pt-0 md:ml-0 text-black '
+          >
             <li className='hover:text-orange  text-xl md:text-base  pt-2 md:pt-0'>
               <Link href='/'>HOME</Link>
             </li>
@@ -168,6 +183,11 @@ const Header = () => {
             <li className='hover:text-orange  text-xl md:text-base  pt-3 md:pt-0'>
               <Link href='/contact' className='pt-3 md:pt-0'>
                 CONTACT US
+              </Link>
+            </li>
+            <li className='block md:hidden    hover:text-orange  text-xl md:text-base  pt-3 md:pt-0'>
+              <Link href='/profile' className='pt-3 md:pt-0'>
+                PROFILE
               </Link>
             </li>
           </ul>

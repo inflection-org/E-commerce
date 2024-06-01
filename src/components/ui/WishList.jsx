@@ -7,18 +7,20 @@ import { toast } from 'react-toastify'
 
 const WishList = () => {
   const [wishLists, setWishLists] = useState([])
-  const [isShow, setIsShow] = useState(true)
+  const [error, setError] = useState('')
   // console.log(wishLists)
 
   useEffect(() => {
+    setError('')
     async function search() {
       try {
         const res = await instance.get('/wishlists/my')
-        // console.log(res.data)
+
         setWishLists(res.data.data)
         // setIsShow(false)
-      } catch (error) {
-        console.log(error)
+      } catch (err) {
+        console.log(err)
+        setError(err?.response?.data?.message)
       }
     }
     search()
@@ -26,54 +28,61 @@ const WishList = () => {
 
   const Remove = async (variant_id) => {
     try {
-      const res = await instance.delete(`/wishlists/${variant_id}`)
-      toast.success('Removed from wish list')
-      console.log(res.data)
-      // setWishLists(res.data.data)
-    } catch (error) {
-      if (error.res.data.data.message) {
-        toast.error(error.res.data.data.message)
+      const { data } = await instance.delete(`/wishlists/${variant_id}`)
+
+      toast.success(data?.message)
+      const remainWishList = wishLists.filter(
+        (item) => item.variant_id !== variant_id
+      )
+      setWishLists(remainWishList)
+    } catch (err) {
+      console.log(err)
+      if (err.res.data.data.message) {
+        toast.error(err.res.data.data.message)
       } else {
-        toast.error(error.message)
+        toast.error(err.message)
       }
     }
   }
 
   return (
     <div>
-      {isShow ? (
+      {wishLists.length > 0 ? (
         wishLists?.map((wishList, i) => {
           const { variant_id, product_name, price } = wishList
           return (
             <div className='mx-2 my-4'>
               <div
-                className='flex items-center justify-between p-5 bg-white rounded-md shadow-md'
+                className='block md:flex items-center justify-between p-5 bg-white rounded-md shadow-md'
                 key={i}
               >
-                <div className='flex items-center gap-3'>
+                <div className='flex items-center gap-3  '>
                   <img
-                    className='object-cover group-hover:scale-110 duration-1000 w-24 h-24 '
+                    className='object-cover group-hover:scale-110 duration-1000 w-64 h-36 md:w-24 md:h-24 '
                     src={'/product/S3.jpg'}
                     alt='logo'
                   />
                 </div>
-                <h1 className=''>{product_name}</h1>
+                <h1 className='mt-2 md:mt-0'>{product_name}</h1>
                 <p>{price}</p>
-                <button className='bg-blue text-white py-2 px-4 rounded-md hover:bg-green'>
-                  Add to Cart
-                </button>
-                <button onClick={() => Remove(variant_id)}>
-                  <RiDeleteBin5Line className='size-6 hover:text-red' />
-                </button>
+                <div className='flex gap-3 items-center justify-between md:gap-44 '>
+                  <button className='bg-blue text-white py-2 px-4 mt-2 md:mt-0 rounded-md hover:bg-green'>
+                    Add to Cart
+                  </button>
+
+                  <button onClick={() => Remove(variant_id)}>
+                    <RiDeleteBin5Line className=' size-10 md:size-6 hover:text-red' />
+                  </button>
+                </div>
               </div>
             </div>
           )
         })
       ) : (
-        <div className='w-auto h-[500px] rounded-md shadow-md bg-white m-4  flex justify-center text-center items-center '>
+        <div className='w-auto h-[500px] rounded-md shadow-md bg-white m-4 p-5 flex justify-center text-center items-center '>
           <div className=''>
             <BsBagHeart className='size-20 ml-20 text-blue' />
-            <h1 className='text-3xl mt-2'>No Item In WishList</h1>
+            <h1 className='text-3xl mt-2'>{error}</h1>
             <p className='text-xl'>Save Your Favorite Item Here</p>
             <button className='bg-orange mt-5 hover:bg-black duration-1000  text-white rounded-full px-8 py-2'>
               Shop Now

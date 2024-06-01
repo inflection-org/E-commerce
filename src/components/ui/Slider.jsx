@@ -33,8 +33,8 @@ const Slider = () => {
         <SwiperSlide>
           <div>
             <img
-              className='object-cover w-full h-52 md:h-[500px]'
-              src='/Slider1.webp'
+              className='object-cover w-full h-52 md:h-[600px]'
+              src='/A.avif'
               alt='logo'
             />
           </div>
@@ -42,8 +42,8 @@ const Slider = () => {
         <SwiperSlide>
           <div>
             <img
-              className='object-cover w-full h-52 md:h-[500px]'
-              src='/Slider3.jpeg'
+              className='object-cover w-full h-52 md:h-[600px]'
+              src='/B.avif'
               alt='logo'
             />
           </div>
@@ -51,8 +51,17 @@ const Slider = () => {
         <SwiperSlide>
           <div>
             <img
-              className='object-cover w-full h-52 md:h-[500px]'
-              src='/Slider2.webp'
+              className='object-cover w-full h-52 md:h-[600px]'
+              src='/C.avif'
+              alt='logo'
+            />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div>
+            <img
+              className='object-cover w-full h-52 md:h-[600px]'
+              src='/D.avif'
               alt='logo'
             />
           </div>

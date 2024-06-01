@@ -30,15 +30,11 @@ const MenuDropdown = () => {
         className='absolute bg-white w-full rounded-b-lg   top-12 left-[50%] -translate-x-[50%]'
       >
         {isShow && (
-          <ul className='ml-5 text-gray cursor-pointer '>
-            <li className='pt-1 hover:text-black hover:underline'>
-              Electronics
-            </li>
-            <li className='pt-1 hover:text-black hover:underline '>Mobile</li>
-            <li className='pt-1 hover:text-black hover:underline'>Sunglass</li>
-            <li className='pt-1 hover:text-black hover:underline'>
-              Uncategorized
-            </li>
+          <ul className='ml-5 text-gray cursor-pointer'>
+            <li className='pt-1 hover:text-black'>Electronics</li>
+            <li className='pt-1 hover:text-black '>Mobile</li>
+            <li className='pt-1 hover:text-black'>Sunglass</li>
+            <li className='pt-1 hover:text-black'>Uncategorized</li>
           </ul>
         )}
       </div>

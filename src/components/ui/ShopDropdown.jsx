@@ -2,12 +2,13 @@
 import React from 'react'
 import { useState } from 'react'
 import { IoIosArrowDown } from 'react-icons/io'
+import Link from 'next/link'
 
 const ShopDropdown = () => {
   const [isShow, setIsShow] = useState(false)
   return (
     <div>
-      <div className='relative z-20  '>
+      <div className='relative z-20'>
         <div
           className='flex justify-center items-center group  gap-3 cursor-pointer'
           onMouseEnter={() => {
@@ -33,14 +34,14 @@ const ShopDropdown = () => {
           onMouseLeave={() => {
             setIsShow(false)
           }}
-          className='absolute  bg-white w-full  rounded-b-lg  '
+          className='absolute bg-white w-full rounded-b-lg'
         >
           {isShow && (
             <ul className='text-sm pl-2 cursor-pointer'>
-              <li className='pt-2 hover:underline hover:text-black'>
-                <a href='/shop'>SHOP</a>
+              <li className='pt-2 text-gray hover:text-black'>
+                <Link href='/shop'>SHOP</Link>
               </li>
-              <li className='pt-1 pb-2 hover:underline hover:text-black'>
+              <li className='pt-1 pb-2 text-gray  hover:text-black'>
                 Shopping Cart
               </li>
             </ul>

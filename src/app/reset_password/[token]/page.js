@@ -2,15 +2,38 @@
 import React from 'react'
 import { useState } from 'react'
 import { CiLock } from 'react-icons/ci'
+import { usePathname } from 'next/navigation'
+import instance from '@/app/axios/Api'
+import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 const page = () => {
+  const router = useRouter()
+  const pathname = usePathname()
   const [password, setPassword] = useState('')
+  console.log(pathname.split('/')[2])
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     console.log(password)
+    try {
+      const res = await instance.patch(
+        `/users/reset_password/${pathname.split('/')[2]}`,
+        password
+      )
+      console.log(res.data)
+      toast.success('login successfully')
+      router.push('/')
+    } catch (error) {
+      if (error.response.data.message) {
+        toast.error(error.response.data.message)
+      } else {
+        toast.error(error.message)
+      }
+    }
   }
+
   return (
-    <div className='flex  justify-center items-center w-full h-full py-5 bg-light_gray'>
+    <div className='flex justify-center items-center w-full h-full py-5 bg-light_gray'>
       <div className='flex justify-center text-center  bg-white w-[80%] h-80 md:w-[60%] rounded-md shadow-md md:h-96'>
         <div>
           <CiLock className='size-20 md:size-32 m-auto mt-6 text-red' />

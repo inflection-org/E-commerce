@@ -16,8 +16,8 @@ const ProductCard2 = () => {
         </div>
         <div className='w-52'>
           <img
-            className='object-cover group-hover:scale-110 duration-1000 w-auto h-auto '
-            src={'/product/product1.webp'}
+            className='object-cover group-hover:scale-110 rounded-md duration-1000 w-auto h-auto '
+            src={'/product/S3.jpg'}
             alt='logo'
           />
         </div>

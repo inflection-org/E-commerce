@@ -12,7 +12,7 @@ const OurTeam = (props) => {
         <img src={props.img} className='w-80 h-[350px]' alt='img' />
       </div>
 
-      <div className='absolute w-full h-52 -mt-40 bg-light_gray   group-hover:translate-y-[0%] group-hover:transition-all group-hover:ease-in group-hover:duration-[0.5s] translate-y-[48%] transition-all ease-in duration-[0.5s] '>
+      <div className='absolute w-full h-52 -mt-44 bg-light_gray   group-hover:translate-y-[0%] group-hover:transition-all group-hover:ease-in group-hover:duration-[0.5s] translate-y-[48%] transition-all ease-in duration-[0.5s] '>
         <div>
           <div className='flex justify-center text-center mt-2'>
             <div>

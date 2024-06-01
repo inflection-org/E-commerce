@@ -3,6 +3,7 @@ import React from 'react'
 import ServiceCard from '@/components/ui/cards/ServiceCard'
 import OurTeam from '@/components/ui/cards/OurTeam'
 import { usePathname } from 'next/navigation'
+import ProtectedRoute from '@/components/app/ProtectedRoute'
 
 function About() {
   const pathname = usePathname()
@@ -23,7 +24,6 @@ function About() {
           Empowering
         </h1>
         <h1 className='text-2xl md:text-4xl text-center font-bold'>
-          {' '}
           eCommerce brands everywhere.
         </h1>
         <p className='text-center p-4'>
@@ -36,7 +36,7 @@ function About() {
         <img src={'/about.webp'} alt='img' className='w-full h-full md:py-4' />
       </div>
       {/* *******ServiceCard****************** */}
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-8 mt-16 mb-5 '>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16 mb-5'>
         <ServiceCard title='Free Shipping' disc='On all orders over $75.00'>
           <svg
             width='61'
@@ -146,10 +146,10 @@ function About() {
         </ServiceCard>
       </div>
       {/* ***********************team part********************* */}
-      <div className='flex justify-center md:bg-light_gray my-5 md:my-10 bg-slate-100 '>
+      <div className='flex justify-center md:bg-light_gray my-5 md:my-10 bg-slate-100'>
         <div className='w-[100%] mt-5'>
           <div className='flex justify-center m-4'>
-            <div className='text-center bg-light_gray  py-4 md:py-8'>
+            <div className='text-center bg-light_gray py-4 md:py-8'>
               <h1 className='text-4xl font-medium'>Our Teams</h1>
               <p className='py-3 md:py-5'>
                 Our team is made up of passionate people who love to create.
@@ -158,7 +158,7 @@ function About() {
           </div>
           {/******* *  OurTeam Card ********/}
           <div className='flex justify-center py-2 md:py-8'>
-            <div className='grid grid-cols-1  md:grid-cols-2  lg:grid-cols-3 gap-10 '>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
               <OurTeam
                 img='
                 /OurTeam/team1.webp'
@@ -170,7 +170,7 @@ function About() {
                 /OurTeam/team2.webp'
                 name='Linh Nguyen'
                 title='Oner & Founder'
-              />{' '}
+              />
               <OurTeam
                 img='
               /OurTeam/team4.webp'
@@ -183,8 +183,8 @@ function About() {
       </div>
       {/********************** Support*************************** */}
       <div className='py-8'>
-        <div className='block md:flex  md:gap-14 w-auto h-auto py-8  rounded-lg'>
-          <div className='w-full md:w-1/2 '>
+        <div className='block md:flex md:gap-14 w-auto h-auto py-8 rounded-lg'>
+          <div className='w-full md:w-1/2'>
             <img
               className='object-top h-auto w-full'
               src={'/platform1.webp'}
@@ -212,7 +212,7 @@ function About() {
                 euismod ipsum et dui roncus auctor.
               </p>
             </div>
-            <hr className='text-gray  pb-8'></hr>
+            <hr className='text-gray pb-8'></hr>
             <div className='mt-4'>
               <h2 className='text-2xl'>Free Shipping</h2>
               <p className='my-5 text-gray'>
@@ -224,30 +224,30 @@ function About() {
         </div>
       </div>
       {/* **** */}
-      <div className='py-8 '>
-        <div className='flex flex-col  md:flex-row md:justify-center gap-14  bg-light_gray w-auto h-auto py-8 px-4 rounded-lg'>
+      <div className='py-8'>
+        <div className='flex flex-col md:flex-row md:justify-center gap-14 bg-light_gray w-auto h-auto py-8 px-4 rounded-lg'>
           <img
-            className='object-cover m-auto  w-28 h-20 md:w-auto md:h-auto'
+            className='object-cover m-auto w-28 h-20 md:w-auto md:h-auto'
             src={'/Brands/Brand-1.png'}
             alt='logo'
-          />{' '}
+          />
           <img
-            className='object-cover m-auto  w-28 h-20 md:w-auto md:h-auto'
+            className='object-cover m-auto w-28 h-20 md:w-auto md:h-auto'
             src={'/Brands/Brand-2.webp'}
             alt='logo'
-          />{' '}
+          />
           <img
-            className='object-cover m-auto  w-28 h-20 md:w-auto md:h-auto'
+            className='object-cover m-auto w-28 h-20 md:w-auto md:h-auto'
             src={'/Brands/Brand-3.png'}
             alt='logo'
-          />{' '}
+          />
           <img
-            className='object-cover m-auto  w-28 h-20 md:w-auto md:h-auto'
+            className='object-cover m-auto w-28 h-20 md:w-auto md:h-auto'
             src={'/Brands/Brand-4.webp'}
             alt='logo'
-          />{' '}
+          />
           <img
-            className='object-cover m-auto  w-28 h-20 md:w-auto md:h-auto'
+            className='object-cover m-auto w-28 h-20 md:w-auto md:h-auto'
             src={'/Brands/Brand-5.webp'}
             alt='logo'
           />
@@ -257,4 +257,4 @@ function About() {
   )
 }
 
-export default About
+export default ProtectedRoute(About)

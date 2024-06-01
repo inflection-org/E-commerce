@@ -5,15 +5,12 @@ import { ProductCard } from '@/components/ui/cards/ProductCard'
 import { products } from '@/constants/productConstant'
 import { Fragment } from 'react'
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
-
 import { IoMdClose } from 'react-icons/io'
-
 import { IoIosArrowDown } from 'react-icons/io'
 import { FaPlus, FaMinus } from 'react-icons/fa'
 
 const page = () => {
   const pathname = usePathname()
-
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
   const sortOptions = [
@@ -72,7 +69,7 @@ const page = () => {
   }
   return (
     <div className='px-5 md:px-10'>
-      <div className='h-44 my-5 px-4 block md:flex md:justify-between items-center bg-light_gray'>
+      <div className='h-44 md:my-5 px-4 block md:flex md:justify-between items-center bg-light_gray'>
         <div className='pt-5 md:pt-0'>
           <h1 className='text-3xl md:text-5xl font-bold'>Shop</h1>
           <p className='mt-3  text-gray text-lg md:text-xl'>
@@ -206,20 +203,19 @@ const page = () => {
               </div>
             </Dialog>
           </Transition.Root>
-
           <main className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-            <div className='flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24'>
-              <h1 className='text-4xl font-bold tracking-tight text-gray-900'>
+            <div className='flex items-baseline justify-between border-b border-gray pb-6 pt-24'>
+              <h1 className='text-4xl font-bold tracking-tight text-black'>
                 New Arrivals
               </h1>
 
               <div className='flex items-center'>
                 <Menu as='div' className='relative inline-block text-left'>
                   <div>
-                    <Menu.Button className='group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900'>
+                    <Menu.Button className='group inline-flex justify-center text-sm font-medium text-black hover:text-gray'>
                       Sort
                       <IoIosArrowDown
-                        className='-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500'
+                        className='-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-black group-hover:text-gray'
                         aria-hidden='true'
                       />
                     </Menu.Button>
@@ -243,9 +239,9 @@ const page = () => {
                                 href={option.href}
                                 className={classNames(
                                   option.current
-                                    ? 'font-medium text-gray-900'
-                                    : 'text-gray-500',
-                                  active ? 'bg-gray-100' : '',
+                                    ? 'font-medium text-black'
+                                    : 'text-black',
+                                  active ? 'bg-gray' : '',
                                   'block px-4 py-2 text-sm'
                                 )}
                               >
@@ -261,7 +257,7 @@ const page = () => {
 
                 <button
                   type='button'
-                  className='-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7'
+                  className='-m-2 ml-5 p-2 text-gray hover:text-black sm:ml-7'
                 >
                   <span className='sr-only'>View grid</span>
                   <svg
@@ -281,7 +277,7 @@ const page = () => {
                 </button>
                 <button
                   type='button'
-                  className='-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden'
+                  className='-m-2 ml-4 p-2 text-gray hover:text-black sm:ml-6 lg:hidden'
                   onClick={() => setMobileFiltersOpen(true)}
                 >
                   <span className='sr-only'>Filters</span>
@@ -314,7 +310,7 @@ const page = () => {
                   <h3 className='sr-only'>Categories</h3>
                   <ul
                     role='list'
-                    className='space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900'
+                    className='space-y-4 border-b border-black pb-6 text-sm font-medium text-black'
                   >
                     {subCategories.map((category) => (
                       <li key={category.name}>
@@ -327,13 +323,13 @@ const page = () => {
                     <Disclosure
                       as='div'
                       key={section.id}
-                      className='border-b border-gray-200 py-6'
+                      className='border-b border-black py-6'
                     >
                       {({ open }) => (
                         <>
                           <h3 className='-my-3 flow-root'>
-                            <Disclosure.Button className='flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500'>
-                              <span className='font-medium text-gray-900'>
+                            <Disclosure.Button className='flex w-full items-center justify-between bg-white py-3 text-sm text-light_black hover:text-black'>
+                              <span className='font-medium text-light_black'>
                                 {section.name}
                               </span>
                               <span className='ml-6 flex items-center'>
@@ -368,7 +364,7 @@ const page = () => {
                                   />
                                   <label
                                     htmlFor={`filter-${section.id}-${optionIdx}`}
-                                    className='ml-3 text-sm text-gray-600'
+                                    className='ml-3 text-sm text-gray'
                                   >
                                     {option.label}
                                   </label>
@@ -384,7 +380,7 @@ const page = () => {
 
                 {/* Product grid */}
                 <div className='lg:col-span-3 '>
-                  <div className='mt-10 flex flex-wrap gap-2 md:gap-5'>
+                  <div className='grid grid-cols-1 md:grid-cols-3 w-full  gap-3'>
                     {products.map((product, index) => (
                       <ProductCard
                         pic={product.pic}
@@ -402,10 +398,9 @@ const page = () => {
           </main>
         </div>
       </div>
-
       {/* *** */}
-      <div className='py-8 '>
-        <div className='flex flex-col   md:flex-row md:justify-center gap-14  bg-light_gray w-auto h-auto py-8 px-4 rounded-lg'>
+      <div className='py-8'>
+        <div className='flex flex-col  md:flex-row md:justify-center gap-14  bg-light_gray w-auto h-auto py-8 px-4 rounded-lg'>
           <img
             className='object-cover m-auto  w-28 h-20 md:w-auto md:h-auto '
             src={'/Brands/Brand-1.png'}

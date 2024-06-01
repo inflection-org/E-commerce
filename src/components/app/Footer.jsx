@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import logo from '../../../public/logo.png'
+import logo from '../../../public/product/i.png'
 import payPal from '../../../public/Paypal.webp'
 import visa from '../../../public/visa.webp'
 import mastercard from '../../../public/mastercard.webp'
@@ -8,6 +8,7 @@ import cash from '../../../public/cash.webp'
 import { GrFacebookOption, GrInstagram } from 'react-icons/gr'
 import { FaTwitter, FaSkype } from 'react-icons/fa'
 import { AiFillCopyrightCircle } from 'react-icons/ai'
+import Link from 'next/link'
 
 function Footer() {
   return (
@@ -18,7 +19,7 @@ function Footer() {
           <div className='flex items-center gap-1'>
             <Image src={logo} width={50} height={50} alt='logo' />
             <h1 className='text-lg'>
-              <span className='font-bold'> Meta</span>Shop
+              <span className='font-bold'>JITENDRA</span>SHOP
             </h1>
           </div>
           <div className='mt-5'>
@@ -29,17 +30,17 @@ function Footer() {
           </div>
           <div className='mt-5'>
             <h1 className='hover:text-orange text-gray'>Phone</h1>
-            <p className='text-sm  hover:text-orange text-gray'>
+            <p className='text-sm hover:text-orange text-gray'>
               +1 423 208 388
             </p>
           </div>
           <div className='mt-5'>
             <h1 className=' hover:text-orange text-gray'>Email</h1>
-            <p className='text-sm  hover:text-orange text-gray'>
+            <p className='text-sm hover:text-orange text-gray'>
               hello@metashop.com
             </p>
           </div>
-          <div className='mt-5 flex  gap-3'>
+          <div className='mt-5 flex gap-3'>
             <div className='bg-gray rounded-full'>
               <GrFacebookOption className='size-8 p-1' />
             </div>
@@ -58,27 +59,33 @@ function Footer() {
         <div className='mt-4'>
           <h1 className='text-lg font-semibold'>Quick Links</h1>
           <div className='mt-6'>
-            <p className='m-2 hover:text-orange text-gray'>About</p>
-            <p className='m-2 hover:text-orange text-gray'>Shop</p>
-            <p className='m-2 hover:text-orange text-gray'>Special Offer</p>
-            <p className='m-2 hover:text-orange text-gray'>New Arrivals</p>
-            <p className='m-2 hover:text-orange text-gray'>Blog</p>
-            <p className='m-2 hover:text-orange text-gray'>FAQs</p>
-            <p className='m-2 hover:text-orange text-gray'>Contact Us</p>
+            <Link href='/about' className='m-2 hover:text-orange text-gray'>
+              About
+            </Link>
+            <Link href='/shop' className='m-2 hover:text-orange text-gray'>
+              Shop
+            </Link>
+            <li className='m-2 hover:text-orange text-gray'>Special Offer</li>
+            <li className='m-2 hover:text-orange text-gray'>New Arrivals</li>
+            <li className='m-2 hover:text-orange text-gray'>Blog</li>
+            <li className='m-2 hover:text-orange text-gray'>FAQs</li>
+            <Link href='/contact' className='m-2 hover:text-orange text-gray'>
+              Contact Us
+            </Link>
           </div>
         </div>
         {/* *****3*** */}
         <div className='mt-4'>
           <h1 className='text-lg font-semibold'>My Account</h1>
-          <div className='mt-6'>
-            <p className='m-2 hover:text-orange text-gray'>My Account</p>
-            <p className='m-2 hover:text-orange text-gray'>Order History</p>
-            <p className='m-2 hover:text-orange text-gray'>Address Book</p>
-            <p className='m-2 hover:text-orange text-gray'>Wishlist</p>
-            <p className='m-2 hover:text-orange text-gray'>Coupon Code</p>
-            <p className='m-2 hover:text-orange text-gray'>Login</p>
-            <p className='m-2 hover:text-orange text-gray'>Registration</p>
-          </div>
+          <ul className='mt-6'>
+            <li className='m-2 hover:text-orange text-gray'>My Account</li>
+            <li className='m-2 hover:text-orange text-gray'>Order History</li>
+            <li className='m-2 hover:text-orange text-gray'>Address Book</li>
+            <li className='m-2 hover:text-orange text-gray'>Wishlist</li>
+            <li className='m-2 hover:text-orange text-gray'>Coupon Code</li>
+            <li className='m-2 hover:text-orange text-gray'>Login</li>
+            <li className='m-2 hover:text-orange text-gray'>Registration</li>
+          </ul>
         </div>
         {/* ****4*** */}
         <div className='mt-4'>
@@ -115,7 +122,7 @@ function Footer() {
               />
               {/* <!--Search button--> */}
               <button
-                className='relative z-[2] flex items-center rounded-r-full  px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white hover:text-black hover:bg-white bg-orange shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg'
+                className='relative z-[2] flex items-center rounded-r-full px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white hover:text-black hover:bg-white bg-orange shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg'
                 type='button'
                 id='button-addon1'
               >
@@ -127,8 +134,8 @@ function Footer() {
       </div>
       <hr className='text-gray mt-8'></hr>
       <div className='flex justify-center text-center lg:block'>
-        <div className='block   lg:flex justify-between  text-white mt-8'>
-          <div className='flex  gap-3 items-center'>
+        <div className='block lg:flex justify-between text-white mt-8'>
+          <div className='flex gap-3 items-center'>
             <AiFillCopyrightCircle className='text-white size-5' />
             <h1>2024 MetaShop. All Rights Reserve.</h1>
           </div>
