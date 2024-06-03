@@ -15,11 +15,11 @@ const ProductCard2 = () => {
           </button>
         </div>
         <div className='w-52'>
-          <img
+          {/* <img
             className='object-cover group-hover:scale-110 rounded-md duration-1000 w-auto h-auto '
             src={'/product/S3.jpg'}
             alt='logo'
-          />
+          /> */}
         </div>
       </div>
     </div>
