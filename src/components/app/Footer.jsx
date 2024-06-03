@@ -50,28 +50,27 @@ function Footer() {
             <div className='bg-gray rounded-full'>
               <FaTwitter className='size-8 p-1' />
             </div>
-            <div className='bg-gray rounded-full'>
-              <FaSkype className='size-8 p-1' />
-            </div>
           </div>
         </div>
         {/* ***2**** */}
         <div className='mt-4'>
           <h1 className='text-lg font-semibold'>Quick Links</h1>
           <div className='mt-6'>
-            <Link href='/about' className='m-2 hover:text-orange text-gray'>
-              About
-            </Link>
-            <Link href='/shop' className='m-2 hover:text-orange text-gray'>
-              Shop
-            </Link>
-            <li className='m-2 hover:text-orange text-gray'>Special Offer</li>
-            <li className='m-2 hover:text-orange text-gray'>New Arrivals</li>
-            <li className='m-2 hover:text-orange text-gray'>Blog</li>
-            <li className='m-2 hover:text-orange text-gray'>FAQs</li>
-            <Link href='/contact' className='m-2 hover:text-orange text-gray'>
-              Contact Us
-            </Link>
+            <ul>
+              <Link href='/about' className='m-2 hover:text-orange text-gray'>
+                About
+              </Link>
+              <Link href='/shop' className='m-2 hover:text-orange text-gray'>
+                Shop
+              </Link>
+              <li className='m-2 hover:text-orange text-gray'>Special Offer</li>
+              <li className='m-2 hover:text-orange text-gray'>New Arrivals</li>
+              <li className='m-2 hover:text-orange text-gray'>Blog</li>
+              <li className='m-2 hover:text-orange text-gray'>FAQs</li>
+              <Link href='/contact' className='m-2 hover:text-orange text-gray'>
+                Contact Us
+              </Link>
+            </ul>
           </div>
         </div>
         {/* *****3*** */}
@@ -135,9 +134,9 @@ function Footer() {
       <hr className='text-gray mt-8'></hr>
       <div className='flex justify-center text-center lg:block'>
         <div className='block lg:flex justify-between text-white mt-8'>
-          <div className='flex gap-3 items-center'>
+          <div className='flex gap-1 items-center'>
             <AiFillCopyrightCircle className='text-white size-5' />
-            <h1>2024 MetaShop. All Rights Reserve.</h1>
+            <h1>2024 Inflection. All Rights Reserve.</h1>
           </div>
           <div className='flex gap-2'>
             <Image src={payPal} width={55} height={55} alt='logo' />
