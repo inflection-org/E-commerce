@@ -3,7 +3,7 @@ import { ProductCard } from '@/components/ui/cards/ProductCard'
 import ProductCard2 from '@/components/ui/cards/ProductCard2'
 import ServiceCard from '@/components/ui/cards/ServiceCard'
 import Slider from '@/components/ui/Slider'
-import { products } from '@/constants/productConstant'
+// import { products } from '@/constants/productConstant'
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import instance from './axios/Api'
@@ -15,9 +15,10 @@ const page = () => {
   const [allProduct, setAllProduct] = useState([])
   console.log(allProduct)
 
-  const seeDetails = (id) => {
-    router.push(`/shop/${id}`)
-    // console.log('apple')
+  const seeDetails = (product_id) => {
+    router.push(`/shop/${product_id}`)
+    console.log('apple')
+    console.log(product_id)
   }
 
   useEffect(() => {
@@ -28,7 +29,7 @@ const page = () => {
     async function search() {
       try {
         const res = await instance.get(
-          '/products/public?limit=2&page=1&quantity=0&min_price=0&max_price=999999'
+          '/products/public?limit=10&page=1&quantity=0&min_price=0&max_price=999999&tags=popular'
         )
         setAllProduct(res.data)
       } catch (err) {
@@ -152,7 +153,7 @@ const page = () => {
             </svg>
           </ServiceCard>
         </div>
-        {/* ******ProductCard*** */}
+        {/* ******ProductCard1*** */}
         <div className='py-10'>
           <div className='block md:flex justify-between'>
             <h1 className='text-3xl md:text-4xl font-bold'>
@@ -168,15 +169,18 @@ const page = () => {
             </div>
           </div>
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-10 gap-10 md:gap-12'>
-            {allProduct.map((product, index) => (
-              <ProductCard
-                toto={() => seeDetails(product.id)}
-                pic={product.pic}
-                name={product.name}
-                price={product.description}
-                key={index}
-              />
-            ))}
+            {allProduct.length > 0 &&
+              allProduct?.map((product, index) => (
+                <ProductCard
+                  toto={() => seeDetails(product.product_id)}
+                  pic={product.thumbnail}
+                  name={product.product_name}
+                  description={product.product_description}
+                  price={product.price}
+                  discount={product.discount}
+                  key={index}
+                />
+              ))}
           </div>
           <div className='mt-8 md:hidden block'>
             <Link
@@ -196,7 +200,7 @@ const page = () => {
         {/* *****bottom menu****** */}
         <div className='py-5'>
           <div className='my-4 py-0 bg-light_gray'>
-            <ul className='flex px-2 md:px-0 md:justify-center gap-10 overflow-auto text-xl bg-light_gray'>
+            <ul className='flex px-2 cursor-pointer md:px-0 md:justify-center gap-10 overflow-auto text-xl bg-light_gray'>
               <li className="class='font-serif text-xl border-b-4 text-nowrap border-transparent text-gray hover:text-orange hover:border-orange py-4">
                 New Arrival
               </li>
@@ -214,22 +218,24 @@ const page = () => {
               </li>
             </ul>
           </div>
-          {/* ***ProductCard**** */}
+          {/* ***ProductCard show by filter**** */}
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-10 gap-10 md:gap-12'>
-            {products.map((product, index) => (
-              <ProductCard
-                pic={product.pic}
-                name={product.title}
-                price={product.price}
-                rating={product.rating}
-                discount={product.discount}
-                key={index}
-              />
-            ))}
+            {allProduct.length > 0 &&
+              allProduct?.map((product, index) => (
+                <ProductCard
+                  toto={() => seeDetails(product.id)}
+                  pic={product.thumbnail}
+                  name={product.name}
+                  description={product.description}
+                  price={product.price}
+                  discount={product.discount}
+                  key={index}
+                />
+              ))}
           </div>
           <Link href='/shop' className='flex justify-center pt-8'>
             <div className='bg-orange hover:bg-black duration-1000 text-white rounded-full px-5 py-3'>
-              View All Deals
+              View More
             </div>
           </Link>
         </div>
@@ -248,7 +254,7 @@ const page = () => {
                   <input
                     type='text'
                     id='first_name'
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full px-16 py-3'
+                    className='bg-gray-50 border rounded-md border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-80  py-3'
                     placeholder='Enter Your Email'
                     required
                   />

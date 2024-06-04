@@ -37,12 +37,12 @@ const ShopDropdown = () => {
           className='absolute bg-white w-full rounded-b-lg'
         >
           {isShow && (
-            <ul className='text-sm pl-2 cursor-pointer'>
+            <ul className='text-xs px-2 font-semibold  cursor-pointer'>
               <li className='pt-2 text-gray hover:text-black'>
                 <Link href='/shop'>SHOP</Link>
               </li>
-              <li className='pt-1 pb-2 text-gray  hover:text-black'>
-                Shopping Cart
+              <li className='pt-1  pb-2 text-gray  hover:text-black'>
+                SHOPPING CART
               </li>
             </ul>
           )}

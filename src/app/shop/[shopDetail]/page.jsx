@@ -4,11 +4,12 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import instance from '@/app/axios/Api'
 import { getCookie } from '@/app/axios/CookieConfig'
+import { discountedPrice } from '@/components/ui/Discount'
+import { addTwoFloat } from '@/components/ui/Floting'
 
 const page = () => {
-  const [currentTab, setCurrentTab] = useState('third-img')
+  const [currentImage, setCurrentImage] = useState('')
   const [productDetails, setProductDetails] = useState([])
-  // const [variant, setVariant] = useState([])
   const params = useParams()
   const id = params.shopDetail
   const token = getCookie('access_token')
@@ -26,19 +27,6 @@ const page = () => {
       }
     }
     getProduct()
-
-    // **********variant**********
-    // async function getVariant() {
-    //   try {
-    //     const res = await instance.get(`/variant/product/${id}`)
-    //     console.log(res.data)
-
-    //     setVariant(res.data)
-    //   } catch (error) {
-    //     console.log(error)
-    //   }
-    // }
-    // getVariant()
   }, [id])
 
   return (
@@ -49,79 +37,34 @@ const page = () => {
             {/* **********1-img********** */}
             <div className='flex  justify-center'>
               <div className='w-auto border-2 border-light_gray  shadow-md'>
-                {currentTab === 'first-img' && (
-                  <img
-                    className='object-cover group-hover:scale-110 duration-1000 w-auto h-60 md:h-80'
-                    src={productDetails.thumbnail}
-                    alt='logo'
-                  />
-                )}
-                {currentTab === 'second-img' && (
-                  <img
-                    className='object-cover  group-hover:scale-110 duration-1000 h-60 md:h-80'
-                    src={'/product/aa2.webp'}
-                    alt='logo'
-                  />
-                )}{' '}
-                {currentTab === 'third-img' && (
-                  <img
-                    className='object-cover  group-hover:scale-110 duration-1000 h-60 md:h-80'
-                    src={'/product/aa.webp'}
-                    alt='logo'
-                  />
-                )}
+                <img
+                  className='object-cover group-hover:scale-110 duration-1000 w-auto h-60 md:h-80'
+                  src={currentImage ? currentImage : productDetails.thumbnail}
+                  alt='logo'
+                />
               </div>
             </div>
+
             {/* **********2-img*********** */}
-            <div className='flex justify-center py-6 md:py-8 gap-4'>
-              <div
-                onMouseEnter={() => {
-                  setCurrentTab('first-img')
-                }}
-                className={`p-1 ${
-                  currentTab === 'first-img'
-                    ? 'border-2 border-orange rounded-md'
-                    : 'border-2 border-light_gray'
-                }`}
-              >
-                <img
-                  className='object-cover w-28 h-24  '
-                  src={'/product/aa1.webp'}
-                  alt='logo'
-                />
-              </div>
-              <div
-                onMouseEnter={() => {
-                  setCurrentTab('second-img')
-                }}
-                className={`p-1 ${
-                  currentTab === 'second-img'
-                    ? 'border-2 border-orange rounded-md'
-                    : 'border-2 border-light_gray'
-                }`}
-              >
-                <img
-                  className='object-cover  w-28 h-24  '
-                  src={'/product/aa2.webp'}
-                  alt='logo'
-                />
-              </div>
-              <div
-                onMouseEnter={() => {
-                  setCurrentTab('third-img')
-                }}
-                className={`p-1 ${
-                  currentTab === 'third-img'
-                    ? 'border-2 border-orange rounded-md'
-                    : 'border-2 border-light_gray'
-                }`}
-              >
-                <img
-                  className='object-cover   w-28 h-24  '
-                  src={'/product/aa.webp'}
-                  alt='logo'
-                />
-              </div>
+            <div className='flex justify-center gap-4'>
+              {productDetails?.image_urls?.map((item, i) => {
+                console.log(item)
+                return (
+                  <div
+                    onMouseEnter={() => {
+                      setCurrentImage(item)
+                    }}
+                    key={i}
+                    className={`p-1 rounded-md mt-8 cursor-pointer ${
+                      currentImage === item
+                        ? 'border-2 border-orange '
+                        : 'border-2 border-light_gray '
+                    }`}
+                  >
+                    <img src={item} alt='logo' className=' w-24 h-24 ' />
+                  </div>
+                )
+              })}
             </div>
             {/*******button***** */}
             <div className='flex mt-5 justify-center'>
@@ -146,22 +89,43 @@ const page = () => {
           <div className='border-b-2 border-light_gray'>
             <h1 className='font-semibold text-xl'>{productDetails.name}</h1>
           </div>
-          <div className='flex gap-4 border-b-2 mt-4 pb-2 border-light_gray'>
-            <p className=''>
-              <span className='font-semibold'> Price: </span>900
-            </p>
-            <p className=''>
-              <span className='font-semibold'> Availability:</span> In Stock
-            </p>
-          </div>
+
           <div>
-            <p className='mt-4 border-b-2 pb-2 border-light_gray'>
+            {productDetails?.all_variants?.map((variant, i) => {
+              const { discount, price, quantity } = variant
+              return (
+                <div className=' gap-4 border-b-2 mt-4 pb-2 border-light_gray'>
+                  <div key={i}>
+                    <p className=''>
+                      <span className='font-semibold'> Price: </span>$
+                      {discountedPrice(price, discount)}
+                    </p>
+                    {discount > 0 && (
+                      <p className='text-gray line-through'>
+                        ${addTwoFloat(price)}
+                      </p>
+                    )}
+                  </div>
+                  <p className=''>
+                    <span className='font-semibold'> discount:</span> {discount}
+                    %
+                  </p>
+                  <p className=''>
+                    <span className='font-semibold'> quantity:</span> {quantity}
+                  </p>
+                </div>
+              )
+            })}
+
+            {/* <p className='mt-4 border-b-2 pb-2 border-light_gray'>
               <span className='font-semibold p-1 text-lg'>size:</span>
               <span className='border-2 border-orange p-1 hover:bg-orange hover:text-white rounded-md'>
                 9x12
               </span>
-            </p>
+            </p> */}
           </div>
+          {/* **************All variants*************** */}
+
           <div className='mt-8'>
             <h1 className='font-semibold text-lg'>Design Information</h1>
             <div className='flex justify-between w-64 '>
@@ -193,8 +157,6 @@ const page = () => {
           <div className='mt-10'>
             <h1 className='text-lg font-semibold'>Description</h1>
             <p>{productDetails.description}</p>
-            <h2>{productDetails.meta_description}</h2>
-            <h2>{productDetails.meta_keywords}</h2>
           </div>
         </div>
       </div>

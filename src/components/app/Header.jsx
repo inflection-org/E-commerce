@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <div className=''>
       {/* *******1******* */}
-      <div className='bg-orange '>
+      {/* <div className='bg-orange '>
         <div className='h-14 md:px-10  flex justify-between items-center text-white'>
           <h1 className='text-xs ml-5 md:ml-0 md:text-base'>
             Get 20%{' '}
@@ -42,7 +42,7 @@ const Header = () => {
             </Link>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* ********2********* */}
       <div className='flex bg-white md:px-10 justify-between h-20 py-2 items-center'>
         <Link href='/' className='flex items-center gap-1'>
@@ -165,27 +165,23 @@ const Header = () => {
             <li className='w-28 text-xl md:text-base pt-2 md:pt-0'>
               <ShopDropdown />
             </li>
-            <li className=' hover:text-orange  text-xl md:text-base  pt-3 md:pt-0'>
-              SPECIAL OFFER
-            </li>
-            <li className='hover:text-orange  text-xl md:text-base  pt-3 md:pt-0'>
+
+            <li className='hover:text-orange  cursor-pointer text-xl md:text-base  pt-3 md:pt-0'>
               NEW ARRIVALS
             </li>
-            <li className='hover:text-orange  text-xl md:text-base  pt-3 md:pt-0'>
+            <li className='hover:text-orange  cursor-pointer text-xl md:text-base  pt-3 md:pt-0'>
               <a href='/about'>ABOUT US</a>
             </li>
-            <li className='hover:text-orange  text-xl md:text-base  pt-3 md:pt-0'>
+            <li className='hover:text-orange cursor-pointer text-xl md:text-base  pt-3 md:pt-0'>
               BLOG
             </li>
-            <li className='hover:text-orange  text-xl md:text-base  pt-3 md:pt-0'>
-              FAQS
-            </li>
-            <li className='hover:text-orange  text-xl md:text-base  pt-3 md:pt-0'>
+
+            <li className='hover:text-orange cursor-pointer text-xl md:text-base  pt-3 md:pt-0'>
               <Link href='/contact' className='pt-3 md:pt-0'>
                 CONTACT US
               </Link>
             </li>
-            <li className='block md:hidden    hover:text-orange  text-xl md:text-base  pt-3 md:pt-0'>
+            <li className='block md:hidden cursor-pointer   hover:text-orange  text-xl md:text-base  pt-3 md:pt-0'>
               <Link href='/profile' className='pt-3 md:pt-0'>
                 PROFILE
               </Link>
