@@ -1,9 +1,9 @@
 'use client'
 import { ProductCard } from '@/components/ui/cards/ProductCard'
-import ProductCard2 from '@/components/ui/cards/ProductCard2'
+// import ProductCard2 from '@/components/ui/cards/ProductCard2'
 import ServiceCard from '@/components/ui/cards/ServiceCard'
 import Slider from '@/components/ui/Slider'
-// import { products } from '@/constants/productConstant'
+import CotegorySlider from '@/components/ui/CotegorySlider'
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import instance from './axios/Api'
@@ -13,12 +13,25 @@ import { useRouter } from 'next/navigation'
 const page = () => {
   const router = useRouter()
   const [allProduct, setAllProduct] = useState([])
-  console.log(allProduct)
+  const [allTags, setAllTags] = useState([])
+  const [filterTag, setFilterTag] = useState([])
+  console.log(filterTag)
 
   const seeDetails = (product_id) => {
     router.push(`/shop/${product_id}`)
-    console.log('apple')
-    console.log(product_id)
+  }
+
+  // ************tag-filter********
+  const tagFilter = async (tag) => {
+    try {
+      const res = await instance.get(
+        `/products/public?limit=4&sort=price_desc&tags=${tag}`
+      )
+
+      setFilterTag(res.data)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   useEffect(() => {
@@ -29,13 +42,24 @@ const page = () => {
     async function search() {
       try {
         const res = await instance.get(
-          '/products/public?limit=10&page=1&quantity=0&min_price=0&max_price=999999&tags=popular'
+          '/products/public?limit=4&sort=price_desc&tags=popular'
         )
         setAllProduct(res.data)
       } catch (err) {
         console.log(err)
       }
     }
+    // *****************
+    async function searchTags() {
+      try {
+        const res = await instance.get('/tags')
+        console.log(res.data)
+        setAllTags(res.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    searchTags()
     search()
   }, [])
 
@@ -45,7 +69,7 @@ const page = () => {
       <div className='px-5 md:px-10'>
         {/* ***service card ******/}
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 md:gap-8 mt-16 mb-5'>
-          <ServiceCard title='Free Shipping' disc='On all orders over $75.00'>
+          <ServiceCard title='Free Shipping' disc='On all orders over'>
             <svg
               width='61'
               height='60'
@@ -156,8 +180,8 @@ const page = () => {
         {/* ******ProductCard1*** */}
         <div className='py-10'>
           <div className='block md:flex justify-between'>
-            <h1 className='text-3xl md:text-4xl font-bold'>
-              Our Best Selling Products
+            <h1 className='text-3xl capitalize md:text-4xl font-bold'>
+              Suggested for you
             </h1>
             <div className='mt-5 hidden md:block'>
               <Link
@@ -168,7 +192,7 @@ const page = () => {
               </Link>
             </div>
           </div>
-          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-10 gap-10 md:gap-12'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-10 gap-10 md:gap-12'>
             {allProduct.length > 0 &&
               allProduct?.map((product, index) => (
                 <ProductCard
@@ -191,42 +215,37 @@ const page = () => {
             </Link>
           </div>
         </div>
-        {/* **ProductCard2 */}
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-4 md:py-20 gap-5'>
-          <ProductCard2 />
-          <ProductCard2 />
-          <ProductCard2 />
+        {/* ************cotegory slide************ */}
+        <div className=' py-4 md:py-20 gap-5'>
+          <CotegorySlider />
         </div>
-        {/* *****bottom menu****** */}
+        {/* *********tags ****** */}
         <div className='py-5'>
-          <div className='my-4 py-0 bg-light_gray'>
+          <div className='my-4 py-0 text-gray capitalize  bg-light_gray'>
             <ul className='flex px-2 cursor-pointer md:px-0 md:justify-center gap-10 overflow-auto text-xl bg-light_gray'>
-              <li className="class='font-serif text-xl border-b-4 text-nowrap border-transparent text-gray hover:text-orange hover:border-orange py-4">
-                New Arrival
-              </li>
-              <li className='font-serif text-xl border-b-4 text-nowrap border-transparent text-gray hover:text-orange hover:border-orange py-4'>
-                Best Seller
-              </li>
-              <li className='font-serif text-xl border-b-4 text-nowrap border-transparent text-gray hover:text-orange hover:border-orange py-4'>
-                Featured
-              </li>
-              <li className='font-serif text-xl border-b-4 text-nowrap border-transparent text-gray hover:text-orange hover:border-orange py-4'>
-                Top Rated
-              </li>
-              <li className='font-serif text-xl border-b-4 text-nowrap border-transparent text-gray hover:text-orange hover:border-orange py-4'>
-                Most Popular
-              </li>
+              {allTags?.length > 0 &&
+                allTags?.map((tag, i) => {
+                  return (
+                    <li
+                      key={i}
+                      className='font-serif text-xl border-b-4 text-nowrap border-transparent text-gray hover:text-orange hover:border-orange py-4'
+                      onClick={() => tagFilter(tag.name)}
+                    >
+                      {tag.name}
+                    </li>
+                  )
+                })}
             </ul>
           </div>
-          {/* ***ProductCard show by filter**** */}
+          {/* ***tags show by filter**** */}
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-10 gap-10 md:gap-12'>
-            {allProduct.length > 0 &&
-              allProduct?.map((product, index) => (
+            {filterTag.length > 0 &&
+              filterTag?.map((product, index) => (
                 <ProductCard
                   toto={() => seeDetails(product.id)}
                   pic={product.thumbnail}
-                  name={product.name}
-                  description={product.description}
+                  name={product.product_name}
+                  description={product.product_description}
                   price={product.price}
                   discount={product.discount}
                   key={index}
@@ -234,7 +253,7 @@ const page = () => {
               ))}
           </div>
           <Link href='/shop' className='flex justify-center pt-8'>
-            <div className='bg-orange hover:bg-black duration-1000 text-white rounded-full px-5 py-3'>
+            <div className='bg-orange hover:bg-black duration-1000 text-white rounded-full px-6 py-3'>
               View More
             </div>
           </Link>
