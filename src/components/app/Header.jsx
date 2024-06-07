@@ -15,34 +15,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className=''>
-      {/* *******1******* */}
-      {/* <div className='bg-orange '>
-        <div className='h-14 md:px-10  flex justify-between items-center text-white'>
-          <h1 className='text-xs ml-5 md:ml-0 md:text-base'>
-            Get 20%{' '}
-            <span className='font-semibold text-xs md:text-lg'>
-              Flat Discount
-            </span>{' '}
-            on Your First Order
-          </h1>
-          <div className='hidden md:flex gap-4'>
-            <Link
-              className='bg-light_gray py-2 px-4 rounded-md text-black'
-              href='/login'
-            >
-              Login
-            </Link>
-
-            <Link
-              className='bg-light_gray py-2 px-4 rounded-md text-black'
-              href='/signUp'
-            >
-              Registration
-            </Link>
-          </div>
-        </div>
-      </div> */}
+    <div className='sticky top-0 z-30 shadow-md'>
       {/* ********2********* */}
       <div className='flex bg-white md:px-10 justify-between h-20 py-2 items-center'>
         <Link href='/' className='flex items-center gap-1'>
@@ -91,6 +64,12 @@ const Header = () => {
           <Link href='/profile'>
             <CgProfile className='w-8 h-8' />
           </Link>
+          <Link
+            href='/login'
+            className='text-sm bg-orange md:mt-0 hover:bg-black duration-1000 text-white px-4 py-2 rounded-md '
+          >
+            Login
+          </Link>
           <Link href='/cart'>
             <div className='flex gap-1 items-center bg-light_gray p-2 rounded-lg'>
               <IoIosCart className='w-6 h-6' />
@@ -129,7 +108,7 @@ const Header = () => {
         </div>
         {/* ******li-item****** */}
         <div
-          className={`md:flex bg-light_gray md:ml-32 md:bg-white h-screen md:h-auto ${
+          className={`md:flex bg-light_gray md:ml-60 md:bg-white h-screen md:h-auto ${
             isOpen
               ? '-translate-x-[0%] transition-all ease-in duration-[0.5s]'
               : '-translate-x-[100%] md:translate-x-[0%] transition-all ease-in duration-[0.5s]'
@@ -171,9 +150,6 @@ const Header = () => {
             </li>
             <li className='hover:text-orange  cursor-pointer text-xl md:text-base  pt-3 md:pt-0'>
               <a href='/about'>ABOUT US</a>
-            </li>
-            <li className='hover:text-orange cursor-pointer text-xl md:text-base  pt-3 md:pt-0'>
-              BLOG
             </li>
 
             <li className='hover:text-orange cursor-pointer text-xl md:text-base  pt-3 md:pt-0'>

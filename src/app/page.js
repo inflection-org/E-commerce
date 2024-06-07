@@ -1,6 +1,5 @@
 'use client'
 import { ProductCard } from '@/components/ui/cards/ProductCard'
-// import ProductCard2 from '@/components/ui/cards/ProductCard2'
 import ServiceCard from '@/components/ui/cards/ServiceCard'
 import Slider from '@/components/ui/Slider'
 import CotegorySlider from '@/components/ui/CotegorySlider'
@@ -15,17 +14,16 @@ const page = () => {
   const [allProduct, setAllProduct] = useState([])
   const [allTags, setAllTags] = useState([])
   const [filterTag, setFilterTag] = useState([])
-  console.log(filterTag)
+  const [filterTagName, setFilterTagName] = useState('popular')
 
   const seeDetails = (product_id) => {
     router.push(`/shop/${product_id}`)
   }
-
   // ************tag-filter********
   const tagFilter = async (tag) => {
     try {
       const res = await instance.get(
-        `/products/public?limit=4&sort=price_desc&tags=${tag}`
+        `/products/public?limit=4&sort=price_desc&tags=${tag ? tag : 'popular'}`
       )
 
       setFilterTag(res.data)
@@ -61,6 +59,7 @@ const page = () => {
     }
     searchTags()
     search()
+    tagFilter()
   }, [])
 
   return (
@@ -177,7 +176,7 @@ const page = () => {
             </svg>
           </ServiceCard>
         </div>
-        {/* ******ProductCard1*** */}
+        {/* ******ProductCard1 public*** */}
         <div className='py-10'>
           <div className='block md:flex justify-between'>
             <h1 className='text-3xl capitalize md:text-4xl font-bold'>
@@ -203,6 +202,7 @@ const page = () => {
                   price={product.price}
                   discount={product.discount}
                   key={index}
+                  variantId={product.variant_id}
                 />
               ))}
           </div>
@@ -215,21 +215,27 @@ const page = () => {
             </Link>
           </div>
         </div>
-        {/* ************cotegory slide************ */}
+        {/* ************cotegory slide card************ */}
         <div className=' py-4 md:py-20 gap-5'>
           <CotegorySlider />
         </div>
-        {/* *********tags ****** */}
+        {/* *********tags name and tag filter card****** */}
         <div className='py-5'>
           <div className='my-4 py-0 text-gray capitalize  bg-light_gray'>
-            <ul className='flex px-2 cursor-pointer md:px-0 md:justify-center gap-10 overflow-auto text-xl bg-light_gray'>
+            <ul className='flex px-2 cursor-pointer md:px-0  md:justify-center gap-10 overflow-auto text-xl bg-light_gray'>
               {allTags?.length > 0 &&
                 allTags?.map((tag, i) => {
                   return (
                     <li
                       key={i}
-                      className='font-serif text-xl border-b-4 text-nowrap border-transparent text-gray hover:text-orange hover:border-orange py-4'
-                      onClick={() => tagFilter(tag.name)}
+                      className={`font-serif py-4 text-xl hover:border-b-4 text-nowrap text-gray hover:text-orange hover:border-orange  ${
+                        filterTagName === tag.name &&
+                        'border-b-4 border-orange text-orange'
+                      }`}
+                      onClick={() => {
+                        tagFilter(tag.name)
+                        setFilterTagName(tag.name)
+                      }}
                     >
                       {tag.name}
                     </li>
@@ -237,9 +243,9 @@ const page = () => {
                 })}
             </ul>
           </div>
-          {/* ***tags show by filter**** */}
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-10 gap-10 md:gap-12'>
-            {filterTag.length > 0 &&
+          {/* ***tags filter product**** */}
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  mt-10 gap-10 md:gap-12'>
+            {filterTag.length > 0 ? (
               filterTag?.map((product, index) => (
                 <ProductCard
                   toto={() => seeDetails(product.id)}
@@ -250,7 +256,14 @@ const page = () => {
                   discount={product.discount}
                   key={index}
                 />
-              ))}
+              ))
+            ) : (
+              // <div className='flex justify-center m-auto items-center h-80 bg-light_gray w-full'>
+              //   <div className='w-full'>
+              <p className='text-2xl'>No Product Found</p>
+              //   </div>
+              // </div>
+            )}
           </div>
           <Link href='/shop' className='flex justify-center pt-8'>
             <div className='bg-orange hover:bg-black duration-1000 text-white rounded-full px-6 py-3'>
@@ -273,7 +286,7 @@ const page = () => {
                   <input
                     type='text'
                     id='first_name'
-                    className='bg-gray-50 border rounded-md border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-80  py-3'
+                    className='bg-gray-50 border rounded-md border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full md:w-80  py-3'
                     placeholder='Enter Your Email'
                     required
                   />
@@ -290,36 +303,6 @@ const page = () => {
                 alt='logo'
               />
             </div>
-          </div>
-        </div>
-        {/* **************** */}
-        <div className='py-8'>
-          <div className='flex flex-col md:flex-row md:justify-center gap-14 bg-light_gray w-auto h-auto py-8 px-4 rounded-lg'>
-            <img
-              className='object-cover m-auto w-28 h-20 md:w-auto md:h-auto'
-              src={'/Brands/Brand-1.png'}
-              alt='logo'
-            />{' '}
-            <img
-              className='object-cover m-auto w-28 h-20 md:w-auto md:h-auto '
-              src={'/Brands/Brand-2.webp'}
-              alt='logo'
-            />{' '}
-            <img
-              className='object-cover m-auto w-28 h-20 md:w-auto md:h-auto '
-              src={'/Brands/Brand-3.png'}
-              alt='logo'
-            />{' '}
-            <img
-              className='object-cover m-auto w-28 h-20 md:w-auto md:h-auto '
-              src={'/Brands/Brand-4.webp'}
-              alt='logo'
-            />{' '}
-            <img
-              className='object-cover m-auto w-28 h-20 md:w-auto md:h-auto '
-              src={'/Brands/Brand-5.webp'}
-              alt='logo'
-            />
           </div>
         </div>
       </div>

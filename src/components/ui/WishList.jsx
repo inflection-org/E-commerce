@@ -15,7 +15,6 @@ const WishList = () => {
     async function search() {
       try {
         const res = await instance.get('/wishlists/my')
-
         setWishLists(res.data.data)
         // setIsShow(false)
       } catch (err) {
@@ -37,8 +36,8 @@ const WishList = () => {
       setWishLists(remainWishList)
     } catch (err) {
       console.log(err)
-      if (err.res.data.data.message) {
-        toast.error(err.res.data.data.message)
+      if (err.response?.data?.message) {
+        toast.error(err.response?.data?.message)
       } else {
         toast.error(err.message)
       }

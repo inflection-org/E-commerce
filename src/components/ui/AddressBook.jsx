@@ -20,6 +20,7 @@ const AddressBook = () => {
     country: '',
     pincode: '',
   })
+
   const [inputError, setInputError] = useState({
     name: '',
     phone: '',
@@ -40,7 +41,6 @@ const AddressBook = () => {
     country: '',
     pincode: '',
   })
-  const nameRegex = /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/
 
   const Show = () => {
     setIsOpen((isOpen) => !isOpen)
@@ -187,11 +187,6 @@ const AddressBook = () => {
                         value={state.name}
                         onChange={(e) => {
                           setState({ ...state, name: e.target.value })
-                          if (nameRegex.test(e.target.value)) {
-                            setInputError({ ...inputError, name: 'Valid' })
-                          } else {
-                            setInputError({ ...inputError, name: 'Invalid' })
-                          }
                         }}
                         className='border-0 px-3 py-3  text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
                         placeholder='Enter Name'

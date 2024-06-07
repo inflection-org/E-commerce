@@ -1,199 +1,456 @@
 'use client'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import CartCard from '@/components/ui/cards/CartCard'
+import instance from '@/app/axios/Api'
+import { usePathname } from 'next/navigation'
 
 const page = () => {
-  const [isOpen, setIsOpen] = useState(true)
+  const pathname = usePathname()
+
+  const [allCarts, setAllCarts] = useState([])
+  const [refresh, setRefresh] = useState(false)
+
+  useEffect(() => {
+    async function searchCart() {
+      try {
+        const res = await instance.get('/carts/my')
+        setAllCarts(res.data.items)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    searchCart()
+  }, [refresh])
 
   return (
-    <div>
-      {isOpen && (
-        <div
-          className='relative z-50'
-          aria-labelledby='slide-over-title'
-          role='dialog'
-          aria-modal='true'
-        >
-          {/* <!--
-    Background backdrop, show/hide based on slide-over state.
-
-    Entering: "ease-in-out duration-500"
-      From: "opacity-0"
-      To: "opacity-100"
-    Leaving: "ease-in-out duration-500"
-      From: "opacity-100"
-      To: "opacity-0"
-  --> */}
-
-          <div className='fixed inset-0 bg-gray bg-opacity-75 transition-opacity'></div>
-          <div className='fixed inset-0 overflow-hidden'>
-            <div className='absolute inset-0 overflow-hidden'>
-              <div className='pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10'>
-                {/* <!--
-          Slide-over panel, show/hide based on slide-over state.
-
-          Entering: "transform transition ease-in-out duration-500 sm:duration-700"
-            From: "translate-x-full"
-            To: "translate-x-0"
-          Leaving: "transform transition ease-in-out duration-500 sm:duration-700"
-            From: "translate-x-0"
-            To: "translate-x-full"
-        --> */}
-                <div className='pointer-events-auto w-screen max-w-md'>
-                  <div className='flex h-full flex-col overflow-y-scroll bg-white shadow-xl'>
-                    <div className='flex-1 overflow-y-auto px-4 py-6 sm:px-6'>
-                      <div className='flex items-start justify-between'>
-                        <h2
-                          className='text-lg font-medium text-gray'
-                          id='slide-over-title'
-                        >
-                          Shopping cart
-                        </h2>
-                        <div className='ml-3 flex h-7 items-center'>
-                          <button
-                            type='button'
-                            className='relative -m-2 p-2 text-gray hover:text-black'
-                            onClick={() => {
-                              setIsOpen(false)
-                            }}
-                          >
-                            <span className='absolute -inset-0.5'></span>
-                            <span className='sr-only'>Close panel</span>
-                            <svg
-                              className='h-6 w-6'
-                              fill='none'
-                              viewBox='0 0 24 24'
-                              stroke-width='1.5'
-                              stroke='currentColor'
-                              aria-hidden='true'
-                            >
-                              <path
-                                stroke-linecap='round'
-                                stroke-linejoin='round'
-                                d='M6 18L18 6M6 6l12 12'
-                              />
-                            </svg>
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className='mt-8'>
-                        <div className='flow-root'>
-                          <ul
-                            role='list'
-                            className='-my-6 divide-y divide-light_gray'
-                          >
-                            <li className='flex py-6'>
-                              <div className='h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-light_gray'>
-                                <img
-                                  src={'/product/product1.webp'}
-                                  alt='Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.'
-                                  className='h-full w-full object-cover object-center'
-                                />
-                              </div>
-
-                              <div className='ml-4 flex flex-1 flex-col'>
-                                <div>
-                                  <div className='flex justify-between text-base font-medium text-black'>
-                                    <h3>
-                                      <a href='#'>Throwback Hip Bag</a>
-                                    </h3>
-                                    <p className='ml-4'>$90.00</p>
-                                  </div>
-                                  <p className='mt-1 text-sm text-gray'>
-                                    Salmon
-                                  </p>
-                                </div>
-                                <div className='flex flex-1 items-end justify-between text-sm'>
-                                  <p className='text-gray-500'>Qty 1</p>
-
-                                  <div className='flex'>
-                                    <button
-                                      type='button'
-                                      className='font-medium text-black hover:text-red'
-                                    >
-                                      Remove
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            </li>
-                            <li className='flex py-6'>
-                              <div className='h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-light_gray'>
-                                <img
-                                  src={'/product/product1.webp'}
-                                  alt='Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.'
-                                  className='h-full w-full object-cover object-center'
-                                />
-                              </div>
-
-                              <div className='ml-4 flex flex-1 flex-col'>
-                                <div>
-                                  <div className='flex justify-between text-base font-medium text-black'>
-                                    <h3>
-                                      <a href='#'>Medium Stuff Satchel</a>
-                                    </h3>
-                                    <p className='ml-4'>$32.00</p>
-                                  </div>
-                                  <p className='mt-1 text-sm text-gray'>Blue</p>
-                                </div>
-                                <div className='flex flex-1 items-end justify-between text-sm'>
-                                  <p className='text-gray-500'>Qty 1</p>
-
-                                  <div className='flex'>
-                                    <button
-                                      type='button'
-                                      className='font-medium text-black hover:text-red'
-                                    >
-                                      Remove
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            </li>
-
-                            {/* <!-- More products... --> */}
-                          </ul>
-                        </div>
-                      </div>
+    <section className='bg-white py-8 antialiased  md:py-16'>
+      <div className='mx-auto max-w-screen-xl px-4 2xl:px-0'>
+        <div className='h-44 my-5 px-4 block md:flex md:justify-between items-center bg-light_gray'>
+          <div className='pt-5 md:pt-0'>
+            <h1 className='text-3xl md:text-5xl font-bold'>My Cart</h1>
+            <p className='mt-3  text-gray text-lg md:text-xl'>
+              Something differet, every day.
+            </p>
+          </div>
+          <p className='uppercase text-center mt-2 md:mt-0'>home{pathname}</p>
+        </div>
+        <div className='mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8'>
+          <div className='mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl'>
+            <div className='space-y-6'>
+              {/* ************card components******************* */}
+              {allCarts?.map(
+                (cart, index) => (
+                  console.log(cart),
+                  (
+                    <CartCard
+                      key={index}
+                      pic={cart.product_thumbnail}
+                      dis={cart.product_description}
+                      price={cart.price}
+                      name={cart.product_name}
+                      variantId={cart.variant_id}
+                      refresh={() => setRefresh(!refresh)}
+                    />
+                  )
+                )
+              )}
+            </div>
+            {/*  */}
+            <div className='hidden xl:mt-8 xl:block'>
+              <h3 className='text-2xl font-semibold text-gray-900 '>
+                People also bought
+              </h3>
+              <div className='mt-6 grid grid-cols-3 gap-4 sm:mt-8'>
+                <div className='space-y-6 overflow-hidden rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 '>
+                  <a href='#' className='overflow-hidden rounded'>
+                    <img
+                      className='mx-auto h-44 w-44 dark:hidden'
+                      src='https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg'
+                      alt='imac image'
+                    />
+                    <img
+                      className='mx-auto hidden h-44 w-44 dark:block'
+                      src='https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg'
+                      alt='imac image'
+                    />
+                  </a>
+                  <div>
+                    <a
+                      href='#'
+                      className='text-lg font-semibold leading-tight text-gray-900 hover:underline '
+                    >
+                      iMac 27”
+                    </a>
+                    <p className='mt-2 text-base font-normal text-gray-500 dark:text-gray-400'>
+                      This generation has some improvements, including a longer
+                      continuous battery life.
+                    </p>
+                  </div>
+                  <div>
+                    <p className='text-lg font-bold text-gray-900 '>
+                      <span className='line-through'> $399,99 </span>
+                    </p>
+                    <p className='text-lg font-bold leading-tight text-red-600 dark:text-red-500'>
+                      $299
+                    </p>
+                  </div>
+                  <div className='mt-6 flex items-center gap-2.5'>
+                    <button
+                      data-tooltip-target='favourites-tooltip-1'
+                      type='button'
+                      className='inline-flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white p-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600  dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700'
+                    >
+                      <svg
+                        className='h-5 w-5'
+                        aria-hidden='true'
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          stroke='currentColor'
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          d='M12 6C6.5 1 1 8 5.8 13l6.2 7 6.2-7C23 8 17.5 1 12 6Z'
+                        ></path>
+                      </svg>
+                    </button>
+                    <div
+                      id='favourites-tooltip-1'
+                      role='tooltip'
+                      className='tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700'
+                    >
+                      Add to favourites
+                      <div className='tooltip-arrow' data-popper-arrow></div>
+                    </div>
+                    <button
+                      type='button'
+                      className='inline-flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium  text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800'
+                    >
+                      <svg
+                        className='-ms-2 me-2 h-5 w-5'
+                        aria-hidden='true'
+                        xmlns='http://www.w3.org/2000/svg'
+                        width='24'
+                        height='24'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          stroke='currentColor'
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          d='M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4'
+                        />
+                      </svg>
+                      Add to cart
+                    </button>
+                  </div>
+                </div>
+                <div className='space-y-6 overflow-hidden rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 '>
+                  <a href='#' className='overflow-hidden rounded'>
+                    <img
+                      className='mx-auto h-44 w-44 dark:hidden'
+                      src='https://flowbite.s3.amazonaws.com/blocks/e-commerce/ps5-light.svg'
+                      alt='imac image'
+                    />
+                    <img
+                      className='mx-auto hidden h-44 w-44 dark:block'
+                      src='https://flowbite.s3.amazonaws.com/blocks/e-commerce/ps5-dark.svg'
+                      alt='imac image'
+                    />
+                  </a>
+                  <div>
+                    <a
+                      href='#'
+                      className='text-lg font-semibold leading-tight text-gray-900 hover:underline '
+                    >
+                      Playstation 5
+                    </a>
+                    <p className='mt-2 text-base font-normal text-gray-500 dark:text-gray-400'>
+                      This generation has some improvements, including a longer
+                      continuous battery life.
+                    </p>
+                  </div>
+                  <div>
+                    <p className='text-lg font-bold text-gray-900 '>
+                      <span className='line-through'> $799,99 </span>
+                    </p>
+                    <p className='text-lg font-bold leading-tight text-red-600 dark:text-red-500'>
+                      $499
+                    </p>
+                  </div>
+                  <div className='mt-6 flex items-center gap-2.5'>
+                    <button
+                      data-tooltip-target='favourites-tooltip-2'
+                      type='button'
+                      className='inline-flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white p-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600  dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700'
+                    >
+                      <svg
+                        className='h-5 w-5'
+                        aria-hidden='true'
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          stroke='currentColor'
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          d='M12 6C6.5 1 1 8 5.8 13l6.2 7 6.2-7C23 8 17.5 1 12 6Z'
+                        ></path>
+                      </svg>
+                    </button>
+                    <div
+                      id='favourites-tooltip-2'
+                      role='tooltip'
+                      className='tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700'
+                    >
+                      Add to favourites
+                      <div className='tooltip-arrow' data-popper-arrow></div>
+                    </div>
+                    <button
+                      type='button'
+                      className='inline-flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium  text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800'
+                    >
+                      <svg
+                        className='-ms-2 me-2 h-5 w-5'
+                        aria-hidden='true'
+                        xmlns='http://www.w3.org/2000/svg'
+                        width='24'
+                        height='24'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          stroke='currentColor'
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          d='M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4'
+                        />
+                      </svg>
+                      Add to cart
+                    </button>
+                  </div>
+                </div>
+                <div className='space-y-6 overflow-hidden rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 '>
+                  <a href='#' className='overflow-hidden rounded'>
+                    <img
+                      className='mx-auto h-44 w-44 dark:hidden'
+                      src='https://flowbite.s3.amazonaws.com/blocks/e-commerce/apple-watch-light.svg'
+                      alt='imac image'
+                    />
+                    <img
+                      className='mx-auto hidden h-44 w-44 dark:block'
+                      src='https://flowbite.s3.amazonaws.com/blocks/e-commerce/apple-watch-dark.svg'
+                      alt='imac image'
+                    />
+                  </a>
+                  <div>
+                    <a
+                      href='#'
+                      className='text-lg font-semibold leading-tight text-gray-900 hover:underline '
+                    >
+                      Apple Watch Series 8
+                    </a>
+                    <p className='mt-2 text-base font-normal text-gray-500 dark:text-gray-400'>
+                      This generation has some improvements, including a longer
+                      continuous battery life.
+                    </p>
+                  </div>
+                  <div>
+                    <p className='text-lg font-bold text-gray-900 '>
+                      <span className='line-through'> $1799,99 </span>
+                    </p>
+                    <p className='text-lg font-bold leading-tight text-red-600 dark:text-red-500'>
+                      $1199
+                    </p>
+                  </div>
+                  <div className='mt-6 flex items-center gap-2.5'>
+                    <button
+                      data-tooltip-target='favourites-tooltip-3'
+                      type='button'
+                      className='inline-flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white p-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600  dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700'
+                    >
+                      <svg
+                        className='h-5 w-5'
+                        aria-hidden='true'
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          stroke='currentColor'
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          d='M12 6C6.5 1 1 8 5.8 13l6.2 7 6.2-7C23 8 17.5 1 12 6Z'
+                        ></path>
+                      </svg>
+                    </button>
+                    <div
+                      id='favourites-tooltip-3'
+                      role='tooltip'
+                      className='tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700'
+                    >
+                      Add to favourites
+                      <div className='tooltip-arrow' data-popper-arrow></div>
                     </div>
 
-                    <div className='border-t border-light_gray px-4 py-6 sm:px-6'>
-                      <div className='flex justify-between text-base font-medium text-black'>
-                        <p>Subtotal</p>
-                        <p>$262.00</p>
-                      </div>
-                      <p className='mt-0.5 text-sm text-gray-500'>
-                        Shipping and taxes calculated at checkout.
-                      </p>
-                      <div className='mt-6'>
-                        <a
-                          href='#'
-                          className='flex items-center justify-center rounded-md border border-transparent bg-blue px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-green'
-                        >
-                          Checkout
-                        </a>
-                      </div>
-                      <div className='mt-6 flex justify-center text-center text-sm text-gray'>
-                        <p>
-                          or
-                          <button
-                            type='button'
-                            className='font-medium ml-1 text-blue hover:text-black'
-                          >
-                            Continue Shopping
-                            <span aria-hidden='true'> &rarr;</span>
-                          </button>
-                        </p>
-                      </div>
-                    </div>
+                    <button
+                      type='button'
+                      className='inline-flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium  text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800'
+                    >
+                      <svg
+                        className='-ms-2 me-2 h-5 w-5'
+                        aria-hidden='true'
+                        xmlns='http://www.w3.org/2000/svg'
+                        width='24'
+                        height='24'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          stroke='currentColor'
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          d='M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4'
+                        />
+                      </svg>
+                      Add to cart
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          {/* *******************Order summary******************************* */}
+          {/* <div className='mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full'>
+            <div className='space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700  sm:p-6'>
+              <p className='text-xl font-semibold text-gray-900 '>
+                Order summary
+              </p>
+
+              <div className='space-y-4'>
+                <div className='space-y-2'>
+                  <dl className='flex items-center justify-between gap-4'>
+                    <dt className='text-base font-normal text-gray-500 dark:text-gray-400'>
+                      Original price
+                    </dt>
+                    <dd className='text-base font-medium text-gray-900 '>
+                      $7,592.00
+                    </dd>
+                  </dl>
+
+                  <dl className='flex items-center justify-between gap-4'>
+                    <dt className='text-base font-normal text-gray-500 dark:text-gray-400'>
+                      Savings
+                    </dt>
+                    <dd className='text-base font-medium text-green-600'>
+                      -$299.00
+                    </dd>
+                  </dl>
+
+                  <dl className='flex items-center justify-between gap-4'>
+                    <dt className='text-base font-normal text-gray-500 dark:text-gray-400'>
+                      Store Pickup
+                    </dt>
+                    <dd className='text-base font-medium text-gray-900 '>
+                      $99
+                    </dd>
+                  </dl>
+
+                  <dl className='flex items-center justify-between gap-4'>
+                    <dt className='text-base font-normal text-gray-500 dark:text-gray-400'>
+                      Tax
+                    </dt>
+                    <dd className='text-base font-medium text-gray-900 '>
+                      $799
+                    </dd>
+                  </dl>
+                </div>
+
+                <dl className='flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700'>
+                  <dt className='text-base font-bold text-gray-900 '>Total</dt>
+                  <dd className='text-base font-bold text-gray-900 '>
+                    $8,191.00
+                  </dd>
+                </dl>
+              </div>
+
+              <a
+                href='#'
+                className='flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800'
+              >
+                Proceed to Checkout
+              </a>
+
+              <div className='flex items-center justify-center gap-2'>
+                <span className='text-sm font-normal text-gray-500 dark:text-gray-400'>
+                  {' '}
+                  or{' '}
+                </span>
+                <a
+                  href='#'
+                  title=''
+                  className='inline-flex items-center gap-2 text-sm font-medium text-primary-700 underline hover:no-underline dark:text-primary-500'
+                >
+                  Continue Shopping
+                  <svg
+                    className='h-5 w-5'
+                    aria-hidden='true'
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      stroke='currentColor'
+                      stroke-linecap='round'
+                      stroke-linejoin='round'
+                      stroke-width='2'
+                      d='M19 12H5m14 0-4 4m4-4-4-4'
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <div className='space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700  sm:p-6'>
+              <form className='space-y-4'>
+                <div>
+                  <label
+                    for='voucher'
+                    className='mb-2 block text-sm font-medium text-gray-900 '
+                  >
+                    {' '}
+                    Do you have a voucher or gift card?{' '}
+                  </label>
+                  <input
+                    type='text'
+                    id='voucher'
+                    className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700  dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500'
+                    placeholder=''
+                    required
+                  />
+                </div>
+                <button
+                  type='submit'
+                  className='flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800'
+                >
+                  Apply Code
+                </button>
+              </form>
+            </div>
+          </div> */}
         </div>
-      )}
-    </div>
+      </div>
+    </section>
   )
 }
 

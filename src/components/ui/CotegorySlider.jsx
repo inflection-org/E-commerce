@@ -2,19 +2,25 @@ import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import ProductCard2 from './cards/ProductCard2'
 import instance from '../../app/axios/Api'
-import { FreeMode, Pagination } from 'swiper/modules'
-import { Autoplay } from 'swiper'
-import SwiperCore from 'swiper'
+import { useRouter } from 'next/navigation'
+
+// Swipper CS
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+
+import { Autoplay } from 'swiper/modules'
 
 function CotegorySlider() {
-  SwiperCore.use([Autoplay])
+  const router = useRouter()
+
   const [categories, setCategories] = useState([])
   // console.log(categories)
   useEffect(() => {
     async function search() {
       try {
         const res = await instance.get('/categories/list')
-        // console.log(res.data)
+
         setCategories(res.data)
       } catch (err) {
         console.log(err)
@@ -46,20 +52,22 @@ function CotegorySlider() {
         }}
         slidesPerView={3}
         spaceBetween={30}
-        // freeMode={true}
         pagination={{
           clickable: true,
         }}
-        // modules={[FreeMode, Pagination]}
+        modules={[Autoplay]}
         className='mySwiper'
       >
         {categories.length > 0 &&
           categories?.map((category, i) => (
             <SwiperSlide key={i}>
               <ProductCard2
+                // onClick={() => console.log('clicked')}
                 name={category.name}
                 dis={category.description}
-                // price={category.price}
+                categoriesDetails={() =>
+                  router.push(`/cotegory/${category.id}`)
+                }
                 pic={category.image}
               />
             </SwiperSlide>
