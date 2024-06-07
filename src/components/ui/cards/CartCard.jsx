@@ -1,36 +1,46 @@
 import React from 'react'
+import { useState } from 'react'
+import { MdDeleteForever } from 'react-icons/md'
+import { FaHeart } from 'react-icons/fa'
+import instance from '@/app/axios/Api'
+import { toast } from 'react-toastify'
 
-function CartCard() {
+function CartCard({ pic, dis, price, variantId, refresh }) {
+  const removeCartList = async (id) => {
+    try {
+      const res = await instance.delete(`/carts/remove/${id}`)
+      toast.success(res?.data?.message)
+      refresh()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
-    <div>
-      <div class='rounded-lg border border-gray-200 bg-light_gray p-4 shadow-sm dark:border-gray-700  md:p-6'>
-        <div class='space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0'>
-          <a href='#' class='shrink-0 md:order-1'>
+    <div className='bg-light_gray'>
+      <div className='rounded-lg  border  border-gray-200 bg-white/65  shadow-md p-4   md:p-6'>
+        <div className='space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0'>
+          <a href='#' className='shrink-0 md:order-1'>
             <img
-              class='h-20 w-20 dark:hidden'
-              src='https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg'
-              alt='imac image'
-            />
-            <img
-              class='hidden h-20 w-20 dark:block'
-              src='https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg'
+              className='hidden h-20 w-20 md:h-32 md:w-32 dark:block'
+              src={pic}
               alt='imac image'
             />
           </a>
 
-          <label for='counter-input' class='sr-only'>
+          <label for='counter-input' className='sr-only'>
             Choose quantity:
           </label>
-          <div class='flex items-center justify-between md:order-3 md:justify-end'>
-            <div class='flex items-center'>
+          <div className='flex items-center justify-between md:order-3 md:justify-end'>
+            <div className='flex items-center'>
               <button
                 type='button'
                 id='decrement-button'
                 data-input-counter-decrement='counter-input'
-                class='inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700'
+                className='inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700'
               >
                 <svg
-                  class='h-2.5 w-2.5 text-gray-900 '
+                  className='h-2.5 w-2.5 text-gray-900 '
                   aria-hidden='true'
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
@@ -49,7 +59,7 @@ function CartCard() {
                 type='text'
                 id='counter-input'
                 data-input-counter
-                class='w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 '
+                className='w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 '
                 placeholder=''
                 value='2'
                 required
@@ -58,10 +68,10 @@ function CartCard() {
                 type='button'
                 id='increment-button'
                 data-input-counter-increment='counter-input'
-                class='inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700'
+                className='inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700'
               >
                 <svg
-                  class='h-2.5 w-2.5 text-gray-900 '
+                  className='h-2.5 w-2.5 text-gray-900 '
                   aria-hidden='true'
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
@@ -77,66 +87,34 @@ function CartCard() {
                 </svg>
               </button>
             </div>
-            <div class='text-end md:order-4 md:w-32'>
-              <p class='text-base font-bold text-gray-900 '>$1,499</p>
+            <div className='text-end md:order-4 md:w-32'>
+              <p className='text-base font-bold text-gray-900 '>{price}</p>
             </div>
           </div>
 
-          <div class='w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md'>
+          <div className='w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md'>
             <a
               href='#'
-              class='text-base font-medium text-gray-900 hover:underline '
+              className='text-xl font-medium text-gray-900 hover:underline '
             >
-              PC system All in One APPLE iMac (2023) mqrq3ro/a, Apple M3, 24"
-              Retina 4.5K, 8GB, SSD 256GB, 10-core GPU, Keyboard layout INT
+              {dis}
             </a>
 
-            <div class='flex items-center gap-4'>
+            <div className='flex items-center gap-4 '>
               <button
                 type='button'
-                class='inline-flex items-center text-sm font-medium text-gray hover:text-black hover:underline dark:text-gray-400 '
+                className='inline-flex items-center text-sm gap-1.5 font-medium text-gray hover:text-black hover:underline dark:text-gray-400 '
               >
-                <svg
-                  class='me-1.5 h-5 w-5'
-                  aria-hidden='true'
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='24'
-                  height='24'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                >
-                  <path
-                    stroke='currentColor'
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
-                    d='M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z'
-                  />
-                </svg>
+                <FaHeart className='size-4' />
                 Add to Favorites
               </button>
 
               <button
+                onClick={() => removeCartList(variantId)}
                 type='button'
-                class='inline-flex items-center text-sm font-medium text-red hover:underline '
+                className='inline-flex items-center text-sm font-medium text-red hover:underline '
               >
-                <svg
-                  class='me-1.5 h-5 w-5'
-                  aria-hidden='true'
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='24'
-                  height='24'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                >
-                  <path
-                    stroke='currentColor'
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
-                    d='M6 18 17.94 6M18 18 6.06 6'
-                  />
-                </svg>
+                <MdDeleteForever className='size-5' />
                 Remove
               </button>
             </div>
