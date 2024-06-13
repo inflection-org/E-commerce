@@ -14,8 +14,7 @@ import { MyContext } from "@/context/MyContext";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isLogin } = useContext(MyContext);
-
+  const { isLogin, myCart } = useContext(MyContext);
   return (
     <div className="sticky top-0 z-30 shadow-md">
       {/* ********1********* */}
@@ -79,7 +78,7 @@ const Header = () => {
             <div className="flex gap-1 items-center bg-light_gray p-2 rounded-lg">
               <IoIosCart className="w-6 h-6" />
               <div className="flex justify-center items-center  text-black rounded-full">
-                0
+                {myCart?.length > 0 && myCart?.length}
               </div>
             </div>
           </Link>
