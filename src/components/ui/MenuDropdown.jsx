@@ -1,62 +1,62 @@
-'use client'
-import React from 'react'
-import { useState, useEffect } from 'react'
-import { CgMenuGridO } from 'react-icons/cg'
-import { IoIosArrowDown } from 'react-icons/io'
-import instance from '@/app/axios/Api'
+"use client";
+import React from "react";
+import { useState, useEffect } from "react";
+import { CgMenuGridO } from "react-icons/cg";
+import { IoIosArrowDown } from "react-icons/io";
+import { instance } from "@/app/axios/Api";
 const MenuDropdown = () => {
-  const [isShow, setIsShow] = useState(false)
-  const [categories, setCategories] = useState([])
+  const [isShow, setIsShow] = useState(false);
+  const [categories, setCategories] = useState([]);
 
   // console.log(categories)
   useEffect(() => {
     async function search() {
       try {
-        const res = await instance.get('/categories/list')
-        setCategories(res.data)
+        const res = await instance.get("/categories/list");
+        setCategories(res.data);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     }
-    search()
-  }, [])
+    search();
+  }, []);
   return (
-    <div className='relative z-50'>
+    <div className="relative z-50">
       <div
-        className='flex justify-center items-center bg-orange text-white h-12 p-2 gap-4 cursor-pointer'
+        className="flex justify-center items-center bg-orange text-white h-12 p-2 gap-4 cursor-pointer"
         onMouseEnter={() => {
-          setIsShow(true)
+          setIsShow(true);
         }}
         onMouseLeave={() => {
-          setIsShow(false)
+          setIsShow(false);
         }}
       >
-        <CgMenuGridO className='' />
+        <CgMenuGridO className="" />
         <h1>All Categories</h1>
-        <IoIosArrowDown className={isShow ? 'rotate-180' : ''} />
+        <IoIosArrowDown className={isShow ? "rotate-180" : ""} />
       </div>
       <div
         onMouseEnter={() => {
-          setIsShow(true)
+          setIsShow(true);
         }}
         onMouseLeave={() => {
-          setIsShow(false)
+          setIsShow(false);
         }}
-        className='absolute bg-white w-full rounded-b-lg   top-12 left-[50%] -translate-x-[50%]'
+        className="absolute bg-white w-full rounded-b-lg   top-12 left-[50%] -translate-x-[50%]"
       >
         {isShow && (
-          <ul className='ml-5 text-gray cursor-pointer'>
+          <ul className="ml-5 text-gray cursor-pointer">
             {categories.map((item) => {
               return (
-                <li className='pt-1 hover:text-black' key={item}>
+                <li className="pt-1 hover:text-black" key={item}>
                   {item.name}
                 </li>
-              )
+              );
             })}
           </ul>
         )}
       </div>
     </div>
-  )
-}
-export default MenuDropdown
+  );
+};
+export default MenuDropdown;

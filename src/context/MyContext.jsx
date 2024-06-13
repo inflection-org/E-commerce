@@ -42,7 +42,7 @@ const MyContextProvider = ({ children }) => {
   const renewToken = async () => {
     setToken("refresh_token");
     try {
-      const { data } = await instance.get("/users/refresh-token");
+      const { data } = await instance.get("/users/renew_token");
       const access_token = data.access_token;
       setCookie("access_token", access_token);
       setToken("access_token");

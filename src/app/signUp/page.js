@@ -1,137 +1,137 @@
-'use client'
-import React from 'react'
-import { useState } from 'react'
-import instance from '../axios/Api'
-import { useRouter } from 'next/navigation'
-import { toast } from 'react-toastify'
+"use client";
+import React from "react";
+import { useState } from "react";
+import { instance } from "../axios/Api";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const page = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [state, setState] = useState({
-    name: '',
-    email: '',
-  })
+    name: "",
+    email: "",
+  });
 
   const handleSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
     // console.log(state)
     setState({
-      name: '',
-      email: '',
-    })
+      name: "",
+      email: "",
+    });
     try {
       // console.log(state)
-      const res = await instance.post('/users/signup', {
-        reset_password_ui_url: 'http://localhost:3000/reset_password',
+      const res = await instance.post("/users/signup", {
+        reset_password_ui_url: "http://localhost:3000/reset_password",
         full_name: state.name,
         email: state.email,
-      })
-      toast.success('signUp successfully')
+      });
+      toast.success("signUp successfully");
       // router.push('/login')
     } catch (error) {
       if (error.response.data.message) {
-        toast.error(error.response.data.message)
+        toast.error(error.response.data.message);
       } else {
-        toast.error(error.message)
+        toast.error(error.message);
       }
     }
-  }
+  };
 
   return (
-    <div className='font-[sans-serif] text-gray-800 bg-white max-w-4xl flex items-center mx-auto md:h-screen p-4'>
-      <div className='grid md:grid-cols-3 items-center shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-xl overflow-hidden'>
-        <div className='max-md:order-1 flex flex-col justify-center space-y-16 max-md:mt-16 min-h-full bg-gradient-to-r from-black to-light_black lg:px-8 px-4 py-4'>
+    <div className="font-[sans-serif] text-gray-800 bg-white max-w-4xl flex items-center mx-auto md:h-screen p-4">
+      <div className="grid md:grid-cols-3 items-center shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-xl overflow-hidden">
+        <div className="max-md:order-1 flex flex-col justify-center space-y-16 max-md:mt-16 min-h-full bg-gradient-to-r from-black to-light_black lg:px-8 px-4 py-4">
           <div>
-            <h4 className='text-white text-lg font-semibold'>
+            <h4 className="text-white text-lg font-semibold">
               Create Your Account
             </h4>
-            <p className='text-[13px] text-white mt-2'>
+            <p className="text-[13px] text-white mt-2">
               Welcome to our registration page! Get started by creating your
               account.
             </p>
           </div>
           <div>
-            <h4 className='text-white text-lg font-semibold'>
+            <h4 className="text-white text-lg font-semibold">
               Simple & Secure Registration
             </h4>
-            <p className='text-[13px] text-white mt-2'>
+            <p className="text-[13px] text-white mt-2">
               Our registration process is designed to be straightforward and
               secure. We prioritize your privacy and data security.
             </p>
           </div>
         </div>
-        <form className='md:col-span-2 w-full py-6 px-6 sm:px-16'>
-          <div className='mb-6'>
-            <h3 className='text-2xl font-bold'>Create an account</h3>
+        <form className="md:col-span-2 w-full py-6 px-6 sm:px-16">
+          <div className="mb-6">
+            <h3 className="text-2xl font-bold">Create an account</h3>
           </div>
-          <div className='space-y-5'>
+          <div className="space-y-5">
             <div>
-              <label className='text-sm mb-2 block'>Name</label>
-              <div className='relative flex items-center'>
+              <label className="text-sm mb-2 block">Name</label>
+              <div className="relative flex items-center">
                 <input
-                  type='text'
-                  name='name'
+                  type="text"
+                  name="name"
                   value={state.name}
                   onChange={(e) => setState({ ...state, name: e.target.value })}
                   required
-                  className='bg-white border border-gray w-full text-sm px-4 py-2.5 rounded-md outline-blue'
-                  placeholder='Enter name'
+                  className="bg-white border border-gray w-full text-sm px-4 py-2.5 rounded-md outline-blue"
+                  placeholder="Enter name"
                 />
                 <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='#bbb'
-                  stroke='#bbb'
-                  className='w-4 h-4 absolute right-4'
-                  viewBox='0 0 24 24'
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="#bbb"
+                  stroke="#bbb"
+                  className="w-4 h-4 absolute right-4"
+                  viewBox="0 0 24 24"
                 >
-                  <circle cx='10' cy='7' r='6' data-original='#000000'></circle>
+                  <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
                   <path
-                    d='M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z'
-                    data-original='#000000'
+                    d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                    data-original="#000000"
                   ></path>
                 </svg>
               </div>
             </div>
             <div>
-              <label className='text-sm mb-2 block'>Email Id</label>
-              <div className='relative flex items-center'>
+              <label className="text-sm mb-2 block">Email Id</label>
+              <div className="relative flex items-center">
                 <input
-                  name='email'
-                  type='email'
+                  name="email"
+                  type="email"
                   value={state.email}
                   onChange={(e) =>
                     setState({ ...state, email: e.target.value })
                   }
                   required
-                  className='bg-white border border-black w-full text-sm px-4 py-2.5 rounded-md outline-blue'
-                  placeholder='Enter email'
+                  className="bg-white border border-black w-full text-sm px-4 py-2.5 rounded-md outline-blue"
+                  placeholder="Enter email"
                 />
                 <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='#bbb'
-                  stroke='#bbb'
-                  className='w-4 h-4 absolute right-4'
-                  viewBox='0 0 682.667 682.667'
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="#bbb"
+                  stroke="#bbb"
+                  className="w-4 h-4 absolute right-4"
+                  viewBox="0 0 682.667 682.667"
                 >
                   <defs>
-                    <clipPath id='a' clipPathUnits='userSpaceOnUse'>
-                      <path d='M0 512h512V0H0Z' data-original='#000000'></path>
+                    <clipPath id="a" clipPathUnits="userSpaceOnUse">
+                      <path d="M0 512h512V0H0Z" data-original="#000000"></path>
                     </clipPath>
                   </defs>
                   <g
-                    clipPath='url(#a)'
-                    transform='matrix(1.33 0 0 -1.33 0 682.667)'
+                    clipPath="url(#a)"
+                    transform="matrix(1.33 0 0 -1.33 0 682.667)"
                   >
                     <path
-                      fill='none'
-                      strokeMiterlimit='10'
-                      strokeWidth='40'
-                      d='M452 444H60c-22.091 0-40-17.909-40-40v-39.446l212.127-157.782c14.17-10.54 33.576-10.54 47.746 0L492 364.554V404c0 22.091-17.909 40-40 40Z'
-                      data-original='#000000'
+                      fill="none"
+                      strokeMiterlimit="10"
+                      strokeWidth="40"
+                      d="M452 444H60c-22.091 0-40-17.909-40-40v-39.446l212.127-157.782c14.17-10.54 33.576-10.54 47.746 0L492 364.554V404c0 22.091-17.909 40-40 40Z"
+                      data-original="#000000"
                     ></path>
                     <path
-                      d='M472 274.9V107.999c0-11.027-8.972-20-20-20H60c-11.028 0-20 8.973-20 20V274.9L0 304.652V107.999c0-33.084 26.916-60 60-60h392c33.084 0 60 26.916 60 60v196.653Z'
-                      data-original='#000000'
+                      d="M472 274.9V107.999c0-11.027-8.972-20-20-20H60c-11.028 0-20 8.973-20 20V274.9L0 304.652V107.999c0-33.084 26.916-60 60-60h392c33.084 0 60 26.916 60 60v196.653Z"
+                      data-original="#000000"
                     ></path>
                   </g>
                 </svg>
@@ -166,20 +166,20 @@ const page = () => {
               </div>
             </div> */}
           </div>
-          <div className='!mt-10'>
+          <div className="!mt-10">
             <button
-              type='button'
+              type="button"
               onClick={handleSubmit}
-              className='w-full py-3 px-4 text-sm font-semibold rounded text-white bg-black hover:bg-light_black focus:outline-none'
+              className="w-full py-3 px-4 text-sm font-semibold rounded text-white bg-black hover:bg-light_black focus:outline-none"
             >
               Create an account
             </button>
           </div>
-          <p className='text-sm mt-6 text-center'>
+          <p className="text-sm mt-6 text-center">
             Already have an account?
             <a
-              href='/login'
-              className='text-blue font-semibold hover:underline ml-1'
+              href="/login"
+              className="text-blue font-semibold hover:underline ml-1"
             >
               Login here
             </a>
@@ -187,7 +187,7 @@ const page = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
