@@ -80,9 +80,7 @@ function CartCard({ pic, dis, price, variantId, refresh }) {
               alt="imac image"
             />
           </Link>
-          <label for="counter-input" className="sr-only">
-            Choose quantity:
-          </label>
+          <label className="sr-only">Choose quantity:</label>
           <div className="flex items-center justify-between md:order-3 md:justify-end">
             <div className="flex items-center">
               <button

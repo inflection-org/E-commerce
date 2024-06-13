@@ -176,10 +176,7 @@ const AddressBook = () => {
                   {/* *******name******* */}
                   <div className="w-full lg:w-6/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-gray text-xs font-bold mb-2"
-                        htmlFor="grid-password"
-                      >
+                      <label className="block uppercase text-gray text-xs font-bold mb-2">
                         Name
                       </label>
                       <input
@@ -197,10 +194,7 @@ const AddressBook = () => {
                   {/* *******contact******* */}
                   <div className="w-full lg:w-6/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-gray text-xs font-bold mb-2"
-                        htmlFor="grid-password"
-                      >
+                      <label className="block uppercase text-gray text-xs font-bold mb-2">
                         Phone
                       </label>
                       <input
@@ -218,10 +212,7 @@ const AddressBook = () => {
                   {/* ************state******* */}
                   <div className="w-full lg:w-6/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-gray text-xs font-bold mb-2"
-                        htmlFor="grid-password"
-                      >
+                      <label className="block uppercase text-gray text-xs font-bold mb-2">
                         State
                       </label>
                       <input
@@ -239,10 +230,7 @@ const AddressBook = () => {
                   {/* *************phone_opt******** */}
                   <div className="w-full lg:w-6/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-gray text-xs font-bold mb-2"
-                        htmlFor="grid-password"
-                      >
+                      <label className="block uppercase text-gray text-xs font-bold mb-2">
                         Altenete Phone
                       </label>
                       <input
@@ -262,10 +250,7 @@ const AddressBook = () => {
                 <div className="flex flex-wrap">
                   <div className="w-full lg:w-12/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-gray text-xs font-bold mb-2"
-                        htmlFor="grid-password"
-                      >
+                      <label className="block uppercase text-gray text-xs font-bold mb-2">
                         Address
                       </label>
                       <input
@@ -284,10 +269,7 @@ const AddressBook = () => {
                   {/* ***********city******* */}
                   <div className="w-full lg:w-4/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-gray text-xs font-bold mb-2"
-                        htmlFor="grid-password"
-                      >
+                      <label className="block uppercase text-gray text-xs font-bold mb-2">
                         City
                       </label>
                       <input
@@ -305,10 +287,7 @@ const AddressBook = () => {
                   {/* ***********country******* */}
                   <div className="w-full lg:w-4/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-gray text-xs font-bold mb-2"
-                        htmlFor="grid-password"
-                      >
+                      <label className="block uppercase text-gray text-xs font-bold mb-2">
                         Country
                       </label>
                       <input
@@ -326,10 +305,7 @@ const AddressBook = () => {
                   {/* ***********pincode******* */}
                   <div className="w-full lg:w-4/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-gray text-xs font-bold mb-2"
-                        htmlFor="grid-password"
-                      >
+                      <label className="block uppercase text-gray text-xs font-bold mb-2">
                         Pin Code
                       </label>
                       <input
@@ -425,10 +401,7 @@ const AddressBook = () => {
                               {/* *******name******* */}
                               <div className="w-full lg:w-6/12 px-4">
                                 <div className="relative w-full mb-3">
-                                  <label
-                                    className="block uppercase text-gray text-xs font-bold mb-2"
-                                    htmlFor="grid-password"
-                                  >
+                                  <label className="block uppercase text-gray text-xs font-bold mb-2">
                                     Name
                                   </label>
                                   <input
@@ -448,10 +421,7 @@ const AddressBook = () => {
                               {/* *******contact******* */}
                               <div className="w-full lg:w-6/12 px-4">
                                 <div className="relative w-full mb-3">
-                                  <label
-                                    className="block uppercase text-gray text-xs font-bold mb-2"
-                                    htmlFor="grid-password"
-                                  >
+                                  <label className="block uppercase text-gray text-xs font-bold mb-2">
                                     Phone
                                   </label>
                                   <input
@@ -472,10 +442,7 @@ const AddressBook = () => {
                               {/* ************state******* */}
                               <div className="w-full lg:w-6/12 px-4">
                                 <div className="relative w-full mb-3">
-                                  <label
-                                    className="block uppercase text-gray text-xs font-bold mb-2"
-                                    htmlFor="grid-password"
-                                  >
+                                  <label className="block uppercase text-gray text-xs font-bold mb-2">
                                     State
                                   </label>
                                   <input
@@ -496,10 +463,7 @@ const AddressBook = () => {
                               {/* *************phone_opt******** */}
                               <div className="w-full lg:w-6/12 px-4">
                                 <div className="relative w-full mb-3">
-                                  <label
-                                    className="block uppercase text-gray text-xs font-bold mb-2"
-                                    htmlFor="grid-password"
-                                  >
+                                  <label className="block uppercase text-gray text-xs font-bold mb-2">
                                     Altenete Phone
                                   </label>
                                   <input
@@ -522,10 +486,7 @@ const AddressBook = () => {
                             <div className="flex flex-wrap">
                               <div className="w-full lg:w-12/12 px-4">
                                 <div className="relative w-full mb-3">
-                                  <label
-                                    className="block uppercase text-gray text-xs font-bold mb-2"
-                                    htmlFor="grid-password"
-                                  >
+                                  <label className="block uppercase text-gray text-xs font-bold mb-2">
                                     Address
                                   </label>
                                   <input
@@ -547,10 +508,7 @@ const AddressBook = () => {
                               {/* ***********city******* */}
                               <div className="w-full lg:w-4/12 px-4">
                                 <div className="relative w-full mb-3">
-                                  <label
-                                    className="block uppercase text-gray text-xs font-bold mb-2"
-                                    htmlFor="grid-password"
-                                  >
+                                  <label className="block uppercase text-gray text-xs font-bold mb-2">
                                     City
                                   </label>
                                   <input
@@ -571,10 +529,7 @@ const AddressBook = () => {
                               {/* ***********country******* */}
                               <div className="w-full lg:w-4/12 px-4">
                                 <div className="relative w-full mb-3">
-                                  <label
-                                    className="block uppercase text-gray text-xs font-bold mb-2"
-                                    htmlFor="grid-password"
-                                  >
+                                  <label className="block uppercase text-gray text-xs font-bold mb-2">
                                     Country
                                   </label>
                                   <input
@@ -595,10 +550,7 @@ const AddressBook = () => {
                               {/* ***********pincode******* */}
                               <div className="w-full lg:w-4/12 px-4">
                                 <div className="relative w-full mb-3">
-                                  <label
-                                    className="block uppercase text-gray text-xs font-bold mb-2"
-                                    htmlFor="grid-password"
-                                  >
+                                  <label className="block uppercase text-gray text-xs font-bold mb-2">
                                     Pin Code
                                   </label>
                                   <input
