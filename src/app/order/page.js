@@ -3,7 +3,7 @@ import React from 'react'
 import { usePathname } from 'next/navigation'
 import OrderCard from '@/components/ui/cards/OrderCard'
 
-const page = () => {
+const Order = () => {
   const pathname = usePathname()
   return (
     <div className='px-5 md:px-10'>
@@ -65,4 +65,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Order

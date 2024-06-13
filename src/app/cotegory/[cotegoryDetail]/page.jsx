@@ -1,6 +1,6 @@
 import React from 'react'
 
-function page() {
+function CategoryDetail() {
   return (
     <div className='px-5 md:px-10 w-full'>
       <div className='flex justify-center items-center bg-light_gray h-96'>
@@ -10,4 +10,4 @@ function page() {
   )
 }
 
-export default page
+export default CategoryDetail

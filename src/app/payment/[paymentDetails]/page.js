@@ -4,7 +4,7 @@ import OrderSummry from '@/components/ui/OrderSummry'
 import { SiRazorpay } from 'react-icons/si'
 import Link from 'next/link'
 
-const page = () => {
+const PaymentDetails = () => {
   return (
     <div className='mx-5 md:mx-10'>
       <div className=' md:flex justify-between w-full gap-5 py-5'>
@@ -52,4 +52,4 @@ const page = () => {
   )
 }
 
-export default page
+export default PaymentDetails

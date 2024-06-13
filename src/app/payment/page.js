@@ -3,7 +3,7 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import OrderSummary from '../../components/ui/OrderSummry'
 
-function page() {
+function Payment() {
   const router = useRouter()
   return (
     <div className='mx-5 md:mx-10 py-5'>
@@ -114,4 +114,4 @@ function page() {
   )
 }
 
-export default page
+export default Payment

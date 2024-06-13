@@ -9,7 +9,7 @@ import { IoMdClose } from 'react-icons/io'
 import { IoIosArrowDown } from 'react-icons/io'
 import { FaPlus, FaMinus } from 'react-icons/fa'
 
-const page = () => {
+const Shop = () => {
   const pathname = usePathname()
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
@@ -432,4 +432,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Shop
