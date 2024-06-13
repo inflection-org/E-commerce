@@ -33,7 +33,6 @@ function CartCard({ pic, dis, price, variantId, refresh }) {
       const res = await instance.post("/wishlists", {
         variant_id: id,
       });
-      console.log(res.data);
       toast.success(res?.data?.message);
       refresh();
     } catch (err) {
@@ -48,9 +47,8 @@ function CartCard({ pic, dis, price, variantId, refresh }) {
   const removeWishlist = async (id) => {
     try {
       const res = await instance.delete(`/wishlists/${id}`);
-      console.log(res.data);
-      toast.success(res?.data?.message);
       refresh();
+      toast.success(res?.data?.message);
     } catch (err) {
       console.log(err);
       if (err.response?.data?.message) {
@@ -62,11 +60,9 @@ function CartCard({ pic, dis, price, variantId, refresh }) {
   };
 
   const removeCartList = async (id) => {
-    console.log(id);
     try {
       const res = await instance.delete(`/carts/remove/${id}`);
       toast.success(res?.data?.message);
-      console.log(res.data);
       refresh();
     } catch (err) {
       console.log(err);
@@ -143,7 +139,9 @@ function CartCard({ pic, dis, price, variantId, refresh }) {
               </button>
 
               <button
-                onClick={() => removeCartList(variantId)}
+                onClick={() => {
+                  removeCartList(variantId);
+                }}
                 type="button"
                 className="inline-flex items-center text-sm font-medium text-red hover:underline "
               >

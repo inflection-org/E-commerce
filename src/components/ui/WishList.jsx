@@ -51,12 +51,9 @@ const WishList = () => {
           const { variant_id, product_name, price, product_thumbnail } =
             wishList;
           return (
-            <div className="mx-2 my-4">
-              <div
-                className="block md:flex items-center justify-between p-5 bg-white rounded-md shadow-md"
-                key={i}
-              >
-                <div className="flex items-center gap-3  ">
+            <div className="mx-2 my-4" key={i}>
+              <div className="block md:flex items-center justify-between p-5 bg-white rounded-md shadow-md">
+                <div className="flex items-center gap-3">
                   <img
                     className="object-cover group-hover:scale-110 duration-1000 w-64 h-36 md:w-24 md:h-24 "
                     src={product_thumbnail}
@@ -82,7 +79,7 @@ const WishList = () => {
         <div className="w-auto h-[500px] rounded-md shadow-md bg-white m-4 p-5 flex justify-center text-center items-center ">
           <div className="">
             <BsBagHeart className="size-20 ml-20 text-blue" />
-            <h1 className="text-3xl mt-2">{error}</h1>
+            <p className="text-3xl mt-2">{error}</p>
             <p className="text-xl">Save Your Favorite Item Here</p>
             <button className="bg-orange mt-5 hover:bg-black duration-1000  text-white rounded-full px-8 py-2">
               Shop Now
