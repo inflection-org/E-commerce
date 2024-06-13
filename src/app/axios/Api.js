@@ -1,18 +1,18 @@
-import axios from 'axios'
-import { getCookie } from './CookieConfig'
+import axios from "axios";
+import { getCookie } from "./CookieConfig";
 
 const instance = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: "http://localhost:5000",
   headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${getCookie('access_token')}`,
+    "Content-Type": "application/json",
   },
   timeout: 10000,
-})
+});
 
-export function setToken(t) {
-  instance.defaults.headers.common['Authorization'] = `Bearer ${t}`
-  console.log(instance.defaults)
+function setToken(token) {
+  instance.defaults.headers.common["Authorization"] = `Bearer ${getCookie(
+    token
+  )}`;
 }
 
-export default instance
+export { instance, setToken };
