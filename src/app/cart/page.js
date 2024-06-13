@@ -26,7 +26,7 @@ const Cart = () => {
   }, [refresh, setMyCart]);
 
   return (
-    <>
+    <ProtectedRoute>
       <div className="bg-white py-8 antialiased  md:py-16">
         <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
           <div className="h-44 my-5 px-4 block md:flex md:justify-between items-center bg-light_gray">
@@ -408,8 +408,8 @@ const Cart = () => {
           </div>
         </div>
       </div>
-    </>
+    </ProtectedRoute>
   );
 };
 
-export default ProtectedRoute(Cart);
+export default Cart;

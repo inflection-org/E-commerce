@@ -1,20 +1,37 @@
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { isAuthenticated } from '../../utils/auth'
+import { setToken } from "@/app/axios/Api";
+import { getCookie } from "@/app/axios/CookieConfig";
+import { MyContext } from "@/context/MyContext";
+import { useRouter } from "next/navigation";
+import { useContext, useEffect } from "react";
 
-const ProtectedRoute = (WrappedComponent) => {
-  return (props) => {
-    const router = useRouter()
+export default function ProtectedRoute({ children }) {
+  const router = useRouter();
+  const { isLogin, setIsLogin } = useContext(MyContext);
 
-    useEffect(() => {
-      if (!isAuthenticated()) {
-        router.replace('/login')
+  useEffect(() => {
+    const checkLogin = () => {
+      const accessToken = getCookie("access_token");
+
+      if (accessToken || accessToken !== null) {
+        setToken("access_token");
+        setIsLogin(true);
+        return;
+      } else {
+        setIsLogin(false);
+        router.push("/login");
       }
-    }, [])
+    };
 
-    return isAuthenticated() ? <WrappedComponent {...props} /> : null
-    //   <div className='h-screen'>loading.................</div>
+    checkLogin();
+  });
+
+  if (isLogin) {
+    return children;
   }
-}
 
-export default ProtectedRoute
+  return (
+    <div className="w-full h-screen flex justify-center items-center">
+      <h1 className="font-semibold text-3xl">Loading...</h1>
+    </div>
+  );
+}
