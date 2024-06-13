@@ -81,7 +81,7 @@ const MyContextProvider = ({ children }) => {
   const fetchMyCart = async () => {
     try {
       const { data } = await instance.get("/carts/my");
-      setMyCart(data);
+      setMyCart(data.items);
     } catch (err) {
       console.log(err);
     }
