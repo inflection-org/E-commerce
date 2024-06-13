@@ -16,8 +16,6 @@ const inter = Inter({ subsets: ['latin'] })
 const Context = createContext()
 const token = getCookie('access_token')
 export default function RootLayout({ children }) {
-  // console.log(token)
-
   return (
     <html lang='en'>
       <body className={inter.className}>

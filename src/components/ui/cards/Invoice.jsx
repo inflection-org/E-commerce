@@ -2,14 +2,16 @@ import React from 'react'
 
 function Invoice() {
   return (
-    <div className='px-32'>
-      <div className='flex justify-between'>
+    <div className=' md:px-32'>
+      <div className='block md:flex justify-between'>
         <h1 className='text-3xl font-semibold'>Invoice</h1>
-        <h1 className='text-3xl font-semibold'>Tax invoice/Payment Receipt</h1>
+        <h1 className='text-xl  text-gray md:text-black md:text-3xl font-semibold'>
+          Tax invoice/Payment Receipt
+        </h1>
       </div>
       {/* ******************address********************* */}
-      <div className='flex px-2 justify-between py-12 mt-5 bg-light_gray'>
-        <div>
+      <div className='md:flex w-full px-2 justify-between py-12 mt-5 bg-light_gray'>
+        <div className='w-full'>
           <h1>
             <span className='font-bold'> Order ID </span>#77667
           </h1>
@@ -20,7 +22,7 @@ function Invoice() {
             <span className='font-bold'> Payment Due </span>12 jun 2021
           </h1>
         </div>
-        <div>
+        <div className='mt-3 md:mt-0'>
           <h1 className='font-bold'> Customer Details </h1>
           <p>Name: prakhar maurya</p>
           <p>Email: 000.excel@gmail.com</p>
@@ -30,7 +32,7 @@ function Invoice() {
           <p>Payer Email: 000.excel@gmail.com</p>
         </div>
       </div>
-      <div className=''>
+      <div>
         {/* **************table*************** */}
         <div className='flex justify-center py-6'>
           <div>
@@ -40,22 +42,22 @@ function Invoice() {
                   <th class='px-4 py-2 border-2 border-gray  font-bold text-left'>
                     Name
                   </th>
-                  <th class='px-4 py-2 border-2 border-gray  font-bold w-80 text-left'>
+                  <th class='px-4 py-2 border-2 border-gray  font-bold md:w-80 text-left'>
                     Design Name
                   </th>
-                  <th class='px-4 py-2 border-2 border-gray  font-bold w-40 text-left'>
+                  <th class='px-4 py-2 border-2 border-gray  font-bold md:w-40 text-left'>
                     Prince
                   </th>
-                  <th class='px-4 py-2 border-2 border-gray  font-bold  w-40 text-left'>
+                  <th class='px-4 py-2 border-2 border-gray  font-bold  md:w-40 text-left'>
                     Discount
                   </th>
-                  <th class='px-4 py-2 border-2 border-gray  font-bold w-40  text-left'>
+                  <th class='px-4 py-2 border-2 border-gray  font-bold md:w-40  text-left'>
                     D.Price
                   </th>
-                  <th class='px-4 py-2 border-2 border-gray  font-bold w-40  text-left'>
+                  <th class='px-4 py-2 border-2 border-gray  font-bold md:w-40  text-left'>
                     GST 18%
                   </th>
-                  <th class='px-4 py-2 border-2 border-gray  font-bold w-40  text-left'>
+                  <th class='px-4 py-2 border-2 border-gray  font-bold md:w-40  text-left'>
                     Total-Amount
                   </th>
                 </tr>
@@ -150,8 +152,8 @@ function Invoice() {
                 </tr>
               </tbody>
             </table>
-            <div className=' flex justify-end font-bold '>
-              <div>
+            <table className=' flex justify-end font-bold '>
+              <tbody>
                 <tr class='bg-white '>
                   <td class='border border-gray/70 px-4 w-[159px] py-2 '>
                     Subtotal
@@ -163,13 +165,13 @@ function Invoice() {
                     2364.0
                   </td>
                 </tr>
-              </div>
-            </div>
+              </tbody>
+            </table>
           </div>
         </div>
         {/* ********************************************* */}
         <hr></hr>
-        <div className='flex justify-between py-5'>
+        <div className='block md:flex justify-between py-5'>
           <div className=''>
             <h1 className='font-bold'> RUSG AI</h1>
             <p> Khalwapur, Khamaria, Uttar Pradesh - 221306</p>
@@ -177,7 +179,7 @@ function Invoice() {
             <p>PAN: AESPG2413F</p>
             <p> Email: team@rugsai.in</p>
           </div>
-          <div>
+          <div className='mt-3 md:mt-0'>
             <span className='font-bold'>Payment Mode :</span> card
             <p>Declaration</p>
             <p>

@@ -3,7 +3,6 @@ import React from 'react'
 import ServiceCard from '@/components/ui/cards/ServiceCard'
 import OurTeam from '@/components/ui/cards/OurTeam'
 import { usePathname } from 'next/navigation'
-import ProtectedRoute from '@/components/app/ProtectedRoute'
 
 function About() {
   const pathname = usePathname()
@@ -257,4 +256,4 @@ function About() {
   )
 }
 
-export default ProtectedRoute(About)
+export default About

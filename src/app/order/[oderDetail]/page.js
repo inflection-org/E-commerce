@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import { usePathname } from 'next/navigation'
+import Invoice from '@/components/ui/cards/Invoice'
 
 const page = () => {
   const pathname = usePathname()
@@ -16,7 +17,7 @@ const page = () => {
         </div>
         <p className='uppercase text-center mt-2 md:mt-0'>home{pathname}</p>
       </div>
-      <div className='block md:flex gap-2 py-5 w-[100%]'>
+      {/* <div className='block md:flex gap-2 py-5 w-[100%]'>
         <div className='border-2  border-gray w-full md:w-[30%]'>
           <div className='hover:bg-orange bg-light_gray'>
             <p className='py-4 px-4 text-sm font-semibold'>DASHBOARD</p>
@@ -75,8 +76,8 @@ const page = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div>
+      </div> */}
+      {/* <div>
         <button className='bg-orange rounded-md hover:text-white p-4 md:text-base md:p-2'>
           Order again
         </button>
@@ -89,7 +90,8 @@ const page = () => {
           <p>phone 9367657497</p>
           <p>email Apple23@gmail.com</p>
         </div>
-      </div>
+      </div> */}
+      <Invoice />
     </div>
   )
 }

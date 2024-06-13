@@ -1,10 +1,25 @@
 'use client'
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { CgMenuGridO } from 'react-icons/cg'
 import { IoIosArrowDown } from 'react-icons/io'
+import instance from '@/app/axios/Api'
 const MenuDropdown = () => {
   const [isShow, setIsShow] = useState(false)
+  const [categories, setCategories] = useState([])
+
+  // console.log(categories)
+  useEffect(() => {
+    async function search() {
+      try {
+        const res = await instance.get('/categories/list')
+        setCategories(res.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    search()
+  }, [])
   return (
     <div className='relative z-50'>
       <div
@@ -31,10 +46,13 @@ const MenuDropdown = () => {
       >
         {isShow && (
           <ul className='ml-5 text-gray cursor-pointer'>
-            <li className='pt-1 hover:text-black'>Electronics</li>
-            <li className='pt-1 hover:text-black '>Mobile</li>
-            <li className='pt-1 hover:text-black'>Sunglass</li>
-            <li className='pt-1 hover:text-black'>Uncategorized</li>
+            {categories.map((item) => {
+              return (
+                <li className='pt-1 hover:text-black' key={item}>
+                  {item.name}
+                </li>
+              )
+            })}
           </ul>
         )}
       </div>

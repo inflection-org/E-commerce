@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 const WishList = () => {
   const [wishLists, setWishLists] = useState([])
   const [error, setError] = useState('')
-  // console.log(wishLists)
+  console.log(wishLists)
 
   useEffect(() => {
     setError('')
@@ -48,7 +48,8 @@ const WishList = () => {
     <div>
       {wishLists.length > 0 ? (
         wishLists?.map((wishList, i) => {
-          const { variant_id, product_name, price } = wishList
+          const { variant_id, product_name, price, product_thumbnail } =
+            wishList
           return (
             <div className='mx-2 my-4'>
               <div
@@ -58,7 +59,7 @@ const WishList = () => {
                 <div className='flex items-center gap-3  '>
                   <img
                     className='object-cover group-hover:scale-110 duration-1000 w-64 h-36 md:w-24 md:h-24 '
-                    src={'/product/S3.jpg'}
+                    src={product_thumbnail}
                     alt='logo'
                   />
                 </div>

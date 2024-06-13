@@ -410,7 +410,7 @@ const page = () => {
             className='object-cover m-auto w-28 h-20 md:w-auto md:h-auto '
             src={'/Brands/Brand-2.webp'}
             alt='logo'
-          />{' '}
+          />
           <img
             className='object-cover m-auto w-28 h-20 md:w-auto md:h-auto '
             src={'/Brands/Brand-3.png'}

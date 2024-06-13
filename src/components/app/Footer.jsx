@@ -57,12 +57,12 @@ function Footer() {
           <h1 className='text-lg font-semibold'>Quick Links</h1>
           <div className='mt-6'>
             <ul>
-              <Link href='/about' className='m-2 hover:text-orange text-gray'>
+              <li href='' className='m-2 hover:text-orange text-gray'>
                 About
-              </Link>
-              <Link href='/shop' className='m-2 hover:text-orange text-gray'>
+              </li>
+              <li href='' className='m-2 hover:text-orange text-gray'>
                 Shop
-              </Link>
+              </li>
               <li className='m-2 hover:text-orange text-gray'>Special Offer</li>
               <li className='m-2 hover:text-orange text-gray'>New Arrivals</li>
               <li className='m-2 hover:text-orange text-gray'>Blog</li>

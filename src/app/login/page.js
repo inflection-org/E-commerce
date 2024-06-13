@@ -30,7 +30,7 @@ const page = () => {
         email: state.email,
         password: state.password,
       })
-      console.log(res)
+      console.log(res.data)
       const jwt = res.data.access_token
       setCookie('access_token', jwt)
       setCookie(jwt)
@@ -41,6 +41,7 @@ const page = () => {
 
       router.push('/')
     } catch (error) {
+      console.log(error)
       if (error.response?.data?.message) {
         toast.error(error.response?.data?.message)
       } else {

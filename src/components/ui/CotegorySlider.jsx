@@ -20,7 +20,6 @@ function CotegorySlider() {
     async function search() {
       try {
         const res = await instance.get('/categories/list')
-
         setCategories(res.data)
       } catch (err) {
         console.log(err)

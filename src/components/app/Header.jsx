@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image'
 import { useState } from 'react'
 import Link from 'next/link'
@@ -10,14 +10,17 @@ import MenuDropdown from '../ui/MenuDropdown'
 import ShopDropdown from '../ui/ShopDropdown'
 import { IoClose } from 'react-icons/io5'
 import { IoMenu } from 'react-icons/io5'
+import { getCookie } from '@/app/axios/CookieConfig'
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
 
+  const token = getCookie('access_token')
+
   return (
     <div className='sticky top-0 z-30 shadow-md'>
-      {/* ********2********* */}
-      <div className='flex bg-white md:px-10 justify-between h-20 py-2 items-center'>
+      {/* ********1********* */}
+      <div className='flex bg-white md:px-10 justify-between md:h-20 py-2 items-center'>
         <Link href='/' className='flex items-center gap-1'>
           <Image src={logo} width={50} height={50} alt='logo' />
           <h1 className='text-lg'>
@@ -61,15 +64,18 @@ const Header = () => {
         </div>
         {/* *****cart*** */}
         <div className='hidden md:flex items-center gap-6'>
-          <Link href='/profile'>
-            <CgProfile className='w-8 h-8' />
-          </Link>
-          <Link
-            href='/login'
-            className='text-sm bg-orange md:mt-0 hover:bg-black duration-1000 text-white px-4 py-2 rounded-md '
-          >
-            Login
-          </Link>
+          {token ? (
+            <Link href='/profile'>
+              <CgProfile className='w-8 h-8' />
+            </Link>
+          ) : (
+            <Link
+              href='/login'
+              className='text-sm bg-orange md:mt-0 hover:bg-black duration-1000 text-white px-4 py-2 rounded-md '
+            >
+              Login
+            </Link>
+          )}
           <Link href='/cart'>
             <div className='flex gap-1 items-center bg-light_gray p-2 rounded-lg'>
               <IoIosCart className='w-6 h-6' />
@@ -101,8 +107,8 @@ const Header = () => {
         </div>
       </div>
       <hr className='text-light_gray'></hr>
-      {/* ************3******* */}
-      <div className='md:flex z-50 relative   md:bg-white  md:px-10  items-center h-12'>
+      {/* ************2******* */}
+      <div className='md:flex z-50 relative  bg-white  md:px-10  items-center h-12'>
         <div className='hidden md:block'>
           <MenuDropdown />
         </div>
@@ -110,7 +116,7 @@ const Header = () => {
         <div
           className={`md:flex bg-light_gray md:ml-60 md:bg-white h-screen md:h-auto ${
             isOpen
-              ? '-translate-x-[0%] transition-all ease-in duration-[0.5s]'
+              ? '-translate-x-[0%] md:translate-x-[0%] transition-all ease-in duration-[0.5s]'
               : '-translate-x-[100%] md:translate-x-[0%] transition-all ease-in duration-[0.5s]'
           }`}
         >
@@ -149,7 +155,7 @@ const Header = () => {
               NEW ARRIVALS
             </li>
             <li className='hover:text-orange  cursor-pointer text-xl md:text-base  pt-3 md:pt-0'>
-              <a href='/about'>ABOUT US</a>
+              <Link href='/about'>ABOUT US</Link>
             </li>
 
             <li className='hover:text-orange cursor-pointer text-xl md:text-base  pt-3 md:pt-0'>
@@ -164,10 +170,6 @@ const Header = () => {
             </li>
           </ul>
         </div>
-        {/* ******* */}
-        {/* <div className='text-light_black hidden md:block hover:text-orange'>
-          <h1>Need Help? Contact Us</h1>
-        </div> */}
       </div>
     </div>
   )

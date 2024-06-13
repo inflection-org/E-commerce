@@ -24,6 +24,7 @@ export const ProductCard = ({
     try {
       const res = await instance.post('/carts', {
         variant_id: id,
+        quantity: 1,
       })
       console.log(res.data)
       router.push('/cart')

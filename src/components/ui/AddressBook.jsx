@@ -76,8 +76,8 @@ const AddressBook = () => {
       setIsOpen(true)
       // search()
     } catch (error) {
-      if (error.res?.data?.message) {
-        toast.error(error.res?.data?.message)
+      if (error.response?.data?.message) {
+        toast.error(error.response?.data?.message)
       } else {
         toast.error(error.message)
       }
@@ -105,13 +105,13 @@ const AddressBook = () => {
         country: '',
         pincode: '',
       })
-      setUpdateAddressId('')
+
       setIsShow(false)
       setRefresh(!refresh)
       // search()
     } catch (error) {
-      if (error.res?.data?.message) {
-        toast.error(error.res?.data?.message)
+      if (error.response?.data?.message) {
+        toast.error(error.response?.data?.message)
       } else {
         toast.error(error.message)
       }
@@ -148,7 +148,7 @@ const AddressBook = () => {
     } catch (err) {
       console.log(err)
       if (err.res.data.message) {
-        toast.error(err.res.data.message)
+        toast.error(err.response?.data?.message)
       } else {
         toast.error(err.message)
       }
@@ -165,7 +165,7 @@ const AddressBook = () => {
       </div>
       {/* ****************new  Address form******************** */}
       {!isOpen && (
-        <div className='bg-white rounded-md shadow-md py-4 mt-4 px-4'>
+        <div className='bg-white rounded-md shadow-md py-4 mt-4 md:px-4'>
           <div className='w-full  mx-auto'>
             <div className='flex-auto px-4 lg:px-10 py-10 pt-0'>
               <form>
@@ -413,8 +413,8 @@ const AddressBook = () => {
                 </div>
                 {/* **********Edit Address******* */}
                 {isShow && (
-                  <div className='lg:fixed absolute md:h-screen inset-0 z-50 bg-black/70 '>
-                    <div className='bg-white   w-[60%] mx-auto rounded-md shadow-md py-4 mt-10 px-4'>
+                  <div className='lg:fixed absolute  h-[1000px] md:h-screen inset-0 z-50 bg-black/70 '>
+                    <div className='bg-white w-full  md:w-[60%] mx-auto rounded-md shadow-md py-4 mt-10 px-4'>
                       <div className='w-auto mx-auto'>
                         <div className='flex-auto px-4 lg:px-10 py-10 pt-0'>
                           <form>

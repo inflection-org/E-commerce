@@ -9,8 +9,12 @@ import { FaHeart } from 'react-icons/fa'
 import { IoMdShareAlt } from 'react-icons/io'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
+import { MdOutlineMailOutline } from 'react-icons/md'
+import { IoLogoWhatsapp } from 'react-icons/io5'
+import { FiTwitter } from 'react-icons/fi'
 
 const page = () => {
+  const [isShow, setIsShow] = useState(false)
   const router = useRouter()
   const [currentImage, setCurrentImage] = useState('')
   const [productDetails, setProductDetails] = useState([])
@@ -18,6 +22,7 @@ const page = () => {
   const [isActive, setIsActive] = useState(false)
   const params = useParams()
   const id = params.shopDetail
+  console.log(productDetails)
 
   const handleClick = () => {
     setIsActive(!isActive)
@@ -162,9 +167,27 @@ const page = () => {
                 ? currentVariant?.name
                 : productDetails.name}
             </h1>
-            <div className='flex gap-1 cursor-pointer items-center hover:text-blue'>
-              <IoMdShareAlt className='size-5' />
-              <h1>Share</h1>
+            <div
+              onMouseEnter={() => {
+                setIsShow(true)
+              }}
+              onMouseLeave={() => {
+                setIsShow(false)
+              }}
+            >
+              <div className='relative flex gap-1 cursor-pointer items-center hover:text-blue'>
+                <IoMdShareAlt className='size-5' />
+                <h1>Share</h1>
+              </div>
+              {isShow && (
+                <div className='absolute shadow-lg rounded-md right-8 p-2'>
+                  <div className='flex gap-2 cursor-pointer'>
+                    <MdOutlineMailOutline className='text-red size-8' />
+                    <IoLogoWhatsapp className='text-green size-7' />
+                    <FiTwitter className='text-blue size-7' />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           {/* ************price******** */}
@@ -184,10 +207,6 @@ const page = () => {
               <span className='font-semibold'> Discount:</span>{' '}
               {currentVariant.discount}%
             </p>
-            {/* <p className='py-4'>
-              <span className='font-semibold'> Quantity:</span>{' '}
-              {currentVariant.quantity}
-            </p> */}
           </div>
           {/* **************All variants*************** */}
           <div className='flex gap-5'>
