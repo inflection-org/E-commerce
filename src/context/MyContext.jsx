@@ -12,6 +12,7 @@ const MyContextProvider = ({ children }) => {
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(false);
   const [myCart, setMyCart] = useState([]);
+  const [myWishList, setMyWishList] = useState([]);
   const [myAddress, setMyAddress] = useState([]);
   const [categories, setCategories] = useState([]);
   const [profile, setProfile] = useState({});
@@ -73,6 +74,7 @@ const MyContextProvider = ({ children }) => {
       fetchMyCart();
       fetchMyProfile();
       fetchMyAddress();
+      fetchWishList();
     }
     return () => clearInterval(loginInterval);
   }, [isLogin, router]);
@@ -82,6 +84,15 @@ const MyContextProvider = ({ children }) => {
     try {
       const { data } = await instance.get("/carts/my");
       setMyCart(data.items);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  //   My WishList
+  const fetchWishList = async () => {
+    try {
+      const { data } = await instance.get("/wishlists/my");
+      setMyWishList(data.data);
     } catch (err) {
       console.log(err);
     }
@@ -121,6 +132,8 @@ const MyContextProvider = ({ children }) => {
         myAddress,
         categories,
         setMyAddress,
+        myWishList,
+        setMyWishList,
       }}
     >
       {children}
