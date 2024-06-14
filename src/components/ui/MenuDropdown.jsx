@@ -8,7 +8,6 @@ const MenuDropdown = () => {
   const [isShow, setIsShow] = useState(false);
   const [categories, setCategories] = useState([]);
 
-  // console.log(categories)
   useEffect(() => {
     async function search() {
       try {
@@ -31,7 +30,7 @@ const MenuDropdown = () => {
           setIsShow(false);
         }}
       >
-        <CgMenuGridO className="" />
+        <CgMenuGridO />
         <h1>All Categories</h1>
         <IoIosArrowDown className={isShow ? "rotate-180" : ""} />
       </div>
@@ -42,7 +41,7 @@ const MenuDropdown = () => {
         onMouseLeave={() => {
           setIsShow(false);
         }}
-        className="absolute bg-white w-full rounded-b-lg   top-12 left-[50%] -translate-x-[50%]"
+        className="absolute bg-white w-full rounded-b-lg top-12 left-[50%] -translate-x-[50%]"
       >
         {isShow && (
           <ul className="ml-5 text-gray cursor-pointer">
