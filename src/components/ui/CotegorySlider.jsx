@@ -36,16 +36,16 @@ function CotegorySlider() {
           disableOnInteraction: false,
         }}
         breakpoints={{
-          // when window width is >= 640px
-          320: {
+          200: {
             slidesPerView: 1,
           },
-          // when window width is >= 480px
           480: {
+            slidesPerView: 1,
+          },
+          640: {
             slidesPerView: 2,
           },
-          // when window width is >= 640px
-          640: {
+          768: {
             slidesPerView: 3,
           },
         }}
@@ -61,7 +61,6 @@ function CotegorySlider() {
           categories?.map((category, i) => (
             <SwiperSlide key={i}>
               <ProductCard2
-                // onClick={() => console.log('clicked')}
                 name={category.name}
                 dis={category.description}
                 categoriesDetails={() =>
