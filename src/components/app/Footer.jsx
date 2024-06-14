@@ -6,113 +6,130 @@ import visa from "../../../public/visa.webp";
 import mastercard from "../../../public/mastercard.webp";
 import cash from "../../../public/cash.webp";
 import { GrFacebookOption, GrInstagram } from "react-icons/gr";
-import { FaTwitter, FaSkype } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
 import { AiFillCopyrightCircle } from "react-icons/ai";
+import { IoLocation } from "react-icons/io5";
+import { IoMdCall } from "react-icons/io";
+import { MdEmail } from "react-icons/md";
 import Link from "next/link";
 
 function Footer() {
   return (
-    <div className="px-10 pb-10 pt-10 bg-black">
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5  mt-5 text-white ">
+    <div className="px-5 sm:px-10 py-10 bg-black">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 text-white ">
         {/* ****1***** */}
         <div>
           <div className="flex items-center gap-1">
             <Image src={logo} width={50} height={50} alt="logo" />
-            <h1 className="text-lg">
+            <h1 className="text-lg pb-4">
               <span className="font-bold">JITENDRA</span>SHOP
             </h1>
           </div>
-          <div className="mt-5">
-            <h1 className=" hover:text-orange text-gray">Address</h1>
-            <p className="text-sm  hover:text-orange text-gray">
-              3566 Bird Spring Lane, Houston Texs
-            </p>
-          </div>
-          <div className="mt-5">
-            <h1 className="hover:text-orange text-gray">Phone</h1>
-            <p className="text-sm hover:text-orange text-gray">
-              +1 423 208 388
-            </p>
-          </div>
-          <div className="mt-5">
-            <h1 className=" hover:text-orange text-gray">Email</h1>
-            <p className="text-sm hover:text-orange text-gray">
-              hello@metashop.com
-            </p>
-          </div>
-          <div className="mt-5 flex gap-3">
-            <div className="bg-gray rounded-full">
-              <GrFacebookOption className="size-8 p-1" />
-            </div>
-            <div className="bg-gray rounded-full">
-              <GrInstagram className="size-8 p-2" />
-            </div>
-            <div className="bg-gray rounded-full">
-              <FaTwitter className="size-8 p-1" />
-            </div>
+          <ul className="mb-3">
+            <li className="flex gap-1 items-center pb-1.5 text-gray">
+              <IoLocation className="text-xl" />
+              <span className="text-sm">
+                Lorem ipsum dolor adipisicing elit.
+              </span>
+            </li>
+            <li className="flex gap-1 items-center pb-1.5 hover:text-orange text-gray">
+              <IoMdCall className="text-xl" />
+              <a href="tel:+91 423 208 388" className="text-sm">
+                +91 423 208 388
+              </a>
+            </li>
+            <li className="flex gap-1 items-center pb-1.5 hover:text-orange text-gray">
+              <MdEmail className="text-xl" />
+              <a href="mailto:hello@metashop.com" className="text-sm">
+                hello@metashop.com
+              </a>
+            </li>
+          </ul>
+          <div className="flex gap-3">
+            <a
+              target="_blank"
+              href="https://www.facebook.com/"
+              className="border-2 border-pink hover:bg-pink text-pink hover:text-orange duration-300 rounded-full p-2"
+            >
+              <GrFacebookOption className="text-lg" />
+            </a>
+            <a
+              target="_blank"
+              href="https://www.instagram.com/"
+              className="border-2 border-pink hover:bg-pink text-pink hover:text-orange duration-300 rounded-full p-2"
+            >
+              <GrInstagram className="text-lg" />
+            </a>
+            <a
+              target="_blank"
+              href="https://x.com/"
+              className="border-2 border-pink hover:bg-pink text-pink hover:text-orange duration-300 rounded-full p-2"
+            >
+              <FaTwitter className="text-lg" />
+            </a>
           </div>
         </div>
         {/* ***2**** */}
-        <div className="mt-4">
-          <h1 className="text-lg font-semibold">Quick Links</h1>
-          <div className="mt-6">
-            <ul>
-              <li href="" className="m-2 hover:text-orange text-gray">
-                About
-              </li>
-              <li href="" className="m-2 hover:text-orange text-gray">
-                Shop
-              </li>
-              <li className="m-2 hover:text-orange text-gray">Special Offer</li>
-              <li className="m-2 hover:text-orange text-gray">New Arrivals</li>
-              <li className="m-2 hover:text-orange text-gray">Blog</li>
-              <li className="m-2 hover:text-orange text-gray">FAQs</li>
-              <Link href="/contact" className="m-2 hover:text-orange text-gray">
-                Contact Us
-              </Link>
-            </ul>
-          </div>
+        <div>
+          <h1 className="text-lg font-semibold pb-4">Quick Links</h1>
+          <ul>
+            <li className="hover:text-orange mb-1.5 text-gray">
+              <Link href="/contact">Contact Us</Link>
+            </li>
+            <li className="hover:text-orange mb-1.5 text-gray">
+              <Link href="/about">About</Link>
+            </li>
+            <li className="hover:text-orange mb-1.5 text-gray">
+              <Link href="/shop">Shop</Link>
+            </li>
+            <li className="hover:text-orange mb-1.5 text-gray">
+              <Link href="/faq">FAQ</Link>
+            </li>
+          </ul>
         </div>
         {/* *****3*** */}
-        <div className="mt-4">
-          <h1 className="text-lg font-semibold">My Account</h1>
-          <ul className="mt-6">
-            <li className="m-2 hover:text-orange text-gray">My Account</li>
-            <li className="m-2 hover:text-orange text-gray">Order History</li>
-            <li className="m-2 hover:text-orange text-gray">Address Book</li>
-            <li className="m-2 hover:text-orange text-gray">Wishlist</li>
-            <li className="m-2 hover:text-orange text-gray">Coupon Code</li>
-            <li className="m-2 hover:text-orange text-gray">Login</li>
-            <li className="m-2 hover:text-orange text-gray">Registration</li>
+        <div>
+          <h1 className="text-lg font-semibold pb-4">My Account</h1>
+          <ul>
+            <li className="hover:text-orange mb-1.5 text-gray">
+              <Link href="/profile">My Account</Link>
+            </li>
+            <li className="hover:text-orange mb-1.5 text-gray">
+              <Link href="/profile?wishlist">Wishlist</Link>
+            </li>
+            <li className="hover:text-orange mb-1.5 text-gray">
+              <Link href="/order">Orders</Link>
+            </li>
+            <li className="hover:text-orange mb-1.5 text-gray">
+              <Link href="/cart">Cart</Link>
+            </li>
           </ul>
         </div>
         {/* ****4*** */}
-        <div className="mt-4">
-          <h1 className="text-lg font-semibold">Support</h1>
-          <ul className="mt-6">
-            <li className="mt-2 hover:text-orange text-gray">Help Center</li>
-            <li className="mt-2 hover:text-orange text-gray">How to Buy</li>
-            <li className="mt-2 hover:text-orange text-gray">
-              Track Your Order
+        <div>
+          <h1 className="text-lg font-semibold pb-4">Support</h1>
+          <ul>
+            <li className="hover:text-orange mb-1.5 text-gray">
+              <Link href="/return_and_refund_policy">
+                Return & Refound Policy
+              </Link>
             </li>
-            <li className="mt-2 hover:text-orange text-gray">Store Location</li>
-            <li className="mt-2 hover:text-orange text-gray">
-              Return & Refound Policy{" "}
+            <li className="hover:text-orange mb-1.5 text-gray">
+              <Link href="/terms_and_conditions">Terms & Condition</Link>
             </li>
-            <li className="mt-2 hover:text-orange text-gray">
-              Terms & Condition
+            <li className="hover:text-orange mb-1.5 text-gray">
+              <Link href="/privacy_policy">Privacy Policy</Link>
             </li>
-            <li className="mt-2 hover:text-orange text-gray">Privacy Policy</li>
           </ul>
         </div>
         {/* ****5**** */}
-        <div className="mt-4">
-          <h1 className="text-lg font-semibold"> Newsletter</h1>
-          <p className="mt-4 hover:text-orange text-gray">
+        <div>
+          <h1 className="text-lg font-semibold pb-4"> Newsletter</h1>
+          <p className="hover:text-orange text-gray">
             Subscribe to our newsletter and get 20% off your first purchase
           </p>
           {/* ******email-box */}
-          <div className=" md:w-72 mt-8">
+          <div className="md:w-72 pt-4">
             <div className="relative  flex w-full flex-wrap items-stretch">
               <input
                 type="search"
@@ -127,25 +144,23 @@ function Footer() {
                 type="button"
                 id="button-addon1"
               >
-                Subscrie
+                Subscribe
               </button>
             </div>
           </div>
         </div>
       </div>
-      <hr className="text-gray mt-8"></hr>
-      <div className="flex justify-center text-center lg:block">
-        <div className="block lg:flex justify-between text-white mt-8">
-          <div className="flex gap-1 items-center">
-            <AiFillCopyrightCircle className="text-white size-5" />
-            <h1>2024 Inflection. All Rights Reserve.</h1>
-          </div>
-          <div className="flex gap-2">
-            <Image src={payPal} width={55} height={55} alt="logo" />
-            <Image src={visa} width={55} height={55} alt="logo" />
-            <Image src={mastercard} width={55} height={55} alt="logo" />
-            <Image src={cash} width={55} height={55} alt="logo" />
-          </div>
+      <hr className="text-gray my-5 w-full" />
+      <div className="flex flex-col sm:flex-row gap-5 justify-between text-white">
+        <div className="flex gap-1 items-center">
+          <AiFillCopyrightCircle className="text-white size-5" />
+          <p>2024 Inflection ORG All Rights Reserve.</p>
+        </div>
+        <div className="flex gap-2.5 items-center">
+          <Image src={payPal} width={55} height={55} alt="logo" />
+          <Image src={visa} width={55} height={55} alt="logo" />
+          <Image src={mastercard} width={55} height={55} alt="logo" />
+          <Image src={cash} width={55} height={55} alt="logo" />
         </div>
       </div>
     </div>
