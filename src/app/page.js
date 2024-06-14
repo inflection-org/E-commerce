@@ -178,22 +178,22 @@ const page = () => {
           </ServiceCard>
         </div>
         {/* ******ProductCard1 public*** */}
-        <div className="py-10">
-          <div className="block md:flex justify-between">
-            <h1 className="text-3xl capitalize md:text-4xl font-bold">
+        <div className="py-5">
+          <div className="block md:flex justify-between items-center">
+            <h1 className="text-3xl capitalize md:text-4xl font-semibold">
               Suggested for you
             </h1>
-            <div className="mt-5 hidden md:block">
+            <div className="hidden md:block">
               <Link
                 href="/shop"
-                className="bg-orange  md:mt-0 hover:bg-black duration-1000 text-white rounded-full px-5 py-3"
+                className="bg-orange md:mt-0 hover:bg-black duration-1000 text-white rounded-full px-4 py-1.5"
               >
-                View All Deals
+                View All
               </Link>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-10 gap-10 md:gap-12">
-            {allProduct.length > 0 &&
+            {allProduct?.length > 0 &&
               allProduct?.map((product, index) => (
                 <ProductCard
                   toto={() => seeDetails(product.product_id)}
@@ -207,18 +207,23 @@ const page = () => {
                 />
               ))}
           </div>
-          <div className="mt-8 md:hidden block">
+          <div className="mt-8 md:hidden flex justify-center text-center">
             <Link
               href="/shop"
-              className="bg-orange  md:mt-0 hover:bg-black duration-1000 text-white rounded-full px-5 py-3"
+              className="bg-orange md:mt-0 hover:bg-black duration-1000 text-white rounded-full px-4 py-1.5"
             >
-              View All Deals
+              View All
             </Link>
           </div>
         </div>
         {/* ************cotegory slide card************ */}
-        <div className=" py-4 md:py-20 gap-5">
-          <CotegorySlider />
+        <div className="py-5">
+          <h1 className="text-3xl capitalize md:text-4xl font-semibold">
+            Categories
+          </h1>
+          <div className="py-5 gap-5">
+            <CotegorySlider />
+          </div>
         </div>
         {/* *********tags name and tag filter card****** */}
         <div className="py-5">
@@ -245,7 +250,7 @@ const page = () => {
             </ul>
           </div>
           {/* ***tags filter product**** */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  mt-10 gap-10 md:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-10 gap-10 md:gap-12">
             {filterTag.length > 0 ? (
               filterTag?.map((product, index) => (
                 <ProductCard
@@ -259,17 +264,13 @@ const page = () => {
                 />
               ))
             ) : (
-              // <div className='flex justify-center m-auto items-center h-80 bg-light_gray w-full'>
-              //   <div className='w-full'>
               <p className="text-2xl">No Product Found</p>
-              //   </div>
-              // </div>
             )}
           </div>
-          <Link href="/shop" className="flex justify-center pt-8">
-            <div className="bg-orange hover:bg-black duration-1000 text-white rounded-full px-6 py-3">
+          <Link href="/shop" className="flex justify-center text-center pt-8">
+            <button className="bg-orange hover:bg-black duration-1000 text-white rounded-full px-4 py-1.5">
               View More
-            </div>
+            </button>
           </Link>
         </div>
         {/* ********newsletter******* */}
@@ -279,8 +280,8 @@ const page = () => {
               <h1 className="text-lg md:text-2xl mt-3">
                 Subscribe to our newsletter
               </h1>
-              <h1 className="text-xl md:text-5xl mt-2 md:mt-5">
-                Get 20% <span className="font-bold">Flat Discount</span>
+              <h1 className="text-2xl md:text-4xl mt-2 md:mt-5">
+                Get 20% <span className="font-semibold">Flat Discount</span>
               </h1>
               <div className="block md:flex items-center py-8 gap-5">
                 <div>
