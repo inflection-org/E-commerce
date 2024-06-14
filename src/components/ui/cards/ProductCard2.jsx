@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProductCard2 = ({ name, dis, price, pic, categoriesDetails }) => {
+const ProductCard2 = ({ name, dis, pic, categoriesDetails }) => {
   return (
     <>
       <div className="flex items-center bg-light_gray w-auto h-full sm:h-[250px] p-5 rounded-lg">
@@ -9,7 +9,7 @@ const ProductCard2 = ({ name, dis, price, pic, categoriesDetails }) => {
           <h1 className=" text-base md:text-lg font-semibold">{dis}</h1>
           <button
             onClick={() => categoriesDetails()}
-            className="w-32 py-2 bg-white hover:bg-orange hover:text-white duration-1000 rounded-full border-2 hover:border-1 border-orange"
+            className="w-32 py-2 bg-white hover:bg-orange hover:text-white duration-1000 rounded-full border-2 hover:border-1 border-pink hover:border-orange"
           >
             Shop Now
           </button>
