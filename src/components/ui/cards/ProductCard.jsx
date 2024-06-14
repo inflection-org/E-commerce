@@ -1,9 +1,7 @@
 import React from "react";
-import { useState } from "react";
 import { discountedPrice } from "../Discount";
 import { addTwoFloat } from "../Floting";
 import { instance } from "@/app/axios/Api";
-// import { FaHeart } from 'react-icons/fa'
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
@@ -17,7 +15,6 @@ export const ProductCard = ({
   toto,
   variantId,
 }) => {
-  // const [isActive, setIsActive] = useState(false)
   const router = useRouter();
 
   const addToCart = async (id) => {
@@ -38,62 +35,14 @@ export const ProductCard = ({
     }
   };
 
-  // const handleClick = () => {
-  //   setIsActive(!isActive)
-  //   console.log(isActive)
-  // }
-  // const addToWishList = async (id) => {
-  //   try {
-  //     const res = await instance.post('/wishlists', {
-  //       variant_id: id,
-  //     })
-  //     console.log(res.data)
-  //     toast.success(res?.data?.message)
-  //   } catch (err) {
-  //     console.log(err)
-  //     if (err.response?.data?.message) {
-  //       toast.error(err.response?.data?.message)
-  //     } else {
-  //       toast.error(err.message)
-  //     }
-  //   }
-  // }
-  // const removeWishlist = async (id) => {
-  //   try {
-  //     const res = await instance.delete(`/wishlists/${id}`)
-  //     console.log(res.data)
-  //     toast.success(res?.data?.message)
-  //   } catch (err) {
-  //     console.log(err)
-  //     if (err.response?.data?.message) {
-  //       toast.error(err.response?.data?.message)
-  //     } else {
-  //       toast.error(err.message)
-  //     }
-  //   }
-  // }
-
   return (
-    <div className="border-2 group border-light_gray w-auto h-auto cursor-pointer shadow-md hover:border-gray rounded-lg">
+    <div className="border-2 border-light_gray group hover:border-pink w-auto h-auto cursor-pointer rounded-lg">
       <div className="flex relative justify-center m-4 rounded-lg overflow-hidden bg-light_gray">
         <img
           className="object-fill group-hover:scale-110 duration-1000 w-full h-[300px]"
           src={pic}
           alt="logo"
         />
-        {/* <div className='absolute top-5 right-2'>
-          <FaHeart
-            onClick={() => {
-              handleClick()
-              if (isActive) {
-                removeWishlist(variantId)
-              } else {
-                addToWishList(variantId)
-              }
-            }}
-            className={`size-5 ${isActive ? 'text-red' : 'text-gray'}`}
-          />
-        </div> */}
       </div>
       <div className="p-5">
         <div onClick={() => toto()}>
