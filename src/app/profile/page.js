@@ -3,21 +3,31 @@ import React from "react";
 import { useState, useEffect } from "react";
 import WishList from "@/components/ui/WishList";
 import AddressBook from "@/components/ui/AddressBook";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { instance } from "../axios/Api";
 import ProtectedRoute from "@/components/app/ProtectedRoute";
 
 const Profile = () => {
   const router = useRouter();
-  const [currentTab, setCurrentTab] = useState("My Details");
+  const params = useSearchParams();
+  const [tab, setTab] = useState();
   const [userDetails, setUserDetails] = useState({});
+  useEffect(() => {
+    setTab(params.get("tab") || "?tab=information");
+  }, [params, tab]);
+
+  useEffect(() => {
+    if (params.size === 0) {
+      router.push("/profile/?tab=information");
+    }
+  });
 
   useEffect(() => {
     async function userDetail() {
       try {
         const res = await instance.get("/users/profiles/my");
-        console.log(res.data);
+        // console.log(res.data);
         setUserDetails(res.data);
       } catch (err) {
         console.log(err);
@@ -28,10 +38,9 @@ const Profile = () => {
 
   // ***************logOut**************
   const Remove = async () => {
-    console.log("remove");
     try {
       const res = await instance.delete("/users/logout");
-      console.log(res);
+      // console.log(res);
       toast.success(res.data?.message);
       router.push("/");
     } catch (err) {
@@ -67,75 +76,61 @@ const Profile = () => {
                 </h1>
               </div>
             </div>
-            <div className="py-2 md:py-6">
+            <ul className="py-5">
               {/************My Details************** */}
-              <div
-                className={`p-1 cursor-pointer ${
-                  currentTab === "My Details" ? "bg-gray " : "hover:bg-gray "
-                }`}
-                onClick={() => {
-                  setCurrentTab("My Details");
-                }}
+              <li
+                onClick={() => router.push("?tab=information")}
+                className={`${
+                  tab === "information" && "text-white bg-gray"
+                } capitalize p-2.5 hover:bg-gray hover:text-white cursor-pointer`}
               >
-                <p className="py-4 px-4 text-sm font-semibold">My Details</p>
-              </div>
-              <hr className="h-px my-0 bg-black border-0" />
+                My Details
+              </li>
+              <hr className="h-0.5 border-0 bg-pink" />
               {/* ****************Wish List******************** */}
-              <div
-                className={`p-1 cursor-pointer ${
-                  currentTab === "Wish List" ? "bg-gray " : "hover:bg-gray "
-                }`}
-                onClick={() => {
-                  setCurrentTab("Wish List");
-                }}
+              <li
+                onClick={() => router.push("?tab=wishlist")}
+                className={`${
+                  tab === "wishlist" && "text-white bg-gray"
+                } capitalize p-2.5 hover:bg-gray hover:text-white cursor-pointer`}
               >
-                <p className="py-4 px-4 text-sm font-semibold">Wish List</p>
-              </div>
-              <hr className="h-px my-0 bg-black border-0" />
+                My Wishlist
+              </li>
+              <hr className="h-0.5 border-0 bg-pink" />
               {/* ***********My Order*************************** */}
-              <div
-                className={`p-1 cursor-pointer ${
-                  currentTab === "My Order" ? "bg-gray " : "hover:bg-gray "
-                }`}
-                onClick={() => {
-                  router.push("/order");
-                }}
+              <li
+                onClick={() => router.push("/order")}
+                className="p-2.5 hover:text-white hover:bg-gray cursor-pointer"
               >
-                <p className="py-4 px-4 text-sm font-semibold">My Order</p>
-              </div>
-              <hr className="h-px my-0 bg-black border-0" />
+                My Order
+              </li>
+              <hr className="h-0.5 border-0 bg-pink" />
               {/* **********************My Address book************ */}
-              <div
-                className={`p-1 cursor-pointer ${
-                  currentTab === "My Address book"
-                    ? "bg-gray "
-                    : "hover:bg-gray "
-                }`}
-                onClick={() => {
-                  setCurrentTab("My Address book");
-                }}
+              <li
+                onClick={() => router.push("?tab=address")}
+                className={`${
+                  tab === "address" && "text-white bg-gray"
+                } capitalize p-2.5 hover:bg-gray hover:text-white cursor-pointer`}
               >
-                <p className="py-4 px-4 text-sm font-semibold">
-                  Manage Addresses
-                </p>
-              </div>
-              <hr className="h-px my-0 bg-black border-0" />
+                Manage addresses
+              </li>
+              <hr className="h-0.5 border-0 bg-pink" />
               {/* *********************LogOut********************* */}
-              <div className="hover:bg-gray cursor-pointer">
+              <div className="hover:bg-gray hover:text-white cursor-pointer">
                 <button
                   onClick={Remove}
-                  className="py-4 px-4 text-sm font-semibold"
+                  className="p-2.5 text-sm font-semibold"
                 >
                   LogOut
                 </button>
               </div>
-            </div>
+            </ul>
           </div>
           {/* ************part-2*********** */}
           <div className="w-full mt-5 md:mt-0 md:w-[80%] rounded-md bg-light_gray">
             {/* **********My Details********** */}
             <div>
-              {currentTab === "My Details" && (
+              {tab === "information" && (
                 <div className="mx-10 mt-12 ">
                   <p className="text-black text-2xl font-bold">
                     Personal Information
@@ -155,15 +150,10 @@ const Profile = () => {
                 </div>
               )}
             </div>
-            {/* *************My Order***************** */}
-            <div>
-              {currentTab === "My Order" && (
-                <h1 className="font-semibold p-2">this is my order</h1>
-              )}
-            </div>
+
             {/* ****************wish list******************** */}
             <div>
-              {currentTab === "Wish List" && (
+              {tab === "wishlist" && (
                 <div>
                   <div className="hidden md:block md:mx-6 mt-5">
                     <ul className="flex justify-between">
@@ -180,7 +170,7 @@ const Profile = () => {
             </div>
             {/* ***************My Address book************ */}
             <div>
-              {currentTab === "My Address book" && (
+              {tab === "address" && (
                 <div>
                   <AddressBook />
                 </div>
