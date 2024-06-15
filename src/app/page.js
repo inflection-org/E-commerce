@@ -9,7 +9,7 @@ import { instance } from "./axios/Api";
 import { getCookie, setCookie } from "./axios/CookieConfig";
 import { useRouter } from "next/navigation";
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
   const [allProduct, setAllProduct] = useState([]);
   const [allTags, setAllTags] = useState([]);
@@ -313,4 +313,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
