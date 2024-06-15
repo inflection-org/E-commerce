@@ -254,13 +254,14 @@ const page = () => {
             {filterTag.length > 0 ? (
               filterTag?.map((product, index) => (
                 <ProductCard
-                  toto={() => seeDetails(product.id)}
+                  toto={() => seeDetails(product.product_id)}
                   pic={product.thumbnail}
                   name={product.product_name}
                   description={product.product_description}
                   price={product.price}
                   discount={product.discount}
                   key={index}
+                  variantId={product.variant_id}
                 />
               ))
             ) : (
