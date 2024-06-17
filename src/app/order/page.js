@@ -17,36 +17,7 @@ const Order = () => {
         <p className='uppercase text-center mt-2 md:mt-0'>home {pathname}</p>
       </div>
       <div className='block md:flex gap-2 py-5 w-[100%]'>
-        {/* <div className='border-2  border-gray w-full md:w-[30%]'>
-          <div className='hover:bg-orange bg-light_gray'>
-            <p className='py-4 px-4 text-sm font-semibold'>DASHBOARD</p>
-          </div>
-          <hr className='h-px my-0 bg-gray border-0' />
-          <div className='hover:bg-orange bg-light_gray'>
-            <p className='py-4 px-4 text-sm font-semibold'>ORDERS</p>
-          </div>
-          <hr className='h-px my-0 bg-gray border-0' />
-          <div className='hover:bg-orange bg-light_gray'>
-            <p className='py-4 px-4 text-sm font-semibold'>DOWNLOADS</p>
-          </div>
-          <hr className='h-px my-0 bg-gray border-0' />
-          <div className='hover:bg-orange bg-light_gray'>
-            <p className='py-4 px-4 text-sm font-semibold'>ADDRESS</p>
-          </div>
-          <hr className='h-px my-0 bg-gray border-0' />
-          <div className='hover:bg-orange bg-light_gray'>
-            <p className='py-4 px-4 text-sm font-semibold'>LOGOUT</p>
-          </div>
-          <hr className='h-px my-0 bg-gray border-0' />
-        </div> */}
         <div className='w-full mt-8 md:mt-0 md:w-[100%]'>
-          <div className='flex justify-between bg-light_gray py-2 px-2'>
-            <p className='font-semibold'>Order</p>
-            <p className=' font-semibold hidden md:block'>Date</p>
-            <p className='font-semibold'>Status</p>
-            <p className='font-semibold hidden md:block '>Total</p>
-            <p className='font-semibold'>Action</p>
-          </div>
           <OrderCard
             order={'#345664'}
             date={'August11,2023'}
