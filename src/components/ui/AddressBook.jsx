@@ -71,7 +71,7 @@ const AddressBook = () => {
         country: state.country,
         pincode: state.pincode,
       });
-      console.log(res.data);
+      // console.log(res.data);
       toast.success(res.data.message);
       setIsOpen(true);
       // search()
@@ -93,7 +93,7 @@ const AddressBook = () => {
         `/address/${updateAddressId}`,
         UpdateAddress
       );
-      console.log(res.data);
+      // console.log(res.data);
       toast.success(res.data.message);
       setUpdateAddress({
         name: "",

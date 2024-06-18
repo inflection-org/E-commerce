@@ -42,7 +42,7 @@ const Page = () => {
         const res = await instance.get(
           "/products/public?limit=4&sort=price_desc&tags=popular"
         );
-        console.log(res.data);
+        // console.log(res.data);
         setAllProduct(res.data);
       } catch (err) {
         console.log(err);

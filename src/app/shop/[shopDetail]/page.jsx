@@ -32,7 +32,7 @@ const ShopDetail = () => {
       const res = await instance.post("/wishlists", {
         variant_id: id,
       });
-      console.log(res.data);
+      // console.log(res.data);
       toast.success(res?.data?.message);
     } catch (err) {
       console.log(err);
@@ -46,7 +46,7 @@ const ShopDetail = () => {
   const removeWishlist = async (id) => {
     try {
       const res = await instance.delete(`/wishlists/${id}`);
-      console.log(res.data);
+      // console.log(res.data);
       toast.success(res?.data?.message);
     } catch (err) {
       console.log(err);
@@ -63,7 +63,7 @@ const ShopDetail = () => {
       const res = await instance.post("/carts", {
         variant_id: id,
       });
-      console.log(res.data);
+      // console.log(res.data);
       router.push("/cart");
       toast.success(res?.data?.message);
     } catch (err) {
@@ -79,7 +79,7 @@ const ShopDetail = () => {
     async function getProduct() {
       try {
         const res = await instance.get(`/products/public/${id}`);
-        console.log(res.data);
+        // console.log(res.data);
         setProductDetails(res.data);
         if (res.data) {
           setCurrentVariant(res.data.variants[0]);

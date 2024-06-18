@@ -23,7 +23,7 @@ export const ProductCard = ({
         variant_id: id,
         quantity: 1,
       });
-      console.log(res.data);
+      // console.log(res.data);
       router.push("/cart");
       toast.success(res?.data?.message);
     } catch (err) {

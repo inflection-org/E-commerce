@@ -10,7 +10,7 @@ function UserDetails() {
     async function getDetails() {
       try {
         const res = await instance.get("/users/profiles/my");
-        console.log(res.data);
+        // console.log(res.data);
         setUserDetails(res.data);
       } catch (err) {
         console.log(err);
