@@ -50,9 +50,9 @@ const Cart = () => {
                     price={cart.price}
                     name={cart.product_name}
                     variantId={cart.variant_id}
+                    cartId={cart.cart_id}
                     refresh={() => {
                       setRefresh(!refresh);
-                      console.log("refresh", refresh);
                     }}
                   />
                 ))}
