@@ -7,14 +7,12 @@ import { instance } from '@/app/axios/Api'
 function Page() {
   const { invoice } = useParams()
   const [invoiceDetails, setInvoiceDetails] = useState({})
-  console.log(invoiceDetails)
 
-  console.log(invoice)
   useEffect(() => {
     const seeInvoice = async () => {
       try {
-        const res = await instance.get(`/orders/invoice/${invoice}`)
-        setInvoiceDetails(res.data)
+        const res = await instance.get(`/orders/my/${invoice}`)
+        setInvoiceDetails(res.data.order)
       } catch (err) {
         console.log(err)
       }
@@ -24,11 +22,7 @@ function Page() {
 
   return (
     <div>
-      {invoiceDetails?.data?.map((e, i) => (
-        <div key={i}>
-          <Invoice data={e} />
-        </div>
-      ))}
+      <Invoice data={invoiceDetails} />
     </div>
   )
 }
