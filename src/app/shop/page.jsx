@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { ProductCard } from "@/components/ui/cards/ProductCard";
 import { Fragment } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
@@ -15,6 +15,7 @@ import Stack from "@mui/material/Stack";
 const Shop = () => {
   const pathname = usePathname();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [allProduct, setAllProduct] = useState([]);
   const [sortName, setSortName] = useState("");
@@ -28,7 +29,9 @@ const Shop = () => {
     async function search() {
       try {
         const res = await instance.get(
-          "/products/public?limit=5&sort=price_desc&tags=popular"
+          `/products/public?limit=5&page=${searchParams.get(
+            "page"
+          )}&sort=price_desc&tags=popular`
         );
         setAllProduct(res.data);
       } catch (err) {
@@ -37,7 +40,7 @@ const Shop = () => {
     }
 
     search();
-  }, []);
+  }, [searchParams]);
 
   const sortOptions = [
     { name: "Popularity", href: "?sort=popularity", current: true },
@@ -388,6 +391,8 @@ const Shop = () => {
                   count={allProduct?.[0]?.total_pages}
                   variant="outlined"
                   shape="rounded"
+                  page={searchParams.get("page")}
+                  onChange={(event, value) => router.push(`?page=${value}`)}
                 />
               </Stack>
             </div>
