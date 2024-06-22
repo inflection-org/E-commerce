@@ -6,7 +6,10 @@ import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
 import { MdOutlineFileDownload } from 'react-icons/md'
 
-function Invoice({ data }) {
+function Invoice({ data, orderSummary }) {
+  console.log(data)
+  console.log(orderSummary)
+
   const downloadPDF = (url = 'invoice') => {
     const input = document.getElementById('pdfContent')
 
@@ -40,7 +43,7 @@ function Invoice({ data }) {
   return (
     <>
       <div
-        className='max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto my-4 sm:my-10'
+        className='max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto'
         id='pdfContent'
       >
         <div className='sm:w-11/12 lg:w-3/4 mx-auto'>
@@ -153,35 +156,36 @@ function Invoice({ data }) {
                     <dt className='col-span-3 font-semibold text-gray-800'>
                       Subtotal:
                     </dt>
-                    <dd className='col-span-2 text-gray-500'>$2750.00</dd>
+                    <dd className='col-span-2 text-gray-500'>
+                      {orderSummary.subtotal}
+                    </dd>
                   </dl>
 
                   <dl className='grid sm:grid-cols-5 gap-x-3'>
                     <dt className='col-span-3 font-semibold text-gray-800'>
-                      Total:
+                      Total Discount
                     </dt>
-                    <dd className='col-span-2 text-gray-500'>$2750.00</dd>
+                    <dd className='col-span-2 text-gray-500'>
+                      {orderSummary.discount}
+                    </dd>
                   </dl>
 
                   <dl className='grid sm:grid-cols-5 gap-x-3'>
                     <dt className='col-span-3 font-semibold text-gray-800'>
-                      Tax:
+                      Shipping
                     </dt>
-                    <dd className='col-span-2 text-gray-500'>$39.00</dd>
+                    <dd className='col-span-2 text-gray-500'>
+                      {orderSummary.shipping}
+                    </dd>
                   </dl>
 
                   <dl className='grid sm:grid-cols-5 gap-x-3'>
                     <dt className='col-span-3 font-semibold text-gray-800'>
                       Amount paid:
                     </dt>
-                    <dd className='col-span-2 text-gray-500'>$2789.00</dd>
-                  </dl>
-
-                  <dl className='grid sm:grid-cols-5 gap-x-3'>
-                    <dt className='col-span-3 font-semibold text-gray-800'>
-                      Due balance:
-                    </dt>
-                    <dd className='col-span-2 text-gray-500'>$0.00</dd>
+                    <dd className='col-span-2 text-gray-500'>
+                      {orderSummary.total}
+                    </dd>
                   </dl>
                 </div>
               </div>
@@ -209,18 +213,18 @@ function Invoice({ data }) {
               © 2024 Inflection ORG All Rights Reserve.
             </p>
           </div>
-          <div
-            className='mt-6 flex justify-end gap-x-3'
-            onClick={() => {
-              downloadPDF(data.order_code)
-            }}
-          >
-            <button className='py-2 px-3 inline-flex justify-center items-center gap-2 rounded-lg border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm'>
-              <MdOutlineFileDownload className='size-5' />
-              Invoice PDF
-            </button>
-          </div>
         </div>
+      </div>
+      <div
+        className='my-2 flex justify-center'
+        onClick={() => {
+          downloadPDF(data.order_code)
+        }}
+      >
+        <button className='py-2 px-3 inline-flex justify-center items-center gap-2 rounded-lg border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm'>
+          <MdOutlineFileDownload className='size-5' />
+          Invoice PDF
+        </button>
       </div>
     </>
   )

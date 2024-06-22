@@ -34,6 +34,8 @@ const ProfileComponent = () => {
     userDetail()
   }, [])
 
+  console.log(tab)
+
   // ***************logOut**************
   const Remove = async () => {
     try {

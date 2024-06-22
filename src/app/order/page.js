@@ -37,9 +37,8 @@ const Order = () => {
         <div className='w-full mt-8 md:mt-0 md:w-[100%]'>
           {allOrderDetails &&
             allOrderDetails.map((e, i) => (
-              <div>
+              <div key={i}>
                 <OrderCard
-                  key={i}
                   data={e}
                   setOrderId={() => router.push(`/order/${e.id}`)}
                 />

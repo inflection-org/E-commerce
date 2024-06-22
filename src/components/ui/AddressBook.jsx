@@ -2,9 +2,11 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { instance } from '@/app/axios/Api'
 import { toast } from 'react-toastify'
+import { useSearchParams } from 'next/navigation'
 import { MdOutlinePermDeviceInformation } from 'react-icons/md'
 
 const AddressBook = () => {
+  const params = useSearchParams()
   const [addresses, setAddresses] = useState([])
   const [isShow, setIsShow] = useState(false)
   const [isOpen, setIsOpen] = useState(true)
@@ -41,6 +43,8 @@ const AddressBook = () => {
     country: '',
     pincode: '',
   })
+  const tab = params.get('address')
+  console.log(tab)
 
   const Show = () => {
     setIsOpen((isOpen) => !isOpen)
@@ -48,7 +52,6 @@ const AddressBook = () => {
   // **************add address*****************
   const handleSubmit = async (event) => {
     event.preventDefault()
-    // console.log(state)
     setState({
       name: '',
       state: '',
@@ -60,7 +63,6 @@ const AddressBook = () => {
       pincode: '',
     })
     try {
-      // console.log(state)
       const res = await instance.post('/address', {
         name: state.name,
         state: state.state,
@@ -71,10 +73,8 @@ const AddressBook = () => {
         country: state.country,
         pincode: state.pincode,
       })
-      // console.log(res.data);
       toast.success(res.data?.message)
       setIsOpen(true)
-      // search()
     } catch (error) {
       if (error.response?.data?.message) {
         toast.error(error.response?.data?.message)
