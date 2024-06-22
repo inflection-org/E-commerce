@@ -6,13 +6,37 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import ProtectedRoute from '@/components/app/ProtectedRoute'
 import { MyContext } from '@/context/MyContext'
+import { discountedPrice } from '@/components/ui/Discount'
 
 const Cart = () => {
   const { myCart, setMyCart } = useContext(MyContext)
   const pathname = usePathname()
   const [refresh, setRefresh] = useState(false)
+  const [orderSummaryData, setOrderSummaryData] = useState({
+    originalPrice: '00',
+    savings: '00',
+    shipping: '80',
+    total: '00',
+  })
 
-  console.log(myCart)
+  useEffect(() => {
+    if (myCart) {
+      let originalPriceVal = 0
+      let savingsVal = 0
+      myCart.forEach((element) => {
+        originalPriceVal = originalPriceVal + element.price * element.quantity
+        savingsVal = savingsVal + element.discount
+      })
+      setOrderSummaryData({
+        ...orderSummaryData,
+        savings: savingsVal,
+        originalPrice: originalPriceVal,
+        total:
+          discountedPrice(originalPriceVal, savingsVal) +
+          orderSummaryData.shipping,
+      })
+    }
+  }, [myCart])
 
   useEffect(() => {
     async function searchCart() {
@@ -349,16 +373,16 @@ const Cart = () => {
                         Original price
                       </dt>
                       <dd className='text-base font-medium text-gray-900 '>
-                        $7,592.00
+                        {orderSummaryData.originalPrice}
                       </dd>
                     </dl>
 
                     <dl className='flex items-center justify-between gap-4'>
                       <dt className='text-base font-normal text-gray-500 dark:text-gray-400'>
-                        Savings
+                        Discount
                       </dt>
                       <dd className='text-base font-medium text-green-600'>
-                        -$299.00
+                        {`${orderSummaryData.savings}%`}
                       </dd>
                     </dl>
 
@@ -367,16 +391,7 @@ const Cart = () => {
                         Store Pickup
                       </dt>
                       <dd className='text-base font-medium text-gray-900 '>
-                        $99
-                      </dd>
-                    </dl>
-
-                    <dl className='flex items-center justify-between gap-4'>
-                      <dt className='text-base font-normal text-gray-500 dark:text-gray-400'>
-                        Tax
-                      </dt>
-                      <dd className='text-base font-medium text-gray-900 '>
-                        $799
+                        {orderSummaryData.shipping}
                       </dd>
                     </dl>
                   </div>
@@ -386,7 +401,7 @@ const Cart = () => {
                       Total
                     </dt>
                     <dd className='text-base font-bold text-gray-900 '>
-                      $8,191.00
+                      {orderSummaryData.total}
                     </dd>
                   </dl>
                 </div>
@@ -398,10 +413,10 @@ const Cart = () => {
                   Proceed to Checkout
                 </a>
 
-                <div className='flex justify-center py-3 shadow-md rounded-md '>
+                <div className='flex justify-center text-center py-3  rounded-md '>
                   <Link
                     href='/checkout'
-                    className='bg-orange hover:bg-black duration-1000 text-white   rounded-md px-6 py-3'
+                    className='bg-orange hover:bg-black duration-1000 text-white  w-full  rounded-md px-6 py-3'
                   >
                     Place Order
                   </Link>

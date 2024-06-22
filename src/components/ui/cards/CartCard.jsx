@@ -13,16 +13,6 @@ function CartCard({ pic, dis, price, variantId, cartId, quan, refresh }) {
   const [isActive, setIsActive] = useState(false)
   const [isButtonDisabled, setButtonDisabled] = useState(false)
   const [quantity, setQuantity] = useState(quan)
-  const pricePerUnit = price // Example price per unit
-  const totalPrice = quantity * pricePerUnit
-
-  const handleIncrease = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1)
-  }
-
-  const handleDecrease = () => {
-    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1))
-  }
 
   const handleClick = () => {
     setIsActive(!isActive)
@@ -44,6 +34,7 @@ function CartCard({ pic, dis, price, variantId, cartId, quan, refresh }) {
       }
     }
   }
+
   const removeWishlist = async (id) => {
     try {
       const res = await instance.delete(`/wishlists/${id}`)
@@ -61,8 +52,32 @@ function CartCard({ pic, dis, price, variantId, cartId, quan, refresh }) {
 
   const removeCartList = async (id) => {
     try {
-      const res = await instance.delete(`/carts/remove/${id}`)
+      const res = await instance.delete(`/carts/${cartId}`)
       toast.success(res?.data?.message)
+      refresh()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  const increment = async (id) => {
+    try {
+      const res = await instance.post('/carts', {
+        variant_id: id,
+      })
+      console.log(res.data.cart)
+      setQuantity(res.data)
+      refresh()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  const decrement = async (id, quantityVal) => {
+    try {
+      const res = await instance.post('/carts', {
+        variant_id: id,
+        quantity: quantityVal - 1,
+      })
+      console.log(res.data)
       refresh()
     } catch (err) {
       console.log(err)
@@ -85,7 +100,9 @@ function CartCard({ pic, dis, price, variantId, cartId, quan, refresh }) {
             <div className='flex items-center'>
               <button
                 type='button'
-                onClick={handleDecrease}
+                onClick={() => {
+                  decrement(variantId, quan)
+                }}
                 id='decrement-button'
                 data-input-counter-decrement='counter-input'
                 className={`inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-b  hover:bg-light_gray focus:outline-none focus:ring-2  ${
@@ -98,7 +115,9 @@ function CartCard({ pic, dis, price, variantId, cartId, quan, refresh }) {
                 {quantity}
               </p>
               <button
-                onClick={handleIncrease}
+                onClick={() => {
+                  increment(variantId)
+                }}
                 id='increment-button'
                 data-input-counter-increment='counter-input'
                 className={`inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-gray  hover:bg-light_gray focus:outline-none  ${
@@ -111,9 +130,7 @@ function CartCard({ pic, dis, price, variantId, cartId, quan, refresh }) {
               </button>
             </div>
             <div className='text-end md:order-4 md:w-32'>
-              <p className='text-base font-bold '>{totalPrice}</p>
-              {/* <p>Price per unit: ${pricePerUnit}</p>
-              <p>Total price: ${totalPrice}</p> */}
+              <p className='text-base font-bold '>{price}</p>
             </div>
           </div>
           <div className='w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md'>
@@ -143,7 +160,6 @@ function CartCard({ pic, dis, price, variantId, cartId, quan, refresh }) {
                 onClick={() => {
                   removeCartList(cartId)
                 }}
-                type='button'
                 className='inline-flex items-center text-sm font-medium text-red hover:underline '
               >
                 <MdDeleteForever className='size-5' />

@@ -23,7 +23,6 @@ const ShopDetail = () => {
   const params = useParams()
   const id = params.shopDetail
   console.log(productDetails)
-
   const handleClick = () => {
     setIsActive(!isActive)
   }
