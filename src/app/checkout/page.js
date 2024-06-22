@@ -1,22 +1,23 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import OrderSummary from '../../components/ui/OrderSummry'
+// import OrderSummary from '../../components/ui/OrderSummry'
 import { instance } from '.././axios/Api'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 export default function Checkout() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [address, setAddress] = useState([])
-  const [variantId, setVariantId] = useState('')
+  const [variantId, setVariantId] = useState()
+  const [currentStatus, setCurrent] = useState('w-[25%]')
   const [orderFormData, setOrderFormData] = useState({
     callback_url: 'http://localhost:3000/payment',
     shipping_method: '',
     billing_address_id: '',
   })
 
-  // console.log(variantId)
   const orderPlace = async () => {
     try {
       const res = await instance.post('/orders/cart', {
@@ -24,8 +25,11 @@ export default function Checkout() {
         shipping_method: orderFormData.shipping_method,
         billing_address_id: orderFormData.billing_address_id * 1,
       })
-      console.log(res.data)
-      console.log('orderPlace')
+      if (res?.data?.shipping_response) {
+        toast.success(res?.data?.shipping_response)
+        setCurrent('w-[100%]')
+        router.push('/order')
+      }
       if (res?.data.payment_url) {
         window.location.replace(res?.data.payment_url)
       }
@@ -34,10 +38,7 @@ export default function Checkout() {
     }
   }
 
-  console.log(address)
-  console.log(orderFormData)
   const buyNow = async () => {
-    console.log(orderFormData)
     try {
       const res = await instance.post('/orders/now', {
         variant_id: variantId * 1,
@@ -45,13 +46,20 @@ export default function Checkout() {
         shipping_method: orderFormData.shipping_method,
         billing_address_id: orderFormData.billing_address_id * 1,
       })
-      console.log(res.data)
-      console.log('buyNow')
+      if (res?.data?.shipping_response) {
+        toast.success(res?.data?.shipping_response)
+        setCurrent('w-[100%]')
+        router.push('/order')
+      }
       if (res?.data.payment_url) {
         window.location.replace(res?.data.payment_url)
       }
-    } catch (error) {
-      console.log(error)
+    } catch (err) {
+      if (err.response?.data?.message) {
+        toast.error(err.response?.data?.message)
+      } else {
+        toast.error(err.message)
+      }
     }
   }
 
@@ -71,8 +79,83 @@ export default function Checkout() {
   return (
     <div>
       <div className='mx-5 md:mx-10 py-5'>
+        <div className='py-4'>
+          <h2 className='sr-only'>Steps</h2>
+
+          <div>
+            <div className='overflow-hidden rounded-full bg-light_gray'>
+              <div
+                className={`h-2 ${currentStatus} rounded-full bg-blue`}
+              ></div>
+            </div>
+
+            <ol className='mt-4 grid grid-cols-3 text-sm font-medium text-gray'>
+              <li className='flex items-center justify-start text-blue sm:gap-1.5'>
+                <span className='hidden sm:inline'> Details </span>
+
+                <svg
+                  className='size-6 sm:size-5'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                  strokeWidth='2'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    d='M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2'
+                  />
+                </svg>
+              </li>
+
+              <li className='flex items-center justify-center text-blue sm:gap-1.5'>
+                <span className='hidden sm:inline'> Address </span>
+
+                <svg
+                  className='size-6 sm:size-5'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                  strokeWidth='2'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'
+                  />
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    d='M15 11a3 3 0 11-6 0 3 3 0 016 0z'
+                  />
+                </svg>
+              </li>
+
+              <li className='flex items-center justify-end sm:gap-1.5'>
+                <span className='hidden sm:inline'> Payment </span>
+
+                <svg
+                  className='size-6 sm:size-5'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                  strokeWidth='2'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    d='M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z'
+                  />
+                </svg>
+              </li>
+            </ol>
+          </div>
+        </div>
         <div className='md:flex justify-center gap-5 w-full'>
-          <div className='w-full md:w-[70%]'>
+          <div className='w-full '>
             {/* *******************Address********** */}
             <div className='shadow-md rounded-md '>
               <div className='bg-blue  rounded-md px-4 py-3  text-white'>
@@ -94,12 +177,13 @@ export default function Checkout() {
                         <input
                           type='radio'
                           name='address'
-                          onChange={(e) =>
+                          onChange={(e) => {
+                            setCurrent('w-[50%]')
                             setOrderFormData({
                               ...orderFormData,
                               billing_address_id: e.target.value,
                             })
-                          }
+                          }}
                           value={address.id}
                           className='mr-2'
                         />
@@ -126,12 +210,13 @@ export default function Checkout() {
                           className='mr-2'
                           value='prepaid'
                           billing_address='default-radio'
-                          onChange={(e) =>
+                          onChange={(e) => {
+                            setCurrent('w-[75%]')
                             setOrderFormData({
                               ...orderFormData,
                               shipping_method: e.target.value,
                             })
-                          }
+                          }}
                         />
                         <span> PrePaid Delivery</span>
                       </label>
@@ -143,12 +228,13 @@ export default function Checkout() {
                           name='paymentMethod'
                           className='mr-2'
                           value='cod'
-                          onChange={(e) =>
+                          onChange={(e) => {
+                            setCurrent('w-[75%]')
                             setOrderFormData({
                               ...orderFormData,
                               shipping_method: e.target.value,
                             })
-                          }
+                          }}
                         />
                         <span> Cash On Delivery</span>
                       </label>
@@ -157,13 +243,13 @@ export default function Checkout() {
                 </div>
               </div>
             </div>
-          </div>
-          <div className='w-full md:w-[30%]'>
-            <OrderSummary />
             <div className='flex justify-center'>
               <button
-                className='bg-orange hover:bg-black duration-1000 text-white w-full mt-6 rounded-md  py-3'
-                onClick={() => (variantId ? buyNow() : orderPlace())}
+                className='bg-orange hover:bg-black duration-1000 text-white w-44 mt-6 rounded-md  py-3'
+                onClick={() => {
+                  setCurrent('w-[85%]')
+                  variantId ? buyNow() : orderPlace()
+                }}
               >
                 Place Order
               </button>
