@@ -29,9 +29,9 @@ const Shop = () => {
     async function search() {
       try {
         const res = await instance.get(
-          `/products/public?limit=5&page=${searchParams.get(
-            "page"
-          )}&sort=price_desc&tags=popular`
+          `/products/public?limit=5&page=${
+            searchParams.get("page") || 1
+          }&sort=price_desc&tags=popular`
         );
         setAllProduct(res.data);
       } catch (err) {
