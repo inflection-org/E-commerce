@@ -8,7 +8,6 @@ function CategoryDetail() {
   const params = useParams()
   const id = params.cotegoryDetail
   const [categoryData, setCategoryData] = useState([])
-  console.log(categoryData)
 
   useEffect(() => {
     async function fetchCategory() {

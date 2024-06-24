@@ -25,7 +25,6 @@ const ProfileComponent = () => {
     async function userDetail() {
       try {
         const res = await instance.get('/users/profiles/my')
-        // console.log(res.data);
         setUserDetails(res.data)
       } catch (err) {
         console.log(err)
@@ -40,7 +39,6 @@ const ProfileComponent = () => {
   const Remove = async () => {
     try {
       const res = await instance.delete('/users/logout')
-      // console.log(res);
       toast.success(res.data?.message)
       router.push('/')
     } catch (err) {

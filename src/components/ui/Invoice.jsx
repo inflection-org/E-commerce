@@ -7,9 +7,6 @@ import html2canvas from 'html2canvas'
 import { MdOutlineFileDownload } from 'react-icons/md'
 
 function Invoice({ data, orderSummary }) {
-  console.log(data)
-  console.log(orderSummary)
-
   const downloadPDF = (url = 'invoice') => {
     const input = document.getElementById('pdfContent')
 

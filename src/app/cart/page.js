@@ -55,14 +55,8 @@ const Cart = () => {
     <ProtectedRoute>
       <div className='bg-white py-8 antialiased  md:py-16'>
         <div className='mx-auto max-w-screen-xl px-4 2xl:px-0'>
-          <div className='h-44 my-5 px-4 block md:flex md:justify-between items-center bg-light_gray'>
-            <div className='pt-5 md:pt-0'>
-              <h1 className='text-3xl md:text-5xl font-bold'>My Cart</h1>
-              <p className='mt-3  text-gray text-lg md:text-xl'>
-                Something differet, every day.
-              </p>
-            </div>
-            <p className='uppercase text-center mt-2 md:mt-0'>home{pathname}</p>
+          <div>
+            <h1 className='text-3xl font-semibold'>My Cart</h1>
           </div>
           <div className='mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8'>
             <div className='mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl'>

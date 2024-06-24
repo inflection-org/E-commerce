@@ -1,32 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import ProductCard2 from "./cards/ProductCard2";
-import { instance } from "../../app/axios/Api";
-import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import ProductCard2 from './cards/ProductCard2'
+import { instance } from '../../app/axios/Api'
+import { useRouter } from 'next/navigation'
 
 // Swipper CS
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
 
-import { Autoplay } from "swiper/modules";
+import { Autoplay } from 'swiper/modules'
 
 function CotegorySlider() {
-  const router = useRouter();
+  const router = useRouter()
 
-  const [categories, setCategories] = useState([]);
-  // console.log(categories)
+  const [categories, setCategories] = useState([])
   useEffect(() => {
     async function search() {
       try {
-        const res = await instance.get("/categories/list");
-        setCategories(res.data);
+        const res = await instance.get('/categories/list')
+        setCategories(res.data)
       } catch (err) {
-        console.log(err);
+        console.log(err)
       }
     }
-    search();
-  }, []);
+    search()
+  }, [])
 
   return (
     <>
@@ -55,7 +54,7 @@ function CotegorySlider() {
           clickable: true,
         }}
         modules={[Autoplay]}
-        className="mySwiper"
+        className='mySwiper'
       >
         {categories.length > 0 &&
           categories?.map((category, i) => (
@@ -72,7 +71,7 @@ function CotegorySlider() {
           ))}
       </Swiper>
     </>
-  );
+  )
 }
 
-export default CotegorySlider;
+export default CotegorySlider

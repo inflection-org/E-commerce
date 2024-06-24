@@ -2,22 +2,10 @@
 import React from 'react'
 import ServiceCard from '@/components/ui/cards/ServiceCard'
 import OurTeam from '@/components/ui/cards/OurTeam'
-import { usePathname } from 'next/navigation'
 
 function About() {
-  const pathname = usePathname()
-
   return (
     <div className='px-5 md:px-10'>
-      <div className='h-44 md:my-5 px-4 block md:flex md:justify-between items-center bg-light_gray'>
-        <div className='pt-5 md:pt-0'>
-          <h1 className='text-3xl md:text-5xl font-bold'>About Us</h1>
-          <p className='mt-3  text-gray text-lg md:text-xl'>
-            Something differet, every day.
-          </p>
-        </div>
-        <p className='uppercase text-center mt-2 md:mt-0'>home {pathname}</p>
-      </div>
       <div className='py-10 md:py-16'>
         <h1 className='text-2xl md:text-4xl text-center font-bold'>
           Empowering

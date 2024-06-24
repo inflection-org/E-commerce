@@ -1,124 +1,122 @@
-"use client";
-import { createContext, useEffect, useState } from "react";
-import { getCookie, setCookie } from "../app/axios/CookieConfig";
-import { useRouter } from "next/navigation";
-import { instance, setToken } from "@/app/axios/Api";
+'use client'
+import { createContext, useEffect, useState } from 'react'
+import { getCookie, setCookie } from '../app/axios/CookieConfig'
+import { useRouter } from 'next/navigation'
+import { instance, setToken } from '@/app/axios/Api'
 
 // Create the context
-const MyContext = createContext();
+const MyContext = createContext()
 
 // Create a provider component
 const MyContextProvider = ({ children }) => {
-  const router = useRouter();
-  const [isLogin, setIsLogin] = useState(false);
-  const [myCart, setMyCart] = useState([]);
-  const [myWishList, setMyWishList] = useState([]);
-  const [myAddress, setMyAddress] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [profile, setProfile] = useState({});
+  const router = useRouter()
+  const [isLogin, setIsLogin] = useState(false)
+  const [myCart, setMyCart] = useState([])
+  const [myWishList, setMyWishList] = useState([])
+  const [myAddress, setMyAddress] = useState([])
+  const [categories, setCategories] = useState([])
+  const [profile, setProfile] = useState({})
 
   useEffect(() => {
-    const accessToken = getCookie("access_token");
+    const accessToken = getCookie('access_token')
     // const refreshToken = getCookie('refresh_token');
 
     if (accessToken && accessToken !== null) {
-      setToken("access_token");
-      setIsLogin(true);
+      setToken('access_token')
+      setIsLogin(true)
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     const getCategories = async () => {
       try {
-        const res = await instance.get("/categories/list");
-        setCategories(res.data);
+        const res = await instance.get('/categories/list')
+        setCategories(res.data)
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
-    };
-    getCategories();
-  }, []);
+    }
+    getCategories()
+  }, [])
 
   //   Renew Token
   const renewToken = async () => {
-    setToken("refresh_token");
+    setToken('refresh_token')
     try {
-      const { data } = await instance.get("/users/renew_token");
-      const access_token = data.access_token;
-      setCookie("access_token", access_token);
-      setToken("access_token");
-      setIsLogin(true);
+      const { data } = await instance.get('/users/renew_token')
+      const access_token = data.access_token
+      setCookie('access_token', access_token)
+      setToken('access_token')
+      setIsLogin(true)
     } catch (err) {
-      console.log(err);
-      setIsLogin(false);
+      console.log(err)
+      setIsLogin(false)
     }
-  };
+  }
 
   useEffect(() => {
     const checkLogin = () => {
-      const accessToken = getCookie("access_token");
-      const refreshToken = getCookie("refresh_token");
+      const accessToken = getCookie('access_token')
+      const refreshToken = getCookie('refresh_token')
 
       if (accessToken || accessToken !== null) {
-        return;
+        return
       }
 
       if (refreshToken && refreshToken !== null) {
-        renewToken();
-        return;
+        renewToken()
+        return
       }
-    };
-    const loginInterval = setInterval(checkLogin, 1000);
+    }
+    const loginInterval = setInterval(checkLogin, 1000)
 
     if (isLogin) {
-      fetchMyCart();
-      fetchMyProfile();
-      fetchMyAddress();
-      fetchWishList();
+      fetchMyCart()
+      fetchMyProfile()
+      fetchMyAddress()
+      fetchWishList()
     }
-    return () => clearInterval(loginInterval);
-  }, [isLogin, router]);
+    return () => clearInterval(loginInterval)
+  }, [isLogin, router])
 
   //   My Cart
   const fetchMyCart = async () => {
     try {
-      const { data } = await instance.get("/carts/my");
-      setMyCart(data.items);
+      const { data } = await instance.get('/carts/my')
+      setMyCart(data.items)
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
   //   My WishList
   const fetchWishList = async () => {
     try {
-      const { data } = await instance.get("/wishlists/my");
-      setMyWishList(data.data);
+      const { data } = await instance.get('/wishlists/my')
+      setMyWishList(data.data)
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   // My Profile
   const fetchMyProfile = async () => {
     try {
-      const { data } = await instance.get("/users/profiles/my");
-      // console.log(data);
-      setProfile(data);
+      const { data } = await instance.get('/users/profiles/my')
+      setProfile(data)
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   //   My Address
   const fetchMyAddress = async () => {
     try {
-      const { data } = await instance.get("/address/my");
-      // console.log(data);
-      setMyAddress(data);
+      const { data } = await instance.get('/address/my')
+      setMyAddress(data)
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   // Provide the state and any other values/functions to the children
   return (
@@ -138,8 +136,8 @@ const MyContextProvider = ({ children }) => {
     >
       {children}
     </MyContext.Provider>
-  );
-};
+  )
+}
 
 // Export the context and provider
-export { MyContext, MyContextProvider };
+export { MyContext, MyContextProvider }

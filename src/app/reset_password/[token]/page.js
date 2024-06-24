@@ -11,17 +11,14 @@ const Payment = () => {
   const router = useRouter()
   const pathname = usePathname()
   const [password, setPassword] = useState('')
-  console.log(pathname.split('/')[2])
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    console.log(password)
     try {
       const res = await instance.patch(
         `/users/reset_password/${pathname.split('/')[2]}`,
         password
       )
-      // console.log(res.data)
       toast.success('login successfully')
       router.push('/')
     } catch (error) {

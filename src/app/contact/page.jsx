@@ -3,28 +3,17 @@ import React from 'react'
 import { IoLocation } from 'react-icons/io5'
 import { IoMdCall } from 'react-icons/io'
 import { MdEmail } from 'react-icons/md'
-import { usePathname } from 'next/navigation'
 
 function Contact() {
-  const pathname = usePathname()
   return (
     <div className='px-5 md:px-10'>
-      <div className='h-44 my-2 md:my-5 px-4 block md:flex md:justify-between items-center bg-light_gray'>
-        <div className='pt-5 md:pt-0'>
-          <h1 className='text-3xl md:text-5xl font-bold'>Contact Us</h1>
-          <p className='mt-3  text-gray text-lg md:text-xl'>
-            {`Something different, every day.`}
-          </p>
-        </div>
-        <p className='uppercase text-center mt-2 md:mt-0'>home{pathname}</p>
-      </div>
-      <div className='flex justify-center md:mt-20'>
-        <div className='w-[100%] mt-5'>
+      <div className='flex justify-center md:mt-10'>
+        <div className='w-[100%] '>
           <div className='flex justify-center m-2'>
             <h1 className='text-4xl font-medium'>Contact With Us</h1>
           </div>
           {/* card */}
-          <div className='flex justify-center my-2'>
+          <div className='flex justify-center mt-10 my-2'>
             <div className='grid w-full grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 place-items-center items-center lg:gap-10 mt-5'>
               {/* *****1***** */}
               <div className='w-full h-40 md:w-96 md:h-40 border-2 border-gray hover:border-red bg-white rounded-md group'>

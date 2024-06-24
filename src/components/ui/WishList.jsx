@@ -10,7 +10,6 @@ const WishList = () => {
   const router = useRouter()
   const [wishLists, setWishLists] = useState([])
   const [error, setError] = useState('')
-  console.log(wishLists)
 
   useEffect(() => {
     setError('')

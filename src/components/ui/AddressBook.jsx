@@ -44,7 +44,6 @@ const AddressBook = () => {
     pincode: '',
   })
   const tab = params.get('address')
-  console.log(tab)
 
   const Show = () => {
     setIsOpen((isOpen) => !isOpen)
@@ -87,13 +86,11 @@ const AddressBook = () => {
 
   const onsubmit = async (event) => {
     event.preventDefault()
-    console.log(UpdateAddress)
     try {
       const res = await instance.patch(
         `/address/${updateAddressId}`,
         UpdateAddress
       )
-      // console.log(res.data);
       toast.success(res.data.message)
       setUpdateAddress({
         name: '',
@@ -127,7 +124,6 @@ const AddressBook = () => {
           e.editMode = false
           return e
         })
-        console.log(d)
         setAddresses(res.data)
       } catch (err) {
         console.log(err)
@@ -139,7 +135,6 @@ const AddressBook = () => {
   const Remove = async (address_id) => {
     try {
       const { data } = await instance.delete(`/address/${address_id}`)
-      console.log(data)
       toast.success(data)
       const remainAddresses = addresses.filter(
         (item) => item.address_id !== address_id

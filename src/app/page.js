@@ -6,6 +6,7 @@ import CotegorySlider from '@/components/ui/CotegorySlider'
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { instance } from './axios/Api'
+import Title from '@/components/ui/Title'
 import { getCookie, setCookie } from './axios/CookieConfig'
 import { useRouter } from 'next/navigation'
 
@@ -13,23 +14,9 @@ const Page = () => {
   const router = useRouter()
   const [allProduct, setAllProduct] = useState([])
   const [allTags, setAllTags] = useState([])
-  const [filterTag, setFilterTag] = useState([])
-  const [filterTagName, setFilterTagName] = useState('popular')
 
   const seeDetails = (product_id) => {
     router.push(`/shop/${product_id}`)
-  }
-  // ************tag-filter********
-  const tagFilter = async (tag) => {
-    try {
-      const res = await instance.get(
-        `/products/public?limit=4&sort=price_desc&tags=${tag ? tag : 'popular'}`
-      )
-
-      setFilterTag(res.data)
-    } catch (err) {
-      console.log(err)
-    }
   }
 
   useEffect(() => {
@@ -42,17 +29,15 @@ const Page = () => {
         const res = await instance.get(
           '/products/public?limit=4&sort=price_desc&tags=popular'
         )
-        // console.log(res.data);
         setAllProduct(res.data)
       } catch (err) {
         console.log(err)
       }
     }
-    // *****************
+    // *************************All-Tag********
     async function searchTags() {
       try {
         const res = await instance.get('/tags')
-        // console.log(res.data)
         setAllTags(res.data)
       } catch (err) {
         console.log(err)
@@ -60,7 +45,6 @@ const Page = () => {
     }
     searchTags()
     search()
-    tagFilter()
   }, [])
 
   return (
@@ -179,9 +163,9 @@ const Page = () => {
         </div>
         {/* ******ProductCard1 public*** */}
         <div className='py-5'>
-          <div className='block md:flex justify-between items-center'>
+          <div className='block md:flex justify-between items-center mt-5'>
             <h1 className='text-3xl capitalize md:text-4xl font-semibold'>
-              Suggested for you
+              Suggestion For You
             </h1>
             <div className='hidden md:block'>
               <Link
@@ -227,52 +211,9 @@ const Page = () => {
         </div>
         {/* *********tags name and tag filter card****** */}
         <div className='py-5'>
-          <div className='my-4 py-0 text-gray capitalize  bg-light_gray'>
-            <ul className='flex px-2 cursor-pointer md:px-0  md:justify-center gap-10 overflow-auto text-xl bg-light_gray'>
-              {allTags?.length > 0 &&
-                allTags?.map((tag, i) => {
-                  return (
-                    <li
-                      key={i}
-                      className={`font-serif py-4 text-xl hover:border-b-4 text-nowrap text-gray hover:text-orange hover:border-orange  ${
-                        filterTagName === tag.name &&
-                        'border-b-4 border-orange text-orange'
-                      }`}
-                      onClick={() => {
-                        tagFilter(tag.name)
-                        setFilterTagName(tag.name)
-                      }}
-                    >
-                      {tag.name}
-                    </li>
-                  )
-                })}
-            </ul>
-          </div>
-          {/* ***tags filter product**** */}
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-10 gap-10 md:gap-12'>
-            {filterTag.length > 0 ? (
-              filterTag?.map((product, index) => (
-                <ProductCard
-                  toto={() => seeDetails(product.product_id)}
-                  pic={product.thumbnail}
-                  name={product.product_name}
-                  description={product.product_description}
-                  price={product.price}
-                  discount={product.discount}
-                  key={index}
-                  variantId={product.variant_id}
-                />
-              ))
-            ) : (
-              <p className='text-2xl'>No Product Found</p>
-            )}
-          </div>
-          <Link href='/shop' className='flex justify-center text-center pt-8'>
-            <button className='bg-orange hover:bg-black duration-1000 text-white rounded-full px-4 py-1.5'>
-              View More
-            </button>
-          </Link>
+          <Title title='Popular' btn='/shop' tag={'popular'} />
+          <Title title='New' btn='/shop' tag={'new '} />
+          <Title title='New Arrival' btn='View All' tag={'new Arrival '} />
         </div>
         {/* ********newsletter******* */}
         <div className='py-8'>

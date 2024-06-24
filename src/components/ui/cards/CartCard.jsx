@@ -64,7 +64,6 @@ function CartCard({ pic, dis, price, variantId, cartId, quan, refresh }) {
       const res = await instance.post('/carts', {
         variant_id: id,
       })
-      console.log(res.data.cart)
       setQuantity(res.data)
       refresh()
     } catch (err) {
@@ -77,7 +76,6 @@ function CartCard({ pic, dis, price, variantId, cartId, quan, refresh }) {
         variant_id: id,
         quantity: quantityVal - 1,
       })
-      console.log(res.data)
       refresh()
     } catch (err) {
       console.log(err)

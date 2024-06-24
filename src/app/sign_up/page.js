@@ -14,13 +14,11 @@ const SignUp = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    // console.log(state)
     setState({
       name: '',
       email: '',
     })
     try {
-      // console.log(state)
       const res = await instance.post('/users/signup', {
         reset_password_ui_url: 'http://localhost:3000/reset_password',
         full_name: state.name,
