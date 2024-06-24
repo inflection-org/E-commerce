@@ -165,7 +165,6 @@ const Header = () => {
               </Link>
             </li>
             <li className='text-gray hover:text-orange text-lg uppercase'>
-              {/* <ShopDropdown /> */}
               <Link
                 onClick={() => {
                   setIsOpen(false)

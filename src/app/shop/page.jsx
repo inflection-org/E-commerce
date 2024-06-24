@@ -11,12 +11,14 @@ import { instance } from '../axios/Api'
 import { useRouter } from 'next/navigation'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
+import Link from 'next/link'
 
 const Shop = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const [allProduct, setAllProduct] = useState([])
+  const [categoryTag, setCategoryTag] = useState([])
   const [sortName, setSortName] = useState('')
   const [catName, setCatName] = useState('')
 
@@ -25,7 +27,7 @@ const Shop = () => {
   }
 
   useEffect(() => {
-    async function search() {
+    async function fetchProduct() {
       try {
         const res = await instance.get(
           `/products/public?limit=5&page=${
@@ -38,7 +40,16 @@ const Shop = () => {
       }
     }
 
-    search()
+    fetchProduct()
+    async function fetchCategory() {
+      try {
+        const res = await instance.get('/categories/list')
+        setCategoryTag(res.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    fetchCategory()
   }, [searchParams])
 
   const sortOptions = [
@@ -47,24 +58,17 @@ const Shop = () => {
     { name: 'Price: Low to High', href: '?sort=price_asc', current: false },
     { name: 'Price: High to Low', href: '?sort=price_desc', current: false },
   ]
-  const subCategories = [
-    { name: 'Totes' },
-    { name: 'Backpacks' },
-    { name: 'Travel Bags' },
-    { name: 'Hip Bags' },
-    { name: 'Laptop Sleeves' },
-  ]
+  // const subCategories = [
+  //   { name: 'Totes' },
+  //   { name: 'Backpacks' },
+  //   { name: 'Travel Bags' },
+  //   { name: 'Hip Bags' },
+  //   { name: 'Laptop Sleeves' },
+  // ]
   const filters = [
     {
       id: 'category',
       name: 'Category',
-      options: [
-        { value: 'new-arrivals', label: 'New Arrivals', checked: false },
-        { value: 'sale', label: 'Sale', checked: false },
-        { value: 'travel', label: 'Travel', checked: true },
-        { value: 'organization', label: 'Organization', checked: false },
-        { value: 'accessories', label: 'Accessories', checked: false },
-      ],
     },
   ]
   function classNames(...classes) {
@@ -116,9 +120,9 @@ const Shop = () => {
                       </button>
                     </div>
 
-                    {/* Filters */}
+                    {/********************** * Filters Mobile************************************************************************** */}
                     <form className='mt-4 border-t border-gray-200 '>
-                      <h3 className='sr-only'>Categories</h3>
+                      {/* <h3 className='sr-only'>Categories</h3>
                       <ul role='list' className='px-2 py-3 font-medium'>
                         {subCategories.map((category) => (
                           <li
@@ -135,7 +139,7 @@ const Shop = () => {
                             </a>
                           </li>
                         ))}
-                      </ul>
+                      </ul> */}
 
                       {filters.map((section) => (
                         <Disclosure
@@ -167,24 +171,24 @@ const Shop = () => {
                               </h3>
                               <Disclosure.Panel className='pt-6'>
                                 <div className='space-y-6'>
-                                  {section.options.map((option, optionIdx) => (
+                                  {categoryTag.map((option) => (
                                     <div
-                                      key={option.value}
+                                      key={option.id}
                                       className='flex items-center'
                                     >
                                       <input
-                                        id={`filter-mobile-${section.id}-${optionIdx}`}
-                                        name={`${section.id}[]`}
-                                        defaultValue={option.value}
-                                        type='checkbox'
-                                        defaultChecked={option.checked}
-                                        className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                        value={option.id}
+                                        type='radio'
+                                        name='btn'
+                                        onClick={() =>
+                                          router.push(
+                                            `?category_id=${option.id}`
+                                          )
+                                        }
+                                        className='h-4 w-4 border-gray text-blue'
                                       />
-                                      <label
-                                        htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                                        className='ml-3 min-w-0 flex-1'
-                                      >
-                                        {option.label}
+                                      <label className='ml-3 text-sm text-gray'>
+                                        {option.name}
                                       </label>
                                     </div>
                                   ))}
@@ -238,12 +242,9 @@ const Shop = () => {
                         {sortOptions.map((option) => (
                           <Menu.Item key={option.name}>
                             {({ active }) => (
-                              <a
+                              <Link
                                 value={option.name}
-                                // href={option.href}
-                                onClick={(e) => {
-                                  setSortName(option.name)
-                                }}
+                                href={option.href}
                                 className={classNames(
                                   option.current
                                     ? 'font-medium text-black'
@@ -251,9 +252,12 @@ const Shop = () => {
                                   active ? 'bg-gray' : '',
                                   'block px-4 py-2 text-sm'
                                 )}
+                                onClick={() =>
+                                  router.push(`?category_id=${option.href}`)
+                                }
                               >
                                 {option.name}
-                              </a>
+                              </Link>
                             )}
                           </Menu.Item>
                         ))}
@@ -272,7 +276,7 @@ const Shop = () => {
               </div>
             </div>
 
-            <section aria-labelledby='products-heading' className='pb-24 pt-6'>
+            <section aria-labelledby='products-heading' className='py-10'>
               <h2 id='products-heading' className='sr-only'>
                 Products
               </h2>
@@ -280,7 +284,7 @@ const Shop = () => {
               <div className='grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4'>
                 {/* Filters */}
                 <form className='hidden lg:block'>
-                  <h3 className='sr-only'>Categories</h3>
+                  {/* <h3 className='sr-only'>Categories</h3>
                   <ul
                     role='list'
                     className='space-y-4 border-b border-black pb-6 text-sm font-medium text-black'
@@ -295,7 +299,7 @@ const Shop = () => {
                         <a href={category.href}>{category.name}</a>
                       </li>
                     ))}
-                  </ul>
+                  </ul> */}
 
                   {filters.map((section) => (
                     <Disclosure
@@ -325,26 +329,25 @@ const Shop = () => {
                               </span>
                             </Disclosure.Button>
                           </h3>
+                          {/* ****************************************Category-laptop**************************************** */}
                           <Disclosure.Panel className='pt-6'>
                             <div className='space-y-4'>
-                              {section.options.map((option, optionIdx) => (
+                              {categoryTag.map((option) => (
                                 <div
-                                  key={option.value}
+                                  key={option.id}
                                   className='flex items-center'
                                 >
                                   <input
-                                    id={`filter-${section.id}-${optionIdx}`}
-                                    name={`${section.id}[]`}
-                                    defaultValue={option.value}
-                                    type='checkbox'
-                                    defaultChecked={option.checked}
-                                    className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                    value={option.id}
+                                    type='radio'
+                                    name='btn'
+                                    onClick={() =>
+                                      router.push(`?category_id=${option.id}`)
+                                    }
+                                    className='h-4 w-4 border-gray text-blue'
                                   />
-                                  <label
-                                    htmlFor={`filter-${section.id}-${optionIdx}`}
-                                    className='ml-3 text-sm text-gray'
-                                  >
-                                    {option.label}
+                                  <label className='ml-3 text-sm text-gray'>
+                                    {option.name}
                                   </label>
                                 </div>
                               ))}
@@ -359,24 +362,36 @@ const Shop = () => {
                 {/* Product grid */}
                 <div className='lg:col-span-3 '>
                   <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full  gap-3'>
-                    {allProduct.map((product, index) => (
-                      <ProductCard
-                        toto={() => seeDetails(product.product_id)}
-                        pic={product.thumbnail}
-                        name={product.product_name}
-                        description={product.product_description}
-                        price={product.price}
-                        discount={product.discount}
-                        key={index}
-                        variantId={product.variant_id}
-                      />
-                    ))}
+                    {allProduct.length > 0 ? (
+                      allProduct?.map((product, index) => (
+                        <ProductCard
+                          toto={() => seeDetails(product.product_id)}
+                          pic={product.thumbnail}
+                          name={product.product_name}
+                          description={product.product_description}
+                          price={product.price}
+                          discount={product.discount}
+                          key={index}
+                          variantId={product.variant_id}
+                        />
+                      ))
+                    ) : (
+                      <>
+                        <div className='flex justify-center items-center h-screen w-full'>
+                          <div>
+                            <h2 className='text-lg font-semibold'>
+                              Product Not Found!
+                            </h2>
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
             </section>
             <div className='flex justify-center'>
-              <Stack spacing={10}>
+              <Stack spacing={5}>
                 <Pagination
                   count={allProduct?.[0]?.total_pages}
                   variant='outlined'

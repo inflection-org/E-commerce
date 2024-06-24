@@ -74,6 +74,7 @@ const AddressBook = () => {
       })
       toast.success(res.data?.message)
       setIsOpen(true)
+      setRefresh(!false)
     } catch (error) {
       if (error.response?.data?.message) {
         toast.error(error.response?.data?.message)
@@ -105,7 +106,6 @@ const AddressBook = () => {
 
       setIsShow(false)
       setRefresh(!refresh)
-      // search()
     } catch (error) {
       if (error.response?.data?.message) {
         toast.error(error.response?.data?.message)
@@ -140,6 +140,7 @@ const AddressBook = () => {
         (item) => item.address_id !== address_id
       )
       setAddresses(remainAddresses)
+      setRefresh(!false)
     } catch (err) {
       console.log(err)
       if (err.response?.data?.message) {
@@ -365,7 +366,7 @@ const AddressBook = () => {
                   <p>{state}</p>
                   <div className='flex gap-6 mt-5'>
                     <button
-                      onClick={() => Remove(address_id)}
+                      onClick={() => Remove(addressd.id)}
                       className='bg-blue hover:bg-red text-white w-24 rounded-md hover:text-white p-4 md:text-base md:p-2'
                     >
                       Delete
@@ -373,7 +374,7 @@ const AddressBook = () => {
                     <button
                       onClick={() => {
                         setIsShow(true)
-                        setUpdateAddressId(address_id)
+                        setUpdateAddressId(addressd.id)
                         setUpdateAddress(addressd)
                       }}
                       className='bg-green text-white w-20  hover:underline rounded-md hover:text-white p-4 md:text-base md:p-2'

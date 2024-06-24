@@ -212,8 +212,8 @@ const Page = () => {
         {/* *********tags name and tag filter card****** */}
         <div className='py-5'>
           <Title title='Popular' btn='/shop' tag={'popular'} />
-          <Title title='New' btn='/shop' tag={'new '} />
-          <Title title='New Arrival' btn='View All' tag={'new Arrival '} />
+          <Title title='New' btn='/shop' tag={'new'} />
+          <Title title='New Arrival' btn='View All' tag={'New Arrival'} />
         </div>
         {/* ********newsletter******* */}
         <div className='py-8'>
