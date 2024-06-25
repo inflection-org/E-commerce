@@ -6,7 +6,9 @@ import LocalTime from '@/components/ui/LocalTime'
 import { useRouter } from 'next/navigation'
 import { discountedPrice } from '@/components/ui/Discount'
 import Invoice from '@/components/ui/Invoice'
+import PostReview from '@/components/ui/PostReview'
 
+//   TODO: Review me aad sidebar (like all categories showing here click to fetch products)
 const OrderDetail = () => {
   const router = useRouter()
   const { oderDetail } = useParams()
@@ -277,7 +279,9 @@ const OrderDetail = () => {
                 </div> */}
                 </div>
               </div>
+              <PostReview />
             </div>
+            {/* ***************************post-Review*********************** */}
           </div>
         </div>
       </div>

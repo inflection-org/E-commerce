@@ -13,6 +13,7 @@ import { MdOutlineMailOutline } from 'react-icons/md'
 import { IoLogoWhatsapp } from 'react-icons/io5'
 import { FiTwitter } from 'react-icons/fi'
 import SimilarCard from '@/components/ui/SimilarCard'
+import Review from '@/components/ui/Review'
 
 const ShopDetail = () => {
   const [isShow, setIsShow] = useState(false)
@@ -163,8 +164,8 @@ const ShopDetail = () => {
           </div>
         </div>
         {/* **********second-part */}
-        <div className='w-full md:w-[60%] mt-7  md:mt-0 px-4'>
-          <div className='flex justify-between border-b-2 border-light_gray'>
+        <div className='w-full md:w-[60%] mt-7 bg-light_gray py-2 md:mt-0 px-4'>
+          <div className='flex justify-between items-center border-b-2 border-black'>
             <div className='font-semibold text-xl py-2'>
               {currentVariant?.name
                 ? currentVariant?.name
@@ -194,8 +195,8 @@ const ShopDetail = () => {
             </div>
           </div>
           {/* ************price******** */}
-          <div className='flex gap-8 bg-light_gray px-2 '>
-            <div className='flex justify-center  gap-3 py-4'>
+          <div className=' block md:flex gap-8  border-b-2 border-black pb-4 '>
+            <div className='flex mt-5 px-4 justify-center border-2 border-gray bg-white rounded-lg gap-3 py-4'>
               <p className=''>
                 <span className='font-semibold'> Price: </span> &#8377;$
                 {discountedPrice(currentVariant.price, currentVariant.discount)}
@@ -206,7 +207,7 @@ const ShopDetail = () => {
                 </p>
               )}
             </div>
-            <p className='py-4'>
+            <p className='py-4  mt-5 px-4 border-2 border-gray   bg-white rounded-lg'>
               <span className='font-semibold'> Discount:</span>{' '}
               {currentVariant.discount}%
             </p>
@@ -219,7 +220,7 @@ const ShopDetail = () => {
                   {/* ************************* */}
                   <div
                     onClick={() => setCurrentVariant(variant)}
-                    className={`border-2 border-gray gap-4 p-2 rounded-md border-b-2 mt-4 pb-2 ${
+                    className={`border-2 border-black rounded-md gap-4 p-2  border-b-2 mt-4 pb-2 ${
                       currentVariant.name === variant.name && 'bg-light_gray'
                     }`}
                   >
@@ -238,6 +239,9 @@ const ShopDetail = () => {
         </div>
       </div>
       <hr></hr>
+      {/* ***************************Review & comments********************************************* */}
+      <Review />
+
       {/* **************similar product******************** */}
       <div>
         <div className='mt-5'>
@@ -245,7 +249,7 @@ const ShopDetail = () => {
             Similar product
           </h3>
         </div>
-        <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 '>
+        <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 '>
           <SimilarCard />
           <SimilarCard />
           <SimilarCard />
@@ -259,7 +263,7 @@ const ShopDetail = () => {
             Recently Viewed
           </h3>
         </div>
-        <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 '>
+        <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 '>
           <SimilarCard />
           <SimilarCard />
           <SimilarCard />
