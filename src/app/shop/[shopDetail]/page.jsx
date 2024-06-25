@@ -27,6 +27,7 @@ const ShopDetail = () => {
   const handleClick = () => {
     setIsActive(!isActive)
   }
+
   const addToWishList = async (id) => {
     try {
       const res = await instance.post('/wishlists', {
@@ -240,8 +241,12 @@ const ShopDetail = () => {
       </div>
       <hr></hr>
       {/* ***************************Review & comments********************************************* */}
-      <Review />
-
+      <div className='py-8'>
+        <h2 class='font-manrope font-bold text-4xl text-black mb-8 text-center'>
+          Our customer reviews
+        </h2>
+        <Review reviewId={productDetails.id} />
+      </div>
       {/* **************similar product******************** */}
       <div>
         <div className='mt-5'>
