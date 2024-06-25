@@ -13,7 +13,6 @@ const OrderDetail = () => {
   const router = useRouter()
   const { oderDetail } = useParams()
   const [order, setOrderDetails] = useState({})
-  const [productId, setProductId] = useState('')
   const [isInvoice, setIsInvoice] = useState(false)
   const [orderSummaryData, setOrderSummaryData] = useState({
     subtotal: '00',
@@ -42,7 +41,6 @@ const OrderDetail = () => {
         total:
           discountedPrice(subtotalVal, discountVal) + orderSummaryData.shipping,
       })
-      setProductId(order.order_item[0].product_id)
     }
   }, [order])
 
@@ -286,7 +284,7 @@ const OrderDetail = () => {
             </div>
           </div>
         </div>
-        <PostReview oderIt={productId} />
+        <PostReview oderIt={order.id} />
       </div>
       {isInvoice && (
         <div>

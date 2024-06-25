@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { instance } from '@/app/axios/Api'
 import { toast } from 'react-toastify'
 import { useSearchParams } from 'next/navigation'
-import { MdOutlinePermDeviceInformation } from 'react-icons/md'
 
 const AddressBook = () => {
   const params = useSearchParams()
