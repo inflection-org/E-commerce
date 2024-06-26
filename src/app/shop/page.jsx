@@ -11,7 +11,6 @@ import { instance } from "../axios/Api";
 import { useRouter } from "next/navigation";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import Link from "next/link";
 
 const Shop = () => {
   const router = useRouter();
@@ -19,8 +18,25 @@ const Shop = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [allProduct, setAllProduct] = useState([]);
   const [categoryTag, setCategoryTag] = useState([]);
-  const [sortName, setSortName] = useState("");
-  const [catName, setCatName] = useState("");
+  const [query, setQuery] = useState({});
+
+  useEffect(() => {
+    const handleQuery = () => {
+      const allQuries = Object.keys(query);
+
+      let finalQuery = "";
+      for (let i = 0; i < allQuries.length; i++) {
+        finalQuery += `${allQuries[i]}=${query[allQuries[i]]}${
+          i < allQuries.length - 1 ? "&" : ""
+        }`;
+      }
+      return finalQuery;
+    };
+    const q = handleQuery();
+    if (q) {
+      router.push(`?${q}`);
+    }
+  }, [query, router]);
 
   const seeDetails = (product_id) => {
     router.push(`/shop/${product_id}`);
@@ -32,7 +48,7 @@ const Shop = () => {
         const res = await instance.get(
           `/products/public?limit=5&page=${
             searchParams.get("page") || 1
-          }&sort=price_desc&tags=popular`
+          }&sort=${searchParams.get("sort") || "price_desc"}`
         );
         setAllProduct(res.data);
       } catch (err) {
@@ -53,18 +69,11 @@ const Shop = () => {
   }, [searchParams]);
 
   const sortOptions = [
-    { name: "Popularity", href: "?sort=popularity", current: true },
-    { name: "Relevance", href: "?sort=relevance", current: false },
-    { name: "Price: Low to High", href: "?sort=price_asc", current: false },
-    { name: "Price: High to Low", href: "?sort=price_desc", current: false },
+    { name: "Popularity", href: "popular", current: true },
+    { name: "Relevance", href: "relevance", current: false },
+    { name: "Price: Low to High", href: "price_asc", current: false },
+    { name: "Price: High to Low", href: "price_desc", current: false },
   ];
-  // const subCategories = [
-  //   { name: 'Totes' },
-  //   { name: 'Backpacks' },
-  //   { name: 'Travel Bags' },
-  //   { name: 'Hip Bags' },
-  //   { name: 'Laptop Sleeves' },
-  // ]
   const filters = [
     {
       id: "category",
@@ -74,6 +83,7 @@ const Shop = () => {
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
+
   return (
     <div className="px-5 md:px-10">
       <div className="bg-white w-full">
@@ -122,25 +132,6 @@ const Shop = () => {
 
                     {/********************** * Filters Mobile************************************************************************** */}
                     <form className="mt-4 border-t border-gray-200 ">
-                      {/* <h3 className='sr-only'>Categories</h3>
-                      <ul role='list' className='px-2 py-3 font-medium'>
-                        {subCategories.map((category) => (
-                          <li
-                            key={category.name}
-                            value=''
-                            className='cursor-pointer'
-                          >
-                            <a
-                              onClick={() => setCatName(category.name)}
-                              // href={category.href}
-                              className='block px-2 py-3 '
-                            >
-                              {category.name}
-                            </a>
-                          </li>
-                        ))}
-                      </ul> */}
-
                       {filters.map((section) => (
                         <Disclosure
                           as="div"
@@ -181,9 +172,10 @@ const Shop = () => {
                                         type="radio"
                                         name="btn"
                                         onClick={() =>
-                                          router.push(
-                                            `?category_id=${option.id}`
-                                          )
+                                          setQuery((prevState) => ({
+                                            ...prevState,
+                                            category_id: option.id,
+                                          }))
                                         }
                                         className="h-4 w-4 border-gray text-blue"
                                       />
@@ -232,19 +224,12 @@ const Shop = () => {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items
-                      // onClick={(e) => {
-                      //   handleSubmit(e.target.value)
-                      // }}
-                      className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none"
-                    >
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <div className="py-1" value="">
                         {sortOptions.map((option) => (
                           <Menu.Item key={option.name}>
                             {({ active }) => (
-                              <Link
-                                value={option.name}
-                                href={option.href}
+                              <p
                                 className={classNames(
                                   option.current
                                     ? "font-medium text-black"
@@ -253,11 +238,14 @@ const Shop = () => {
                                   "block px-4 py-2 text-sm"
                                 )}
                                 onClick={() =>
-                                  router.push(`?category_id=${option.href}`)
+                                  setQuery((prevState) => ({
+                                    ...prevState,
+                                    sort: option.href,
+                                  }))
                                 }
                               >
                                 {option.name}
-                              </Link>
+                              </p>
                             )}
                           </Menu.Item>
                         ))}
@@ -284,23 +272,6 @@ const Shop = () => {
               <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
                 {/* Filters */}
                 <form className="hidden lg:block">
-                  {/* <h3 className='sr-only'>Categories</h3>
-                  <ul
-                    role='list'
-                    className='space-y-4 border-b border-black pb-6 text-sm font-medium text-black'
-                  >
-                    {subCategories.map((category) => (
-                      <li
-                        key={category.name}
-                        value=''
-                        className='hover:bg-gray cursor-pointer py-2 px-2'
-                        onClick={() => setCatName(category.name)}
-                      >
-                        <a href={category.href}>{category.name}</a>
-                      </li>
-                    ))}
-                  </ul> */}
-
                   {filters.map((section) => (
                     <Disclosure
                       as="div"
@@ -342,7 +313,10 @@ const Shop = () => {
                                     type="radio"
                                     name="btn"
                                     onClick={() =>
-                                      router.push(`?category_id=${option.id}`)
+                                      setQuery((prevState) => ({
+                                        ...prevState,
+                                        category_id: option.id,
+                                      }))
                                     }
                                     className="h-4 w-4 border-gray text-blue"
                                   />
@@ -361,7 +335,7 @@ const Shop = () => {
 
                 {/* Product grid */}
                 <div className="lg:col-span-3 ">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full  gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full gap-3">
                     {allProduct.length > 0 ? (
                       allProduct?.map((product, index) => (
                         <ProductCard
@@ -396,8 +370,13 @@ const Shop = () => {
                   count={allProduct?.[0]?.total_pages}
                   variant="outlined"
                   shape="rounded"
-                  page={searchParams.get("page")}
-                  onChange={(event, value) => router.push(`?page=${value}`)}
+                  page={searchParams.get("page") * 1}
+                  onChange={(event, value) =>
+                    setQuery((prevState) => ({
+                      ...prevState,
+                      page: value,
+                    }))
+                  }
                 />
               </Stack>
             </div>
