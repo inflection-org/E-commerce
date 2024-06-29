@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { MdDeleteForever } from 'react-icons/md'
 import { FaHeart } from 'react-icons/fa'
 import { instance } from '@/app/axios/Api'
@@ -13,6 +13,9 @@ function CartCard({ pic, dis, price, variantId, cartId, quan, refresh }) {
   const [isActive, setIsActive] = useState(false)
   const [isButtonDisabled, setButtonDisabled] = useState(false)
   const [quantity, setQuantity] = useState(quan)
+  const [totalPrice, setTotalPrice] = useState(price * quan)
+
+  // console.log(totalPrice)
 
   const handleClick = () => {
     setIsActive(!isActive)
@@ -64,6 +67,8 @@ function CartCard({ pic, dis, price, variantId, cartId, quan, refresh }) {
       const res = await instance.post('/carts', {
         variant_id: id,
       })
+
+      console.log(res.data)
       setQuantity(res.data)
       refresh()
     } catch (err) {
@@ -76,11 +81,16 @@ function CartCard({ pic, dis, price, variantId, cartId, quan, refresh }) {
         variant_id: id,
         quantity: quantityVal - 1,
       })
+      setQuantity(res.data)
       refresh()
     } catch (err) {
       console.log(err)
     }
   }
+
+  useEffect(() => {
+    setTotalPrice(price * quantity)
+  }, [quantity, price])
 
   return (
     <div className='bg-light_gray'>
@@ -90,7 +100,7 @@ function CartCard({ pic, dis, price, variantId, cartId, quan, refresh }) {
             <img
               className='hidden h-20 w-20 md:h-32 md:w-32 dark:block'
               src={pic}
-              alt='imac image'
+              alt='img'
             />
           </Link>
           <label className='sr-only'>Choose quantity:</label>
@@ -128,27 +138,27 @@ function CartCard({ pic, dis, price, variantId, cartId, quan, refresh }) {
               </button>
             </div>
             <div className='text-end md:order-4 md:w-32'>
-              <p className='text-base font-bold '>{price}</p>
+              <p className='text-base font-bold'>{totalPrice}</p>
             </div>
           </div>
           <div className='w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md'>
-            <Link href='#' className='text-xl font-medium  hover:underline '>
+            <Link href='#' className='text-xl font-medium '>
               {dis}
             </Link>
-            <div className='flex items-center gap-4 '>
+            <div className='flex items-center gap-4'>
               <button
                 type='button'
-                className='inline-flex items-center text-sm gap-1.5 font-medium text-gray hover:text-black hover:underline  '
+                onClick={() => {
+                  handleClick()
+                  if (isActive) {
+                    removeWishlist(variantId)
+                  } else {
+                    addToWishList(variantId)
+                  }
+                }}
+                className='inline-flex items-center text-sm gap-1.5 font-medium text-gray hover:text-black '
               >
                 <FaHeart
-                  onClick={() => {
-                    handleClick()
-                    if (isActive) {
-                      removeWishlist(variantId)
-                    } else {
-                      addToWishList(variantId)
-                    }
-                  }}
                   className={`size-5 ${isActive ? 'text-red' : 'text-gray'}`}
                 />
                 Add to Favorites
@@ -158,7 +168,7 @@ function CartCard({ pic, dis, price, variantId, cartId, quan, refresh }) {
                 onClick={() => {
                   removeCartList(cartId)
                 }}
-                className='inline-flex items-center text-sm font-medium text-red hover:underline '
+                className='inline-flex items-center text-sm font-medium text-orange hover:text-red '
               >
                 <MdDeleteForever className='size-5' />
                 Remove

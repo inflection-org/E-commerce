@@ -69,8 +69,6 @@ const Login = () => {
         reset_password_ui_url: 'http://localhost:3000/reset_password',
         email: forgetPasswordEmail,
       })
-      // console.log(res)
-      toast.success('login successfully')
       router.push('/')
     } catch (error) {
       if (error.response?.data?.message) {

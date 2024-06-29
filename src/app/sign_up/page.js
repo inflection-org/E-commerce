@@ -11,6 +11,7 @@ const SignUp = () => {
     name: '',
     email: '',
   })
+  const [isOpen, setIsOpen] = useState(false)
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -24,8 +25,9 @@ const SignUp = () => {
         full_name: state.name,
         email: state.email,
       })
-      toast.success('signUp successfully')
-      // router.push('/login')
+      // toast.success('signUp successfully')
+
+      setIsOpen(true)
     } catch (error) {
       if (error.response.data.message) {
         toast.error(error.response.data.message)
@@ -36,7 +38,7 @@ const SignUp = () => {
   }
 
   return (
-    <div className='font-[sans-serif] text-gray-800 bg-white max-w-4xl flex items-center mx-auto md:h-screen p-4'>
+    <div className='font-[sans-serif]  bg-white max-w-4xl flex items-center mx-auto md:h-screen p-4'>
       <div className='grid md:grid-cols-3 items-center shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-xl overflow-hidden'>
         <div className='max-md:order-1 flex flex-col justify-center space-y-16 max-md:mt-16 min-h-full bg-gradient-to-r from-black to-light_black lg:px-8 px-4 py-4'>
           <div>
@@ -184,6 +186,68 @@ const SignUp = () => {
           </p>
         </form>
       </div>
+      {/* **************************************** */}
+      {isOpen && (
+        <div
+          className='relative z-10 '
+          aria-labelledby='modal-title'
+          role='dialog'
+          aria-modal='true'
+        >
+          <div
+            className='fixed inset-0 bg-black bg-opacity-75 transition-opacity'
+            aria-hidden='true'
+          ></div>
+
+          <div className='fixed inset-0 z-10 w-screen  overflow-y-auto'>
+            <div className='flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0'>
+              <div className='relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg'>
+                <div className='bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4'>
+                  <div className='sm:flex sm:items-start'>
+                    <div className='mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10'>
+                      <svg
+                        className='h-6 w-6 text-red'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke-width='1.5'
+                        stroke='currentColor'
+                        aria-hidden='true'
+                      >
+                        <path
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          d='M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z'
+                        />
+                      </svg>
+                    </div>
+                    <div className='mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left'>
+                      <h3
+                        className='text-base font-semibold leading-6 text-gray-900'
+                        id='modal-title'
+                      >
+                        Check Your Email
+                      </h3>
+                      <div className='mt-2'>
+                        <p className='text-sm text-gray-500'>
+                          GoTo Mail and Set Your Password after Login Here !
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className='bg-gray-50 px-4 py-3 flex justify-center sm:px-6'>
+                  <button
+                    onClick={() => router.push('/login')}
+                    className='text-sm bg-orange md:mt-0 hover:bg-black duration-1000 text-white px-6 py-2 rounded-md '
+                  >
+                    Ok
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

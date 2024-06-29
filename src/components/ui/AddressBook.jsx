@@ -8,7 +8,7 @@ const AddressBook = () => {
   const params = useSearchParams()
   const [addresses, setAddresses] = useState([])
   const [isShow, setIsShow] = useState(false)
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
   const [refresh, setRefresh] = useState(false)
   const [updateAddressId, setUpdateAddressId] = useState('')
   const [state, setState] = useState({
@@ -154,12 +154,12 @@ const AddressBook = () => {
     <div className='py-5 px-5'>
       {/* *************new Address form************* */}
       <div onClick={() => Show()} className='rounded-md bg-white shadow-md'>
-        <button className=' p-2 w-full h-auto text-gray hover:text-blue text-lg flex items-center'>
+        <button className=' p-2 w-full h-auto text-gray hover:text-orange text-lg flex items-center'>
           <span className='text-2xl mx-2'> + </span>Add New Address
         </button>
       </div>
       {/* ****************new  Address form******************** */}
-      {!isOpen && (
+      {isOpen && (
         <div className='bg-white rounded-md shadow-md py-4 mt-4 md:px-4'>
           <div className='w-full  mx-auto'>
             <div className='flex-auto px-4 lg:px-10 py-10 pt-0'>
@@ -180,7 +180,7 @@ const AddressBook = () => {
                         onChange={(e) => {
                           setState({ ...state, name: e.target.value })
                         }}
-                        className='border-0 px-3 py-3  text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+                        className='border-0 px-3 py-3 text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring-2 focus:ring-orange w-full ease-linear transition-all duration-150'
                         placeholder='Enter Name'
                       />
                     </div>
@@ -199,7 +199,7 @@ const AddressBook = () => {
                         onChange={(e) =>
                           setState({ ...state, phone: e.target.value })
                         }
-                        className='border-0 px-3 py-3  text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+                        className='border-0 px-3 py-3 text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring-2 focus:ring-orange w-full ease-linear transition-all duration-150'
                         placeholder='Phone'
                       />
                     </div>
@@ -217,7 +217,7 @@ const AddressBook = () => {
                         onChange={(e) =>
                           setState({ ...state, state: e.target.value })
                         }
-                        className='border-0 px-3 py-3  text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+                        className='border-0 px-3 py-3 text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring-2 focus:ring-orange w-full ease-linear transition-all duration-150'
                         placeholder='State'
                       />
                     </div>
@@ -235,7 +235,7 @@ const AddressBook = () => {
                         onChange={(e) =>
                           setState({ ...state, phone_opt: e.target.value })
                         }
-                        className='border-0 px-3 py-3  text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+                        className='border-0 px-3 py-3 text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring-2 focus:ring-orange w-full ease-linear transition-all duration-150'
                         placeholder='Alternate Phone'
                       />
                     </div>
@@ -255,12 +255,11 @@ const AddressBook = () => {
                         onChange={(e) =>
                           setState({ ...state, address: e.target.value })
                         }
-                        className='border-0 px-3 py-3  text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+                        className='border-0 px-3 py-3 text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring-2 focus:ring-orange w-full ease-linear transition-all duration-150'
                         placeholder='Address'
                       />
                     </div>
                   </div>
-
                   {/* ***********city******* */}
                   <div className='w-full lg:w-4/12 px-4'>
                     <div className='relative w-full mb-3'>
@@ -274,7 +273,7 @@ const AddressBook = () => {
                         onChange={(e) =>
                           setState({ ...state, city: e.target.value })
                         }
-                        className='border-0 px-3 py-3 text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+                        className='border-0 px-3 py-3 text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring-2 focus:ring-orange w-full ease-linear transition-all duration-150'
                         placeholder='City'
                       />
                     </div>
@@ -292,7 +291,7 @@ const AddressBook = () => {
                         onChange={(e) =>
                           setState({ ...state, country: e.target.value })
                         }
-                        className='border-0 px-3 py-3  text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+                        className='border-0 px-3 py-3 text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring-2 focus:ring-orange w-full ease-linear transition-all duration-150'
                         placeholder='Country'
                       />
                     </div>
@@ -310,7 +309,7 @@ const AddressBook = () => {
                         onChange={(e) =>
                           setState({ ...state, pincode: e.target.value })
                         }
-                        className='border-0 px-3 py-3  text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+                        className='border-0 px-3 py-3 text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring-2 focus:ring-orange w-full ease-linear transition-all duration-150'
                         placeholder='Pin Code'
                       />
                     </div>
@@ -319,13 +318,12 @@ const AddressBook = () => {
                 <div className='flex gap-4 mt-8  px-4'>
                   <button
                     onClick={handleSubmit}
-                    type='submit'
                     className='bg-blue text-white rounded-md hover:bg-green w-28 md:text-base md:p-2'
                   >
                     SAVE
                   </button>
                   <button
-                    type='submit'
+                    onClick={() => setIsOpen(false)}
                     className='text-blue rounded-md hover:font-semibold p-2 md:text-base md:p-2'
                   >
                     CANCEL
@@ -341,7 +339,6 @@ const AddressBook = () => {
         {addresses?.length > 0 ? (
           addresses?.map((addressd, i) => {
             const {
-              address_id,
               name,
               address,
               address_line_2,
@@ -376,7 +373,7 @@ const AddressBook = () => {
                         setUpdateAddressId(addressd.id)
                         setUpdateAddress(addressd)
                       }}
-                      className='bg-green text-white w-20  hover:underline rounded-md hover:text-white p-4 md:text-base md:p-2'
+                      className='bg-green text-white w-20  rounded-md hover:text-white p-4 md:text-base md:p-2'
                     >
                       Edit
                     </button>
@@ -384,8 +381,8 @@ const AddressBook = () => {
                 </div>
                 {/* **********Edit Address******* */}
                 {isShow && (
-                  <div className='lg:fixed absolute  h-[1000px] md:h-screen inset-0 z-50 bg-black/70 '>
-                    <div className='bg-white w-full  md:w-[60%] mx-auto rounded-md shadow-md py-4 mt-10 px-4'>
+                  <div className='fixed overflow-y-auto min-h-screen inset-0 z-50 bg-black/70 md:flex md:justify-center md:items-center'>
+                    <div className='bg-white w-full md:w-[60%] rounded-md shadow-md py-4 px-4'>
                       <div className='w-auto mx-auto'>
                         <div className='flex-auto px-4 lg:px-10 py-10 pt-0'>
                           <form>
@@ -408,7 +405,7 @@ const AddressBook = () => {
                                         name: e.target.value,
                                       })
                                     }
-                                    className='border-0 px-3 py-3  text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+                                    className='border-0 px-3 py-3 text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring-2 focus:ring-orange w-full ease-linear transition-all duration-150'
                                     placeholder='Enter Name'
                                   />
                                 </div>
@@ -429,7 +426,7 @@ const AddressBook = () => {
                                         phone: e.target.value,
                                       })
                                     }
-                                    className='border-0 px-3 py-3  text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+                                    className='border-0 px-3 py-3 text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring-2 focus:ring-orange w-full ease-linear transition-all duration-150'
                                     placeholder='Phone'
                                   />
                                 </div>
@@ -450,7 +447,7 @@ const AddressBook = () => {
                                         state: e.target.value,
                                       })
                                     }
-                                    className='border-0 px-3 py-3  text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+                                    className='border-0 px-3 py-3 text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring-2 focus:ring-orange w-full ease-linear transition-all duration-150'
                                     placeholder='State'
                                   />
                                 </div>
@@ -471,7 +468,7 @@ const AddressBook = () => {
                                         phone_opt: e.target.value,
                                       })
                                     }
-                                    className='border-0 px-3 py-3  text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+                                    className='border-0 px-3 py-3 text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring-2 focus:ring-orange w-full ease-linear transition-all duration-150'
                                     placeholder='Alternate Phone'
                                   />
                                 </div>
@@ -494,7 +491,7 @@ const AddressBook = () => {
                                         address: e.target.value,
                                       })
                                     }
-                                    className='border-0 px-3 py-3  text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+                                    className='border-0 px-3 py-3 text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring-2 focus:ring-orange w-full ease-linear transition-all duration-150'
                                     placeholder='Address'
                                   />
                                 </div>
@@ -516,7 +513,7 @@ const AddressBook = () => {
                                         city: e.target.value,
                                       })
                                     }
-                                    className='border-0 px-3 py-3 text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+                                    className='border-0 px-3 py-3 text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring-2 focus:ring-orange w-full ease-linear transition-all duration-150'
                                     placeholder='City'
                                   />
                                 </div>
@@ -537,7 +534,7 @@ const AddressBook = () => {
                                         country: e.target.value,
                                       })
                                     }
-                                    className='border-0 px-3 py-3  text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+                                    className='border-0 px-3 py-3 text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring-2 focus:ring-orange w-full ease-linear transition-all duration-150'
                                     placeholder='Country'
                                   />
                                 </div>
@@ -558,7 +555,7 @@ const AddressBook = () => {
                                         pincode: e.target.value,
                                       })
                                     }
-                                    className='border-0 px-3 py-3  text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+                                    className='border-0 px-3 py-3 text-gray bg-white rounded text-sm shadow focus:outline-none focus:ring-2 focus:ring-orange w-full ease-linear transition-all duration-150'
                                     placeholder='Pin Code'
                                   />
                                 </div>

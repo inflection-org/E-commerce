@@ -23,7 +23,7 @@ export const ProductCard = ({
         variant_id: id,
         quantity: 1,
       })
-      router.push('/cart')
+
       toast.success(res?.data?.message)
     } catch (err) {
       if (err.response?.data?.message) {
